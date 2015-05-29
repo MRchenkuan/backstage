@@ -11,7 +11,16 @@
 
 	function getNews()
 	{
-		echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
+		// echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
+		$xmlPath = '../../myfolder/test.xml';
+		$xmlPath_newslist = '../../myfolder/newslist.xml';
+		$xmlPath_contentPageDate = '../../myfolder/contentPageDate.xml';
+
+		$xmlDoc = simplexml_load_file($xmlPath_newslist);
+		$ctpg = simplexml_load_file($xmlPath_contentPageDate);
+		echo '<pre>';
+		print_r(utf8_encode($ctpg->children());
+		echo '</pre>';
 	}
 
 	function defaultMethod(){

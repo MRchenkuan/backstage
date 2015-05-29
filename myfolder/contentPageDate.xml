@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<xml>
+    <news id="1" title="日本导师Ema授课">
+        <obj type="img" value="img/news/new1/1.jpg" />
+        <obj type="img" value="img/news/new1/2.jpg" />
+        <obj type="img" value="img/news/new1/3.jpg" />
+        <obj type="img" value="img/news/new1/4.jpg" />
+        <obj type="img" value="img/news/new1/5.jpg" />
+        <obj type="img" value="img/news/new1/6.jpg" />
+        <obj type="img" value="img/news/new1/7.jpg" />
+    </news>
+    <news id="2" title="授课日本导师照片">
+        <obj type="html" value="">
+            <![CDATA[
+                <style type="text/css">
+                    .teacherbox{width: 960px;float: left;margin:50px 0;}
+                    .teacherboxImg{width:350px;overflow: hidden;float: left;border:1px #ffffff solid;}
+                    .teacherboxImg img {height: 430px;float: left;}
+                    .info{height: 430px;background-color: #5e5e5e;font-size: 0.85px;font-weight: 700;border: 1px #c7c7c7 solid;width:580px; float: right}
+                    .info:hover{border:1px solid;background-color:grey}
+                    .teacherbox .title{width: 90%;font-weight: 900;float: left;font-size: 24px;padding: 0 25px;line-height: 2em;}
+                    .teacherbox .infoText{width: 90%;margin:0 auto 10px auto;font-weight: normal;float: left;font-size: 14px;padding: 0 25px;height:372px;overflow:hidden;text-align: left;}
+                    .teacherbox .infoText:hover{overflow:auto;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;background-color: none;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar{width: 12px;background-color: none;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar-thumb{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);background-color: #3e4151;}
+                </style>
+                <div class="teacherbox">
+                    <div class="teacherboxImg">
+                        <img src="./img/news/new2/3.jpg">
+                    </div>
+                    <div class="info">
+                        <span class="title">MASAKO</span>
+                        <div class="infoText">姓名：铃木雅子<br>舞蹈名：ＭＡＳＡＫＯ<br>出生年月：１９８３年１月２０日<br>住址：１６４０００３<br>东京都中野区東中野３－１－１チェリーヒル東中野５０３<br>联系方式：０９０８８７９０５８７<br>电子邮箱：手机邮箱：twins-mako.aki-ft@docomo.ne.jp<br>电脑邮箱：shortymasako@yahoo.co.jp<br>身高：１５９㎝<br>体重：４５㎏<br><br>演艺经验<br>2002 DABO「IN DA CLUB」「CLUP.YA.HANDS」P.V back dancer<br>2003 Full of Harmony「excrivive」P.V back dancer<br>ZEEBRA巡演之东京公演出演啦啦队<br>2004 SPHERE of INLUENCE巡演之东京公演LIVE back dancer<br>2005 Full of Harmony巡演back dancer<br>Vlidge巡演back dancer<br>2006出演Natural Movement vol.7（舞台）<br>出演MTVＭSIZE<br>KENSIN LIVE back dancer<br>「SO-DA」PV back dancer<br>ARIA LIVE back dancer<br>May.J LIVE back dancer<br>DEE CIKA LIVE back dancer<br>2007加藤米莉亚「このままずっと朝まで（就这样直到天明）」PV back dancer<br>FOXI MISQ「ALIVE」PV back dancer<br>DABO release party出演dancer<br>LIVE back dancer<br>Full of Harmony LIVE back dancer<br>Thalisha back dancer<br>上户彩巡演dancer<br>2008 may j.full of harmony vlidge LIVE TOUR dancer<br>A,KSENT back dancer<br>VLIDGE「DAINAMO」PV<br>MYA JAPAN巡演back dancer<br>ZEBBRA武道館LIVE back dancer<br>出演GLAY LIVE视频<br>2009 KIICHIfromVLIDG SOLO LIVE编舞back dancer<br>COMA-CHI「girls girls」编舞、back dancer<br>DABO release party back dancer<br>DORIする？岛袋宽子back dancer<br>COMA-CHI「NAME-TAG」朝日电视VERSUS back dancer<br>湘南乃风横浜ARENA LIVE back dancer<br>上戸彩LIVEback dancer<br>Full of harmony LIVEback dancer<br>COMA-CHIワンマンLIVE编舞back dancer<br>２０１０MAY J.LIVE back dancer编舞<br>２０１１MAY J.LIVE back dancer编舞<br><br>东京GIRLS COLLECTION MINI back dancer<br>２０１２MAY J.LIVE back dancer振りつけ<br>２０１３ＮＷＢ４８TORA<br>ＰＯＰ，ＮＫＩＳＳ编舞<br><br>还有在东京都内和其他地方的SCHOOL INSTRUCTOR SHOW CASE等</div>
+                    </div>
+                </div>
+            ]]>
+        </obj>
+        <obj type="img" value="img/news/new2/1.jpg" />
+        <obj type="img" value="img/news/new2/2.jpg" />
+        <obj type="img" value="img/news/new2/3.jpg" />
+    </news>
+    <news id="3" title="caster小白授课1">
+        <obj type="img" value="img/news/new3/1.jpg" />
+        <obj type="img" value="img/news/new3/2.jpg" />
+        <obj type="img" value="img/news/new3/3.jpg" />
+        <obj type="img" value="img/news/new3/4.jpg" />
+        <obj type="img" value="img/news/new3/5.jpg" />
+    </news>
+    <news id="4" title="caster小白授课2">
+        <obj type="img" value="img/news/new4/1.jpg" />
+        <obj type="img" value="img/news/new4/2.jpg" />
+        <obj type="img" value="img/news/new4/3.jpg" />
+        <obj type="img" value="img/news/new4/4.jpg" />
+        <obj type="img" value="img/news/new4/5.jpg" />
+        <obj type="img" value="img/news/new4/6.jpg" />
+        <obj type="img" value="img/news/new4/7.jpg" />
+
+    </news>
+    <news id="5" title="huk新款T恤发布">
+        <obj type="img" value="img/news/new5/1.jpg" />
+        <obj type="img" value="img/news/new5/2.jpg" />
+        <obj type="img" value="img/news/new5/3.jpg" />
+        <obj type="img" value="img/news/new5/4.jpg" />
+        <obj type="img" value="img/news/new5/5.jpg" />
+        <obj type="img" value="img/news/new5/6.jpg" />
+    </news>
+    <news id="6" title="王润HUK授课">
+        <obj type="html" value="">
+            <![CDATA[
+                <style type="text/css">
+                    .teacherbox{width: 960px;float: left;margin:50px 0;}
+                    .teacherboxImg{width:350px;overflow: hidden;float: left;border:1px #ffffff solid;}
+                    .teacherboxImg img {height: 430px;float: left}
+                    .info{height: 430px;background-color: #5e5e5e;font-size: 0.85px;font-weight: 700;border: 1px #c7c7c7 solid;width:580px; float: right}
+                    .info:hover{border:1px solid;background-color:grey}
+                    .teacherbox .title{width: 90%;font-weight: 900;float: left;font-size: 24px;padding: 0 25px;line-height: 2em;}
+                    .teacherbox .infoText{width: 90%;margin:0 auto 10px auto;font-weight: normal;float: left;font-size: 14px;padding: 0 25px;height:372px;overflow:hidden;text-align: left;}
+                    .teacherbox .infoText:hover{overflow:auto;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;background-color: none;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar{width: 12px;background-color: none;}
+                    .teacherbox .infoText:hover::-webkit-scrollbar-thumb{border-radius: 10px;-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);background-color: #3e4151;}
+                </style>
+                <div class="teacherbox">
+                    <div class="teacherboxImg">
+                        <img src="./img/news/new6/cover.jpg">
+                    </div>
+                    <div class="info">
+                        <span class="title">
+                            王润 Maggie
+                        </span>
+                        <div class="infoText">
+                            姓名：王润<br>
+                            英文名：Maggie<br>
+                            风格：LA style Jazz & Hiphop<br>
+                            舞龄：13年<br>
+                            Jazz dance舞龄：6年<br>
+                            <br>
+                            王润她是中国知名爵士舞者 自幼就开始学习中国各种民族民间舞·当代舞等，从2007年开始转修爵士舞。2008年签约北京舞吉星舞蹈工作室（舞库）王蓉专著Dancer 及爵士舞老师。2010年加入北京爵仕天下文化传播有限公司 S.P.Y dance studio 为特级讲师 并以资深舞蹈编导身份活跃于中国爵士舞界。<br>
+                            <br>
+                            2013年获得 东方卫视《舞林争霸》全国十强舞者<br>
+                        </div>
+                    </div>
+                </div>
+            ]]>
+        </obj>
+        <obj type="img" value="img/news/new6/1.JPG" />
+        <obj type="img" value="img/news/new6/2.JPG" />
+        <obj type="img" value="img/news/new6/3.JPG" />
+        <obj type="img" value="img/news/new6/4.JPG" />
+        <obj type="img" value="img/news/new6/5.JPG" />
+        <obj type="img" value="img/news/new6/6.JPG" />
+        <obj type="img" value="img/news/new6/7.JPG" />
+    </news>
+    <news id="7" title="jonny-HUK授课">
+        <obj type="img" value="img/news/new7/1.JPG" />
+        <obj type="img" value="img/news/new7/2.JPG" />
+        <obj type="img" value="img/news/new7/3.JPG" />
+        <obj type="img" value="img/news/new7/4.JPG" />
+        <obj type="img" value="img/news/new7/5.JPG" />
+        <obj type="img" value="img/news/new7/6.JPG" />
+    </news>
+    <news id="8" title="名浩HUK授课">
+        <obj type="img" value="img/news/new8/1.JPG" />
+        <obj type="img" value="img/news/new8/2.JPG" />
+        <obj type="img" value="img/news/new8/3.JPG" />
+        <obj type="img" value="img/news/new8/4.JPG" />
+        <obj type="img" value="img/news/new8/5.JPG" />
+        <obj type="img" value="img/news/new8/6.JPG" />
+    </news>
+    <news id="9" title="WIB长沙赛区">
+        <obj type="img" value="img/news/new9/1.JPG" />
+        <obj type="img" value="img/news/new9/2.JPG" />
+        <obj type="img" value="img/news/new9/3.JPG" />
+        <obj type="img" value="img/news/new9/4.JPG" />
+        <obj type="img" value="img/news/new9/5.JPG" />
+        <obj type="img" value="img/news/new9/6.JPG" />
+        <obj type="img" value="img/news/new9/7.JPG" />
+        <obj type="img" value="img/news/new9/8.JPG" />
+        <obj type="img" value="img/news/new9/9.JPG" />
+        <obj type="img" value="img/news/new9/10.JPG" />
+        <obj type="img" value="img/news/new9/11.JPG" />
+        <obj type="img" value="img/news/new9/12.JPG" />
+        <obj type="img" value="img/news/new9/13.JPG" />
+        <obj type="img" value="img/news/new9/14.JPG" />
+        <obj type="img" value="img/news/new9/15.JPG" />
+    </news>
+    <news id="event1" title="百老汇舞者来huk交流">
+        <obj type="img" value="img/events/event1/1.jpg" />
+    </news>
+    <news id="event2" title="师大保持态度街舞活动">
+        <obj type="img" value="img/events/event2/1.jpg" />
+        <obj type="img" value="img/events/event2/2.jpg" />
+        <obj type="img" value="img/events/event2/3.jpg" />
+    </news>
+    <news id="event3" title="huk街球团体">
+        <obj type="img" value="img/events/event3/1.jpg" />
+        <obj type="img" value="img/events/event3/2.jpg" />
+        <obj type="img" value="img/events/event3/3.jpg" />
+    </news>
+
+
+    <!--
+    <news id="访问参数" title="页面标题">
+        <obj type="类型" value="若为图片则填写地址" />
+        <obj type="类型" value="若为html则不填" >
+            <![CDATA[若为html则此处填写html代码]]>
+        </obj>
+        <obj type="p" value="" />段落
+        <obj type="t" value="" />文章标题 title
+        <obj type="s" value="" />小标题 subtitle
+    </news>
+    访问方式：【www.huk.com.cn/new.html?newsid=访问参数】
+    -->
+
+
+
+</xml>
