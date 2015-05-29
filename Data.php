@@ -19,7 +19,7 @@
 		$xmlDoc = simplexml_load_file($xmlPath_newslist);
 		$ctpg = simplexml_load_file($xmlPath_contentPageDate);
 		echo '<pre>';
-		print_r(utf8_encode($ctpg->children());
+		print_r(utf8_encode($ctpg->children()));
 		echo '</pre>';
 	}
 
