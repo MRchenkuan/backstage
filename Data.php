@@ -5,9 +5,24 @@
 	$config['defaultMethod']=defaultMethod;
 	$config['getNews']=getNews;
 	$config['uploadImg']=uploadImg;
+    $config['userVerify']=userVerify;
 	$config[$APIID]();
 
 
+    function userLogin(){
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if(!($username&&$password))return;
+        session_start();
+        if($username=='admin'&& $$password=='admin'){
+            /*记录session值并写入cookie*/
+            setcookie('SSID',session_id());
+            $_SESSION['Verifyed']=true;
+            echo '登录成功';
+        }else{
+            echo ['code'=>201,'msg'=>'帐号密码错误'];
+        }
+    }
 
 	function getNews()
 	{
