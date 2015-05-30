@@ -1,32 +1,42 @@
 <?
-	$APIID = $_GET['id']?$_GET['id']:'defaultMethod';
+    session_start();
 
-	$config=array();
+    $APIID = $_GET['id']?$_GET['id']:'defaultMethod';
+    $config=array();
 	$config['defaultMethod']=defaultMethod;
 	$config['getNews']=getNews;
 	$config['uploadImg']=uploadImg;
+    $config['userLogin']=userLogin;
     $config['userVerify']=userVerify;
-	$config[$APIID]();
+
+    $config[$APIID]();
 
 
     function userLogin(){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        if(!($username&&$password))return;
-        session_start();
-        if($username=='admin'&& $$password=='admin'){
+        $username = $_GET['username'];
+        $password = $_GET['password'];
+        if($username=='admin'&& $password=='admin'){
             /*记录session值并写入cookie*/
             setcookie('SSID',session_id());
+            $_SESSION['stat']='login';
             $_SESSION['Verifyed']=true;
-            echo '登录成功';
+            echo 'login sucesses!';
         }else{
-            echo ['code'=>201,'msg'=>'帐号密码错误'];
+            echo 202;
+        }
+    }
+
+    function userVerify(){
+        if($_SESSION['stat']=='login'){
+            echo 'yes login';
+        }else{
+            echo 'no not login';
         }
     }
 
 	function getNews()
 	{
-		// echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
+		echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
 		$xmlPath = '../../myfolder/test.xml';
 		$xmlPath_newslist = '../../myfolder/newslist.xml';
 		$xmlPath_contentPageDate = '../../myfolder/contentPageDate.xml';
