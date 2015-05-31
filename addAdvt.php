@@ -1,9 +1,15 @@
+<?php
+error_reporting(0);
+session_start();
+if(!$_SESSION['stat']=='login'){
+    return false;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head lang="zh-CN">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
@@ -11,29 +17,8 @@
     <title>主页</title>
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <!--品牌图标-->
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon-cog"></span>
-                <span class="glyphicon glyphicon-book"></span>
-                <span class="glyphicon glyphicon-list-alt"></span>
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-        <!--导航菜单-->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <!--导航选项-->
-                <li><a href="./home.html">首页</a></li>
-                <li  class="active"><a href="./addAdvt.html">广告添加</a></li>
-                <li><a href="./addNews.html">新闻添加</a></li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
+<!--导航-->
+<?php include('./widgets/nav.php');?>
 
 
 

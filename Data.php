@@ -1,14 +1,16 @@
-<?
+<?php
+    error_reporting(0);
     session_start();
 
     $APIID = $_GET['id']?$_GET['id']:'defaultMethod';
-    $config=array();
-	$config['defaultMethod']=defaultMethod;
-	$config['getNews']=getNews;
-	$config['uploadImg']=uploadImg;
-    $config['userLogin']=userLogin;
-    $config['userVerify']=userVerify;
 
+    $config=array(
+        'defaultMethod'=>defaultMethod,
+        'getNews'=>getNews,
+        'uploadImg'=>uploadImg,
+        'userLogin'=>userLogin,
+        'userVerify'=>userVerify
+    );
     $config[$APIID]();
 
 
@@ -20,17 +22,24 @@
             setcookie('SSID',session_id());
             $_SESSION['stat']='login';
             $_SESSION['Verifyed']=true;
-            echo 'login sucesses!';
+            echo array(
+                'stat'=>200,
+                'msg'=>'login sucessed!'
+            );
+            header($_GET['ref']?$_GET['ref']:'/');
         }else{
-            echo 202;
+            echo array(
+                'stat'=>201,
+                'msg'=>'login failed!'
+            );
         }
     }
 
     function userVerify(){
         if($_SESSION['stat']=='login'){
-            echo 'yes login';
+            return true;
         }else{
-            echo 'no not login';
+            echo false;
         }
     }
 
