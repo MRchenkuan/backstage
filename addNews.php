@@ -1,12 +1,3 @@
-<?php
-/*登录验证*/
-error_reporting(0);
-session_start();
-if(!$_SESSION['stat']=='login'){
-    return false;
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head lang="zh-CN">
@@ -20,6 +11,16 @@ if(!$_SESSION['stat']=='login'){
     <title>主页</title>
 </head>
 <body>
+<?php
+error_reporting(0);
+session_start();
+if(!$_SESSION['stat']=='login'){
+    /*未登录展示登录框*/
+    require('./widgets/loginboard.php');
+    echo "</body></html>";
+    return;
+}
+?>
 <!--导航-->
 <?php include('./widgets/nav.php');?>
 

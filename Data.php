@@ -13,7 +13,6 @@
     );
     $config[$APIID]();
 
-
     function userLogin(){
         $username = $_GET['username'];
         $password = $_GET['password'];
@@ -22,16 +21,16 @@
             setcookie('SSID',session_id());
             $_SESSION['stat']='login';
             $_SESSION['Verifyed']=true;
-            echo array(
+
+            echo json_encode(array(
                 'stat'=>200,
                 'msg'=>'login sucessed!'
-            );
-            header($_GET['ref']?$_GET['ref']:'/');
+            ));
         }else{
-            echo array(
+            echo json_encode(array(
                 'stat'=>201,
                 'msg'=>'login failed!'
-            );
+            ));
         }
     }
 
