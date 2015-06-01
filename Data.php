@@ -1,6 +1,7 @@
 <?php
     error_reporting(0);
     session_start();
+    require_once('./tools/Kodbc.class.php');
 
     $APIID = $_GET['id']?$_GET['id']:'defaultMethod';
 
@@ -13,6 +14,9 @@
     );
     $config[$APIID]();
 
+    /**
+     * 用户登陆的方法
+     * */
     function userLogin(){
         $username = $_GET['username'];
         $password = $_GET['password'];
@@ -34,32 +38,51 @@
         }
     }
 
+    /**
+     * 用户登陆态验证的方法
+     * */
     function userVerify(){
         if($_SESSION['stat']=='login'){
             return true;
         }else{
-            echo false;
+            return false;
         }
     }
 
-	function getNews()
-	{
-		echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
-		$xmlPath = '../../myfolder/test.xml';
-		$xmlPath_newslist = '../../myfolder/newslist.xml';
-		$xmlPath_contentPageDate = '../../myfolder/NEWSDATA.xml';
+    /**
+     * 用户创建广告的方法
+     * */
+	function createAdvt(){
+        $order = $_GET['order'];
+        $title = $_GET['title'];
+        $imgfile= $_FILES['order'];
+        $update = $_GET['update'];
+        $dndate = $_GET['dndate'];
+        $remark = $_GET['remark'];
 
-		$xmlDoc = simplexml_load_file($xmlPath_newslist);
-		$ctpg = simplexml_load_file($xmlPath_contentPageDate);
-		echo '<pre>';
-		print_r(utf8_encode($ctpg->children()));
-		echo '</pre>';
-	}
+        if(!userVerify()){
+            /*验证用户登陆*/
+            echo json_encode(array(
+                    'stat'=>201,
+                    'msg'=>'login failed!'
+                ));
+            return false;
+        }
 
+        $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+
+
+    }
+    /**
+     * 默认返回的方法
+     * */
 	function defaultMethod(){
 		echo 'api unformated!';
 	}
 
+    /**
+     * 图片上传的方法
+     * */
 	function uploadImg(){
 		$uploaddir = './'.date('Ymd').'/';
 		if(!file_exists($uploaddir)){

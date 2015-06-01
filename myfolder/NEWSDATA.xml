@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<database nowid="5">
+<database NOWID="5">
     <item id="1" order="1" stat="active" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
     <item id="2" order="2" stat="active" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
     <item id="3" order="10" stat="disable" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>

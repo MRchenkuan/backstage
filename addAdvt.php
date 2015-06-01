@@ -38,7 +38,7 @@ if(!$_SESSION['stat']=='login'){
 
     <!-- Table -->
     <table class="table">
-        <tr  style="text-align: center">
+        <tr  style="text-align: left">
             <td>
                 <span class="glyphicon glyphicon-picture"></span>
                 图片
