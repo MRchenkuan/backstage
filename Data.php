@@ -47,7 +47,7 @@
 		echo 'this is '.$_GET['param']?$_GET['param']:'api unformated!'.'s news';
 		$xmlPath = '../../myfolder/test.xml';
 		$xmlPath_newslist = '../../myfolder/newslist.xml';
-		$xmlPath_contentPageDate = '../../myfolder/contentPageDate.xml';
+		$xmlPath_contentPageDate = '../../myfolder/NEWSDATA.xml';
 
 		$xmlDoc = simplexml_load_file($xmlPath_newslist);
 		$ctpg = simplexml_load_file($xmlPath_contentPageDate);
