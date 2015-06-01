@@ -18,7 +18,7 @@ session_start();
 <!--登录框-->
 <?php
 if(!$_SESSION['stat']=='login'){
-    include('./widgets/Loginboard.php');
+    include('./widgets/Loginboard_.php');
 }else{
     include('./widgets/nav.php');
 }

@@ -18,7 +18,7 @@ error_reporting(0);
 session_start();
 if(!$_SESSION['stat']=='login'){
     /*未登录展示登录框*/
-    require('./widgets/loginboard.php');
+    require('./widgets/Loginboard_.php');
     echo "</body></html>";
     return;
 }
