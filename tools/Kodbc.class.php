@@ -6,7 +6,6 @@
  * Time: 下午5:59
  */
 error_reporting(0);
-
 class Kodbc {
     function __construct($xmlPath) {
         $this->xmlPath=$xmlPath;

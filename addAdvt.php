@@ -3,10 +3,10 @@
 <head lang="zh-CN">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-theme.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
     <style>
         .input-group{margin: 10px auto;}
     </style>
@@ -63,9 +63,9 @@ if(!$_SESSION['stat']=='login'){
         <?php
 
         $adCollection = array(
-            array('index'=>1,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
-            array('index'=>2,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
-            array('index'=>3,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
+            array('id'=>1,'index'=>1,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
+            array('id'=>2,'index'=>2,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
+            array('id'=>3,'index'=>3,'title'=>'第一个的标题','cover'=>'http://tangweimm.com/img/imgveiw/3.jpg','update'=>'2015-04-25 00:00:00','dndate'=>'2015-06-25 00:00','remark'=>'默认备注'),
         );
 
         foreach($adCollection as $items){?>
@@ -76,6 +76,7 @@ if(!$_SESSION['stat']=='login'){
                 <td><?php echo substr($items['dndate'],0,10)?></td>
                 <td><div class="btn-group" role="group" aria-label="..."><button type="button" class="btn btn-default"  onclick="if(!confirm('是否删除此条记录?'))return false;"><span class="glyphicon glyphicon-trash"></span></button>
                         <button type="button" class="btn btn-default" onclick="fillForMod(this)"
+                                data-id="<?php echo $items['id']?>"
                                 data-index="<?php echo $items['index']?>"
                                 data-title="<?php echo $items['title']?>"
                                 data-cover="<?php echo $items['cover']?>"
@@ -111,6 +112,11 @@ if(!$_SESSION['stat']=='login'){
     </div>
     <div  style="margin: 20px;">
         <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">广告艾迪</span>
+            <input id="ad_id" type="number" class="form-control" readonly placeholder="自动填写" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">广告顺序</span>
             <input id="ad_index" type="number" class="form-control" placeholder="填写广告序号" aria-describedby="basic-addon1">
         </div>
@@ -140,6 +146,8 @@ if(!$_SESSION['stat']=='login'){
 <script>
 
     function fillForMod(node){
+        console.log(node.getAttribute('data-id'))
+        var ad_id  = document.getElementById('ad_id').value=node.getAttribute('data-id')||'';
         var ad_index  = document.getElementById('ad_index').value=node.getAttribute('data-index')||'';
         var ad_title  = document.getElementById('ad_title').value=node.getAttribute('data-title')||'';
 //        var ad_cover  = document.getElementById('ad_cover').value=node.getAttribute('data-cover')||'';
