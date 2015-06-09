@@ -1,6 +1,7 @@
 <?php
     error_reporting(0);
     session_start();
+
     require_once('./tools/Kodbc.class.php');
 
     $APIID = $_GET['id']?$_GET['id']:'defaultMethod';
@@ -17,7 +18,9 @@
     /**
      * 用户登陆的方法
      * */
+
     function userLogin(){
+
         $username = $_GET['username'];
         $password = $_GET['password'];
         if($username=='admin'&& $password=='admin'){

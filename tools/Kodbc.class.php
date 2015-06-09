@@ -61,9 +61,9 @@ class Kodbc {
     }
 }
 
-$k = new Kodbc('../myfolder/NEWSDATA.xml');
-if($k->getById(5)){
-    echo 'yes';
-}else{
-    echo 'no';
-};
+//$k = new Kodbc('../myfolder/NEWSDATA.xml');
+//if($k->getById(5)){
+//    echo 'yes';
+//}else{
+//    echo 'no';
+//};
