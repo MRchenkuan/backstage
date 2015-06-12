@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<database NOWID="5">
-    <item id="1" order="1" stat="active" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
-    <item id="2" order="2" stat="active" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
-    <item id="3" order="10" stat="disable" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
-    <item id="4" order="4" stat="active" title="文章标题" imgsrc="www.baidu.com" update="2010-04-24 12:33:44" dndate="2010-04-24 12:33:44" remark="一条广告记录"/>
-</database>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE database SYSTEM "./news.dtd">
+<database NOWID="15"><item id="1" order="1" stat="disable" title="第一个的标题" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" update="2015-04-25T00:00:00" dndate="2015-06-25T00:00:00" remark="默认备注"/><item id="2" order="2" stat="disable" title="第2个的标题" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" update="2015-04-25T00:00:00" dndate="2015-06-25T00:00:00" remark="默认备注"/>
+<item id="13" order="4" stat="disable" title="第四条广告" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" update="2015-06-12T10:19" dndate="2016-12-01T12:59" remark="一条备注"/><item id="14" order="5" stat="disable" title="yuhuqi的logo" imgsrc="./image/20150612/1434077950.jpg" update="2015-12-31T12:59" dndate="2015-12-31T12:59" remark="啦啦"/></database>
