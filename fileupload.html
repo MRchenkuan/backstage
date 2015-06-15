@@ -1,8 +1,8 @@
 <html>
 <body style="padding: 0;margin: 0">
-<form style="padding: 0;margin: 0" enctype="multipart/form-data" action='./Data.php?id=uploadImg' method='POST' name='form'>
-    <input id='userfile' name='userfile' type='file'>
-    <input type='submit' value='上传'>
+<form id="uploadform" style="padding: 0;margin: 0" enctype="multipart/form-data" action='./Data.php?id=uploadImg' method='POST' name='form'>
+    <img id='uploadCallBack-ImgSrc' style='height:100%;max-width: 300px;' src='./UI/IMGBED.jpg'>
+    <input style="float:right;" id='userfile' name='userfile' type='file' onchange="document.getElementById('uploadform').submit()">
 </form>
 </body>
 </html>

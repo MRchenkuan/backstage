@@ -36,6 +36,8 @@ class Kodbc {
     function delById($id){
         $xmldoc = new DOMDocument();
         $xmldoc->load($this->xmlPath);
+
+        /*getid获取不到就只能用xpath了*/
         $xpath = new DOMXPath($xmldoc);
         $preDel = $xpath->query("//database/item[@id='".$id."']")->item(0);
         if(!$preDel){
@@ -44,6 +46,7 @@ class Kodbc {
                 'msg'=>$id.' is not found'
             ));
         }
+
         $preDel->parentNode->removeChild($preDel);
         $xmldoc->save($this->xmlPath);
 
@@ -129,7 +132,8 @@ class Kodbc {
             $item->addAttribute($k,$v);
         };
         /*最大ID数+1*/
-        $this->xmlDoc->attributes()['NOWID'] = $NowId+1;
+        $selfattr = $this->xmlDoc->attributes();
+        $selfattr['NOWID'] = $NowId+1;
         $this->xmlDoc->asXML($this->xmlPath);
     }
 

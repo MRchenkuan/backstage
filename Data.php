@@ -5,6 +5,7 @@
     require_once('./tools/Kodbc.class.php');
 
     $APIID = $_GET['id']?$_GET['id']:'defaultMethod';
+    $DATABASEURL = './myfolder/ADVTSDATA.xml';
 
 //    /*整体验证*/
 //    if(!userVerify()){
@@ -16,6 +17,7 @@
 //        return false;
 //    }
 
+
     $config=array(
         'defaultMethod'=>defaultMethod,
         'getNews'=>getNews,
@@ -23,7 +25,7 @@
         'userLogin'=>userLogin,
         'userVerify'=>userVerify,
         'createAdvt'=>createAdvt,
-        'delAdvt'=>delAdvt
+        'delAdvt'=>delAdvt,
     );
     $config[$APIID]();
 
@@ -37,17 +39,33 @@
 
         $username = $_GET['username'];
         $password = $_GET['password'];
+        $trylimit = 10;//最大登录尝试次数
+
+        if(!$_COOKIE['_auth'])return;
+
+        if($_SESSION['trycount']&&$_SESSION['trycount']>=$trylimit){
+            echo json_encode(array(
+                'stat'=>201,
+                'msg'=>'login failed!'
+            ));
+            return;
+        }
         if($username=='admin'&& $password=='admin'){
             /*记录session值并写入cookie*/
             setcookie('SSID',session_id());
             $_SESSION['stat']='login';
             $_SESSION['Verifyed']=true;
-
+            $_SESSION['trycount'] = 1;
             echo json_encode(array(
                 'stat'=>200,
                 'msg'=>'login sucessed!'
             ));
         }else{
+            if(!$_SESSION['trycount']){
+                $_SESSION['trycount'] = 0;
+            }
+            $_SESSION['trycount'] += 1;
+
             echo json_encode(array(
                 'stat'=>201,
                 'msg'=>'login failed!'
@@ -87,7 +105,8 @@
             echo false;
         }
 
-        $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+        global $DATABASEURL;
+        $Kodbc = new Kodbc($DATABASEURL);
         $dataitem = array(
             'order'=>$order,
             'stat'=>'disable',
@@ -115,7 +134,8 @@
      * */
     function delAdvt(){
         $id = $_GET['adid'];
-        $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+        global $DATABASEURL;
+        $Kodbc = new Kodbc($DATABASEURL);
         echo $Kodbc->delById($id);
     }
 
@@ -139,19 +159,25 @@
 			};
 		}
 		$uploadfileUrl = $uploaddir.time().'.jpg';
-        echo $uploadfileUrl."<body style='padding:0;margin:0'><input type='hidden' value='".$uploadfileUrl."' id='uploadCallBack-ImgSrc' /></body>";
 
         if($_FILES['userfile']['error']!==0){
             echo 'upload failed! error code:'.$_FILES['userfile']['error'];
             var_dump($_FILES['userfile']);
         }else{
-//            var_dump(move_uploaded_file($_FILES['userfile']['tmp_name'],$uploadfileUrl));
             if(move_uploaded_file($_FILES['userfile']['tmp_name'],$uploadfileUrl)) {
-                echo "<img src='".$uploadfileUrl."'>";
+                echo "<body style='padding: 0;margin: 0'>";
+                echo "<form style='padding: 0;margin: 0;' enctype='multipart/form-data' action='./Data.php?id=uploadImg' method='POST' name='form'>";
+                echo "<img id='uploadCallBack-ImgSrc' style='height:100%;max-width: 300px;' src='".$uploadfileUrl."'>";
+                echo "<input style='float: right' id='userfile' name='userfile' type='file' onchange=\"document.getElementById('uploadform').submit()\">";
+//                echo "<input style='float: right' type='submit' value='上传图片'>";
+                echo "</body>";
+                echo "</form>";
                 header($uploadfileUrl);
             } else {
                 header('#');
             }
         }
 	}
+
+
 ?>

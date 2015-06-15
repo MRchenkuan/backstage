@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
+$pageID='home';
 ?>
 <!DOCTYPE html>
 <html>

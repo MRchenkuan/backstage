@@ -13,10 +13,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <!--导航选项-->
-                <li class="active"><a href="./home.php">首页</a></li>
-                <li><a href="./addAdvt.php">广告添加</a></li>
-                <li><a href="./addNews.php">新闻添加</a></li>
+                <li class="<?php echo $pageID=='home'?'active':'default' ?>"><a href="./home.php">首页</a></li>
+                <li class="<?php echo $pageID=='addAdvt'?'active':'default' ?>"><a href="./addAdvt.php">广告添加</a></li>
+                <li class="<?php echo $pageID=='addNews'?'active':'default' ?>"><a href="./addNews.php">新闻添加</a></li>
             </ul>
         </div>
     </div>
 </nav>
+

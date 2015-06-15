@@ -1,3 +1,6 @@
+<?php
+    setcookie('_auth',session_id());
+?>
 <div class="panel panel-primary" style="width:600px;margin:160px auto 0 auto">
     <div class="panel-heading">
         <h3 class="panel-title">用户登录</h3>
