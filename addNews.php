@@ -56,7 +56,7 @@ usort($adCollection, function($a, $b) {
             <tr>
                 <td><img height=100 src="<?php echo $items['cover']?>" alt="缩略图"></td>
                 <td><?php echo $items['id']?></td>
-                <td><?php echo $items['title']?></td>
+                <td><a href="./news.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
                 <td><?php echo substr($items['pubdata'],0,10)?></td>
                 <td><?php echo substr($items['text'],0,20)?></td>
                 <td><div class="btn-group" role="group" aria-label="...">
@@ -71,7 +71,9 @@ usort($adCollection, function($a, $b) {
                                 data-id="<?php echo $items['id']?>"
                                 data-title="<?php echo $items['title']?>"
                                 data-cover="<?php echo $items['cover']?>"
-                                data-update="<?php echo substr($items['pubdata'],0,10).'T'.substr($items['pubdata'],0,10)?>">
+                                data-auth="<?php echo $items['auth']?>"
+                                data-org="<?php echo $items['origin']?>"
+                                data-update="<?php echo substr($items['pubdata'],0,10).'T'.substr($items['pubdata'],11,16)?>">
                             <span class="glyphicon glyphicon-list-alt"></span>
                         </button>
                     </div>
@@ -90,7 +92,7 @@ usort($adCollection, function($a, $b) {
     <div class="panel-heading">新闻发布器</div>
     <div class="panel-body" style="overflow-x: hidden;overflow-y: scroll;padding: 0">
         <div class="input-group" style="width: 80%">
-            <span class="input-group-addon" id="basic-addon1">广告艾迪</span>
+            <span class="input-group-addon" id="basic-addon1">新闻艾迪</span>
             <input id="news_id" type="number" class="form-control" readonly placeholder="自动填写" aria-describedby="basic-addon1">
         </div>
         <div class="input-group" style="width: 80%">
@@ -170,14 +172,14 @@ usort($adCollection, function($a, $b) {
             },
             success: function (data) {
                 console.log(data);
-//                var rep = eval("(" + data.responseText + ")");
-//                if (rep.stat == 200) {
-//                    alert(rep.msg);
-//                    location.reload();
-//                } else{
-//                    self.innerHTML = '提交出错，请重试';
-//                    self.removeAttribute('disabled');
-//                }
+                var rep = eval("(" + data + ")");
+                if (rep.stat == 200) {
+                    alert(rep.msg);
+                    location.reload();
+                } else{
+                    self.innerHTML = '提交出错，请重试';
+                    self.removeAttribute('disabled');
+                }
             },
             error: function () {
                 alert('提交出错');
@@ -209,6 +211,15 @@ usort($adCollection, function($a, $b) {
                 self.removeAttribute('disabled');
             }
         })
+    }
+
+    function fillForMod(node){
+        var news_id  = document.getElementById('news_id').value=node.getAttribute('data-id')||'';
+        var news_cover  = document.getElementById('news_cover').contentWindow.document.getElementById('uploadCallBack-ImgSrc').src=node.getAttribute('data-cover')||'';
+        var news_publish_data  = document.getElementById('news_publish_data').value=node.getAttribute('data-update')||'';
+        var news_title = document.getElementById('news_title').value=node.getAttribute('data-title')||'';
+        var news_auth = document.getElementById('news_auth').value=node.getAttribute('data-auth')||'';
+        var news_origin = document.getElementById('news_origin').value=node.getAttribute('data-org')||'';
     }
 </script>
 

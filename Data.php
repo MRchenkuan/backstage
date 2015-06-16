@@ -203,12 +203,50 @@ function createNews(){
 
     $newsid     =   $_POST['newsid'];
     $title     =   $_POST['title'];
-    $text       =   htmlspecialchars($_POST['text']);
     $auth       =   $_POST['auth'];
     $origin     =   $_POST['origin'];
     $pubdata    =   $_POST['pubdata'];
     $stat    =   $_POST['stat'];
     $cover    =   $_POST['cover'];
+
+    $text       =   htmlspecialchars($_POST['text']);
+
+    $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+    /*************
+     *
+     * 储存大文本
+     *
+     ************/
+    $newsDir = './news/'.date('Ymd').'/';
+    if (!file_exists($newsDir)) {
+        if (mkdir($newsDir)) {
+            chmod($newsDir, 0777);
+        } else {
+            echo 'faile to create ' . $newsDir . 'maybe the path you have no permit!<br>';
+        };
+    }
+
+    /*判断是修改文件还是新增文件*/
+    if ($newsid && $newsid != ''){
+        $item = $Kodbc->getById($newsid);
+        $newsFileUrl = $item['text'];
+    }else{
+        $newsFileUrl = $newsDir . time() . '.news';
+    }
+
+    $fp = fopen($newsFileUrl, "w+");
+    if(!fwrite($fp,$text)){
+        fclose($fp);
+        echo json_encode(array(
+            'stat' => 201,
+            'msg' => 'login failed!'
+        ));
+        throw new Exception("文件保存异常");
+    }
+    fclose($fp);
+    /**************
+     * 文件储存结束
+     **************/
 
     if (!userVerify()) {
         /*验证用户登陆*/
@@ -216,16 +254,15 @@ function createNews(){
             'stat' => 201,
             'msg' => 'login failed!'
         ));
-        echo false;
     }
-    $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+
     $dataitem = array(
         'stat' => $stat,
         'title' => $title,
-        'text' => $text,
         'auth' => $auth,
         'origin' => $origin,
         'pubdata' => $pubdata,
+        'text' =>$newsFileUrl,
         'cover' => $cover
     );
 

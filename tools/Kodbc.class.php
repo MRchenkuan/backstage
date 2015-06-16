@@ -121,12 +121,10 @@ class Kodbc {
 
     }
 
-
     /*根据属性插入新节点*/
     function insertItem($attrs){
         $NowId= $this->xmlDoc->attributes()['NOWID'];
         $item = $this->xmlDoc->addChild('item');
-//        $item->attributes()['id'] = $NowId;
         $item->addAttribute('id',$NowId);
         foreach($attrs as $k=>$v){
             $item->addAttribute($k,$v);
@@ -147,6 +145,3 @@ class Kodbc {
         $this->xmlDoc->asXML($this->xmlPath);
     }
 }
-
-//$Kodbc = new Kodbc('../myfolder/NEWDATA.xml');
-//$Kodbc->delById('2');

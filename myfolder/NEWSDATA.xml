@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "news.dtd">
-<database NOWID="19">
-</database>
+<database NOWID="26">
+<item id="22" stat="" title="allalala" auth="dfsdkfaj" origin="fdsafdsafasf" pubdata="2015-12-31T12:59" text="./news/20150616/1434431262.news" cover="./UI/IMGBED.jpg"/><item id="23" stat="" title="fdsfafdasf" auth="fdasfasdas" origin="fdsafdasfdsafaf" pubdata="2015-12-31T12:59" text="./news/20150616/1434433835.news" cover="./image/20150616/1434434469.jpg"/><item id="24" stat="" title="lalala" auth="dfasfas" origin="fdsafasfdsa" pubdata="2015-12-31T12:59" text="./news/20150616/1434434291.news" cover="./UI/IMGBED.jpg"/></database>

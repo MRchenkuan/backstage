@@ -2,19 +2,9 @@
 error_reporting(0);
 session_start();
 $pageID='home';
+include './widgets/head.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head lang="zh-CN">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <title>主页</title>
-</head>
-<body>
+
 
 <!--登录框-->
 <?php
@@ -25,5 +15,40 @@ if(!$_SESSION['stat']=='login'){
 }
 ?>
 
-</body>
-</html>
+    <div class="page-header" style="width: 960px;margin: 60px auto 0 auto">
+        <h1>Example page header <small>Subtext for header</small></h1>
+    </div>
+    <div class="jumbotron" style="width: 960px;margin: 60px auto 0 auto">
+        <h2>Hello backstage</h2>
+        <p>轻便后台管理系统</p>
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="http://tangweimm.com/img/foodveiw/4.jpg" alt="...">
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="http://tangweimm.com/img/foodveiw/3.jpg" alt="...">
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="http://tangweimm.com/img/foodveiw/2.jpg" alt="...">
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="http://tangweimm.com/img/foodveiw/1.jpg" alt="...">
+                </a>
+            </div>
+        </div>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+
+<?php
+include './widgets/foot.php';
+?>
