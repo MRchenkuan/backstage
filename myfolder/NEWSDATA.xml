@@ -1,35 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<database NOWID="18">
-    <item id="13"
-          order="2"
-          stat="disable"
-          title="第一个新闻"
-          cover="http://tangweimm.com/img/imgveiw/3.jpg"
-          update="2015-06-12T10:19"
-          dndate="2016-12-01T10:19"
-          remark="一条备注"/>
-    <item id="16"
-          order="2"
-          stat="disable"
-          title="第一个新闻"
-          cover="http://tangweimm.com/img/imgveiw/3.jpg"
-          update="2015-06-12T10:19"
-          dndate="2016-12-01T10:19"
-          remark="一条备注"/>
-    <item id="15"
-          order="2"
-          stat="disable"
-          title="第一个新闻"
-          cover="http://tangweimm.com/img/imgveiw/3.jpg"
-          update="2015-06-12T10:19"
-          dndate="2016-12-01T10:19"
-          remark="一条备注"/>
-    <item id="14"
-          order="2"
-          stat="disable"
-          title="第一个新闻"
-          cover="http://tangweimm.com/img/imgveiw/3.jpg"
-          update="2015-06-12T10:19"
-          dndate="2016-12-01T10:19"
-          remark="一条备注"/>
+<!DOCTYPE database SYSTEM "news.dtd">
+<database NOWID="19">
 </database>

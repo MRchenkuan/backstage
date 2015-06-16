@@ -133,7 +133,7 @@ include('widgets/head.php');
         var imgsrcobj = document.getElementById('ad_img').contentWindow.document.getElementById('uploadCallBack-ImgSrc');
         var imgsrc;
         if(imgsrcobj){
-            imgsrc = imgsrcobj.src;
+            imgsrc = imgsrcobj.getAttribute('src');
         }else{
             imgsrc = 'http://tangweimm.com/img/imgveiw/3.jpg';
         }

@@ -135,6 +135,7 @@ class Kodbc {
         $selfattr = $this->xmlDoc->attributes();
         $selfattr['NOWID'] = $NowId+1;
         $this->xmlDoc->asXML($this->xmlPath);
+        return $selfattr['NOWID'];
     }
 
     /*根据id和对象更新节点*/
