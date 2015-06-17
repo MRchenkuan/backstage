@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE database SYSTEM "photo.dtd">
+<database NOWID="0">
+    <item id="13" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://d.hiphotos.baidu.com/zhidao/pic/item/c8177f3e6709c93d6b939abe9d3df8dcd1005411.jpg" pubdata="2015-06-12T10:19"/>
+    <item id="14" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" pubdata="2015-06-12T10:19"/>
+    <item id="15" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" pubdata="2015-06-12T10:19"/>
+    <item id="16" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://d.hiphotos.baidu.com/zhidao/pic/item/c8177f3e6709c93d6b939abe9d3df8dcd1005411.jpg" pubdata="2015-06-12T10:19"/>
+    <item id="16" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" pubdata="2015-06-12T10:19"/>
+</database>

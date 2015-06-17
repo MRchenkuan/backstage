@@ -10,7 +10,7 @@ include "./widgets/head.php";
 <?php
 /*--连接数据库--*/
 require_once('./tools/Kodbc.class.php');
-$Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+$Kodbc = new Kodbc('./Database/NEWSDATA.xml');
 $pageNow = $_GET['page'];
 $sliceParam = 'page';
 

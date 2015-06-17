@@ -7,7 +7,7 @@ include('widgets/head.php');
 <?php
     /*--连接数据库--*/
     require_once('./tools/Kodbc.class.php');
-    $Kodbc = new Kodbc('./myfolder/ADVTSDATA.xml');
+    $Kodbc = new Kodbc('./Database/ADVTSDATA.xml');
     $pageNow = $_GET['page'];//当前分页
     if(!$pageNow){$pageNow=1;}
     $sliceParam = 'page'; //分页参数

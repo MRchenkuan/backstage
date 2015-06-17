@@ -63,6 +63,12 @@ class Kodbc {
         }
     }
 
+    /*根据属性查找结果集*/
+    function getByAttr($attr,$val){
+        $arr = $this->xmlDoc->xpath("//database/item[@".$attr."='".$val."']");
+        return $arr;
+    }
+
     /*得到所有item列表*/
     function getAllItems(){
         $args = func_get_args();
@@ -145,3 +151,6 @@ class Kodbc {
         $this->xmlDoc->asXML($this->xmlPath);
     }
 }
+
+//$kodbc = new Kodbc('../Database/photolib/photobase.xml');
+//$kodbc->getByAttr('albumid','14');

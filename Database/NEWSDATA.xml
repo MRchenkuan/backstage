@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE database SYSTEM "news.dtd">
+<database NOWID="27">
+<item id="22" stat="" title="allalala" auth="dfsdkfaj" origin="fdsafdsafasf" pubdata="2015-12-31T12:59" text="./news/20150616/1434431262.news" cover="./UI/IMGBED.jpg"/><item id="23" stat="" title="fdsfafdasf" auth="fdasfasdas" origin="fdsafdasfdsafaf" pubdata="2015-12-31T12:59" text="./news/20150616/1434433835.news" cover="./image/20150616/1434434469.jpg"/><item id="24" stat="" title="lalala" auth="dfasfas" origin="fdsafasfdsa" pubdata="2015-12-31T12:59" text="./news/20150616/1434434291.news" cover="./UI/IMGBED.jpg"/><item id="26" stat="" title="记得把图片唯一化" auth="记得把图片唯一化" origin="记得把图片唯一化" pubdata="2015-12-31T12:59" text="./news/20150617/1434510849.news" cover="./UI/IMGBED.jpg"/></database>

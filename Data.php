@@ -5,7 +5,7 @@ session_start();
 require_once('./tools/Kodbc.class.php');
 
 $APIID = $_GET['id'] ? $_GET['id'] : 'defaultMethod';
-$DATABASEURL = './myfolder/ADVTSDATA.xml';
+$DATABASEURL = './Database/ADVTSDATA.xml';
 
 
 /*****************************************************
@@ -23,6 +23,7 @@ $config = array(
     'delAdvt' => delAdvt,
     'createNews' => createNews,
     'delNews' => delNews,
+    'uploadImgAjax' => uploadImgAjax
 );
 $config[$APIID]();
 
@@ -115,7 +116,7 @@ function createAdvt()
         echo false;
     }
 
-    $Kodbc = new Kodbc('./myfolder/ADVTSDATA.xml');
+    $Kodbc = new Kodbc('./Database/ADVTSDATA.xml');
     $dataitem = array(
         'order' => $order,
         'stat' => 'disable',
@@ -211,7 +212,7 @@ function createNews(){
 
     $text       =   htmlspecialchars($_POST['text']);
 
-    $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
     /*************
      *
      * 储存大文本
@@ -285,8 +286,43 @@ function createNews(){
 function delNews()
 {
     $id = $_GET['newsid'];
-    $Kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
     echo $Kodbc->delById($id);
 }
 
 
+/*****************************************************
+ *
+ *                  图库的处理函数
+ *
+ *****************************************************/
+function uploadImgAjax()
+{
+    $imgdatastring = $_POST['imgDataString'] or null;
+    $uploaddir = './image/' . date('Ymd') . '/';
+    if (!file_exists($uploaddir)) {
+        if (mkdir($uploaddir)) {
+            chmod($uploaddir, 0777);
+        } else {
+            echo 'faile to create ' . $uploaddir . 'maybe the path you have no permit!<br>';
+        };
+    }
+    $uploadfileUrl = $uploaddir . time() . '.jpg';
+
+    /*base64保存为图片*/
+    if($imgdatastring){
+
+        //do someting for 保存图片
+
+        echo json_encode(array(
+            'stat'=>200,
+            'imgurl'=>$uploadfileUrl,
+            'msg'=>'图片上传成功',
+        ));
+    }else{
+        echo json_encode(array(
+            'stat'=>202,
+            'msg'=>'后端未收到前端图片数据',
+        ));
+    }
+}

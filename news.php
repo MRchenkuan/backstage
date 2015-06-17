@@ -2,7 +2,7 @@
 <?php
 error_reporting(0);
 session_start();
-$pageID='addNews';
+$pageID='news';
 include "./widgets/head.php";
 ?>
 
@@ -11,7 +11,7 @@ include "./widgets/head.php";
 /*连接数据库*/
 require_once('./tools/Kodbc.class.php');
 $newsid = $_GET['id'];
-$kodbc = new Kodbc('./myfolder/NEWSDATA.xml');
+$kodbc = new Kodbc('./Database/NEWSDATA.xml');
 
 $news = $kodbc->getById($newsid);
 ?>

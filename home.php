@@ -16,9 +16,9 @@ if(!$_SESSION['stat']=='login'){
 ?>
 
     <div class="page-header" style="width: 960px;margin: 60px auto 0 auto">
-        <h1>Example page header <small>Subtext for header</small></h1>
+        <h1>Home page header <small>Subtext for header</small></h1>
     </div>
-    <div class="jumbotron" style="width: 960px;margin: 60px auto 0 auto">
+    <div class="jumbotron" style="width: 960px;margin: 20px auto;border-radius: 10px;padding: 30px;">
         <h2>Hello backstage</h2>
         <p>轻便后台管理系统</p>
         <div class="row">
