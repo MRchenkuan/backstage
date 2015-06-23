@@ -298,6 +298,7 @@ function delNews()
  *****************************************************/
 function uploadImgAjax()
 {
+
     $imgdatastring = $_POST['imgDataString'] or null;
     $uploaddir = './image/' . date('Ymd') . '/';
     if (!file_exists($uploaddir)) {
@@ -307,18 +308,40 @@ function uploadImgAjax()
             echo 'faile to create ' . $uploaddir . 'maybe the path you have no permit!<br>';
         };
     }
-    $uploadfileUrl = $uploaddir . time() . '.jpg';
 
-    /*base64保存为图片*/
+    /*base64保存为图片，并写入数据库*/
     if($imgdatastring){
 
         //do someting for 保存图片
+        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $imgdatastring, $result)){
+            $type = $result[2];
+            $uploadfileUrl = $uploaddir. time().'.'.$type;
+            if (file_put_contents($uploadfileUrl, base64_decode(str_replace($result[1], '', $imgdatastring)))){
+                //写入数据库
+                $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+                $Kodbc->insertItem(array(
+                        'albumid'=>$_POST['albumid'],
+                        'stat'=>'active',
+                        'remark'=>$_POST['remark'],
+                        'imgsrc'=>$uploadfileUrl,
+                        'pubdata'=> date('Y-m-d')
+                    )
+                );
 
-        echo json_encode(array(
-            'stat'=>200,
-            'imgurl'=>$uploadfileUrl,
-            'msg'=>'图片上传成功',
-        ));
+                echo json_encode(array(
+                    'stat'=>200,
+                    'imgurl'=>$uploadfileUrl,
+                    'msg'=>'图片上传成功',
+                ));
+            }
+        }else{
+            echo json_encode(array(
+                'stat'=>202,
+                'imgurl'=>null,
+                'msg'=>'图片字符串匹配失败！',
+            ));
+        }
+
     }else{
         echo json_encode(array(
             'stat'=>202,

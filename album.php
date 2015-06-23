@@ -57,22 +57,32 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
                 <h4 class="modal-title" id="myModalLabel">文件上传</h4>
             </div>
             <div class="modal-body">
-                <div class="col-xs-6 col-md-10" style="position: relative;float: none">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-link"></span></span>
+                    <input type="text" class="form-control" placeholder="如果不上传，则在此处填写图片url" id="onlineurl" aria-describedby="basic-addon1">
+                </div>
+                <div class="col-xs-6 col-md-10" style="position: relative;float: none;margin: 0 auto">
                     <a href="#" class="thumbnail">
                         <img id="imguploadpreview" name="forupload" data-selected="0" src="./UI/area-add.png" alt="添加图片">
                     </a>
                     <input id="imageupload" type="file" value="选择图片" accept="image/*" style="opacity:0;width:100%;height:100%;position: absolute;top:0;left: 0;">
                 </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-tags"></span></span>
+                    <input type="text" class="form-control" placeholder="添加该图片的描述" id="remark" aria-describedby="basic-addon1">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button id="saveimg" type="button" class="btn btn-success">保存</button>
+                <button id="saveimg" type="button" class="btn btn-success" data-albumid="<?php echo $id?>">保存</button>
             </div>
 
             <script>
                 var uploadbtn = document.getElementById('imageupload');
                 var uploadprv = document.getElementById('imguploadpreview');
                 var savebtn = document.getElementById('saveimg');
+                var albumid = savebtn.getAttribute('data-albumid');
+
                 uploadbtn.addEventListener('click',function(){
                     var self = this;
                     var reader = new FileReader();
@@ -88,18 +98,39 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
                 });
                 savebtn.addEventListener('click',function(){
                     var imgs = document.getElementsByName('forupload');
+                    var remark = document.getElementById('remark').value;
+                    var onlineurl = document.getElementById('onlineurl').value;
 
                     Array.prototype.some.call(imgs,function(it,id,ar){
                         if(it.getAttribute('data-selected')!=0){
+                            savebtn.setAttribute('disabled','disabled');
+                            savebtn.innerHTML = '上传中请稍等……';
                             $.ajax({
                                 url:'Data.php?id=uploadImgAjax',
                                 type:'POST',
                                 data:{
-                                    'imgDataString':it.src
+                                    'imgDataString':it.src,
+                                    'albumid':albumid,
+                                    'remark':remark,
+                                    'onlineurl':onlineurl
                                 },
                                 success:function(data){
                                     data = eval('(' + data + ')');
-                                    console.log(data)
+                                    console.log(data);
+
+                                    if (data.stat == 200) {
+                                        alert(data.msg);
+                                        location.reload();
+                                    } else{
+                                        savebtn.removeAttribute('disabled');
+                                        savebtn.innerHTML = '上传出错，请调试';
+                                    }
+                                },
+                                error:function(data){
+                                    data = eval('(' + data + ')');
+                                    console.log(data);
+                                    savebtn.removeAttribute('disabled');
+                                    savebtn.innerHTML = 'data.msg';
                                 }
                             });
                         }
