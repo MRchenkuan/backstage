@@ -66,7 +66,19 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
     }else{
         foreach($photos as $photo){?>
             <div class="col-xs-6 col-md-3">
-                <span class="glyphicon glyphicon-trash" style="position: absolute;margin: 5px;"></span>
+                <span class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除图片" style="float: right;margin: 5px;color: #e94513"></span>
+                <div class="dropdown" style="float: right;margin: 5px;color: #4c973e">
+                    <span class="glyphicon glyphicon-log-out dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" data-placement="top" title="移动图片"></span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li class="dropdown-header">移动图片到相册</li>
+<!--                        <li role="separator" class="divider"></li>-->
+                        <?php
+                        $albums = $photoalbum->getAllItems();
+                        foreach($albums as $album) { ?>
+                            <li><a href="#"><?php echo $album['remark']?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
                 <a href="<?php echo $photo['imgsrc']?>" class="thumbnail">
                     <img src="<?php echo $photo['imgsrc']?>" alt="<?php echo $photo['remark']?>">
                 </a>
@@ -106,6 +118,11 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
             </div>
 
             <script>
+                /*移入提示*/
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                });
+
                 var uploadbtn = document.getElementById('imageupload');
                 var uploadprv = document.getElementById('imguploadpreview');
                 var savebtn = document.getElementById('saveimg');
