@@ -149,6 +149,7 @@ class Kodbc {
             $item->attributes()->$k=$v;
         }
         $this->xmlDoc->asXML($this->xmlPath);
+
     }
 }
 

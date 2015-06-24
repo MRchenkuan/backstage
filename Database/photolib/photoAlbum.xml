@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "Album.dtd">
 <database NOWID="20">
-    <item id="0" stat="disable" remark="系统相册:未分类" delable="1" count="18" pubdata="2015-06-12T10:19"/>
-    <item id="13" stat="disable" remark="系统相册:A" delable="0" count="2" pubdata="2015-06-12T10:19"/>
-    <item id="14" stat="disable" remark="系统相册:B" delable="0" count="11" pubdata="2015-06-12T10:19"/>
-    <item id="15" stat="disable" remark="系统相册:C" delable="0" count="4" pubdata="2015-06-12T10:19"/>
+    <item id="0" stat="disable" remark="系统相册:未分类" delable="1" count="12" pubdata="2015-06-12T10:19"/>
+    <item id="13" stat="disable" remark="系统相册:A" delable="0" count="3" pubdata="2015-06-12T10:19"/>
+    <item id="14" stat="disable" remark="系统相册:B" delable="0" count="8" pubdata="2015-06-12T10:19"/>
+    <item id="15" stat="disable" remark="系统相册:C" delable="0" count="5" pubdata="2015-06-12T10:19"/>
     <item id="16" stat="disable" remark="系统相册:D" delable="0" count="1" pubdata="2015-06-12T10:19"/>
     <item id="17" stat="disable" remark="系统相册:E" delable="1" count="0" pubdata="2015-06-12T10:19"/>
 </database>

@@ -23,7 +23,9 @@ $config = array(
     'delAdvt' => delAdvt,
     'createNews' => createNews,
     'delNews' => delNews,
-    'uploadImgAjax' => uploadImgAjax
+    'uploadImgAjax' => uploadImgAjax,
+    'moveImage' => moveImage,
+    'removeImage' => removeImage
 );
 $config[$APIID]();
 
@@ -361,5 +363,74 @@ function uploadImgAjax()
             'stat'=>202,
             'msg'=>'后端未收到前端图片数据',
         ));
+    }
+}
+
+function moveImage(){
+    $albumid=$_GET['albumid'];
+    $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+    if($_GET['imgid']){
+        $imgid=$_GET['imgid'];
+        $Kodbc->updateItem($imgid,array(
+            'albumid'=>$albumid
+        ));
+        echo json_encode(array(
+            'stat'=>200,
+            'msg'=>"{$imgid}移动到{$albumid}",
+        ));
+    }elseif($_GET['imgsrc']){
+        $imgsrc=$_GET['imgsrc'];
+        $Kodbc->insertItem(array(
+            'albumid'=>'0',
+           'imgsrc'=>$imgsrc,
+            'pubdata'=>date('Y-m-d'),
+            'remark'=>'from image binding'
+        ));
+        echo json_encode(array(
+            'stat'=>200,
+            'msg'=>"{$imgsrc}绑定到{$albumid}",
+        ));
+    }else{
+        echo json_encode(array(
+            'stat'=>202,
+            'msg'=>"既没有图片ID也没有图片地址"
+        ));
+    }
+
+}
+
+function removeImage(){
+    $imgsrc = $_GET['imgsrc'];
+    $filename=end(explode('/',$imgsrc));
+    /*新建回收站*/
+    $dashbindir = './dashbin/'.date('Ymd').'/';
+    if (!file_exists($dashbindir)) {
+        if (mkdir($dashbindir)) {
+            chmod($dashbindir, 0777);
+        } else {
+            echo 'faile to create ' . $dashbindir . 'maybe the path you have no permit!<br>';
+        };
+    }
+
+    $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+    if($_GET['imgid']){
+        $imgid=$_GET['imgid'];
+        $Kodbc->delById($imgid);
+    }
+
+    if(rename($imgsrc,$dashbindir.$filename )){
+        echo json_encode(array(
+            'stat'=>200,
+            'msg'=>"{$_GET['imgid']}在数据库中删除，{$filename}移动到服务器回收站",
+        ));
+        return true;
+    }else{
+        echo json_encode(array(
+            'stat'=>200,
+            'msg'=>"数据库删除成功，但服务器无此文件",
+            '$imgsrc'=>$imgsrc,
+            '$dashbindir.$filename'=>$dashbindir.$filename,
+        ));
+        return true;
     }
 }

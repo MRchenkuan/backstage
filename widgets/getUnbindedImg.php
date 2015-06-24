@@ -17,7 +17,7 @@ function getUnbindedImg($dirforscan){
                     $file = $dirforscan . $path . '/' . $img;
                     $imgtype_ = explode('.',$file);
                     $imgtype = end($imgtype_);
-                    if($imgtype=='jpg'||$imgtype=='png'||$imgtype=='gif'){
+                    if($imgtype=='jpeg'||$imgtype=='jpg'||$imgtype=='png'||$imgtype=='gif'){
                         array_push($unbindedfiles,$file);
                     }
                 }

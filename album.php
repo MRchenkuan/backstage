@@ -11,14 +11,15 @@ include './tools/Kodbc.class.php';
 $id = $_GET['id'];
 $photobase = new Kodbc('./Database/photolib/photobase.xml');
 $photoalbum = new Kodbc('./Database/photolib/photoAlbum.xml');
-$album = $photoalbum->getById($id) or null;
+$thisalbum = $photoalbum->getById($id) or null;
 $photos = $photobase->getByAttr('albumid',$id) or null;
+$albums = $photoalbum->getAllItems();
 ?>
 <!--album-->
 <div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">
 
     <div class="panel-heading">
-        <h3 class="panel-title">相册《<?php echo $album['remark'] ?>》下的图片</h3>
+        <h3 class="panel-title">相册《<?php echo $thisalbum['remark'] ?>》下的图片</h3>
     </div>
 
     <!-- 文件上传控制按钮 -->
@@ -29,7 +30,7 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
     <div class="panel-body">
     <?php
     /*首先检查是否维护相册统计数*/
-    if($album['count']!=count($photos)){
+    if($thisalbum['count']!=count($photos)){
         $photoalbum->updateItem($id,array('count'=>count($photos)));
     }
 
@@ -45,12 +46,23 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
             }
         }
         /**更新未分类的图片数*/
-        if($album['count']!=count($unbindedimgs)){
-            $photoalbum->updateItem($id,array('count'=>count($unbindedimgs)));
+        if($thisalbum['count']!=count($unbindedimgs)){
+            $photoalbum->updateItem($id,array('count'=>(count($unbindedimgs)+count($photos))));
         }
-
-        foreach($unbindedimgs as $photo){?>
+        foreach($unbindedimgs as $photo){
+            ?>
             <div class="col-xs-6 col-md-3">
+                <span onclick="if(confirm('继续操作将删除此图片！'))delImg(this);" data-imgsrc="<?php echo $photo?>" class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除图片" style="float: right;margin: 5px;color: #e94513"></span>
+                <span style="float: right;margin: 5px;color: #05c133" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-placement="top" title="编辑图片" data-target="#imageEditor"></span>
+                <div class="dropdown" style="float: right;margin: 4px;color: #5f6297">
+                    <span class="glyphicon glyphicon-globe dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" data-placement="top" title="移动图片"></span>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li class="dropdown-header">绑定图片到相册</li>
+                        <?php foreach($albums as $album){ ?>
+                            <li><a onclick="moveImgToAlbum(this)" data-imgsrc="<?php echo $photo?>" data-albumid="<?php echo $album['id']?>" href="javascript:void(0)"><?php echo $album['remark']?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
                 <a href="<?php echo $photo?>" class="thumbnail">
                     <img src="<?php echo $photo?>" alt="<?php echo '未绑定的图片'?>">
                 </a>
@@ -66,16 +78,15 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
     }else{
         foreach($photos as $photo){?>
             <div class="col-xs-6 col-md-3">
-                <span class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除图片" style="float: right;margin: 5px;color: #e94513"></span>
-                <div class="dropdown" style="float: right;margin: 5px;color: #4c973e">
-                    <span class="glyphicon glyphicon-log-out dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" data-placement="top" title="移动图片"></span>
+                <span onclick="if(confirm('继续操作将删除此图片！'))delImg(this);" data-imgsrc="<?php echo $photo['imgsrc']?>" data-imgid="<?php echo $photo['id']?>" class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除图片" style="float: right;margin: 5px;color: #e94513"></span>
+                <span style="float: right;margin: 5px;color: #05c133" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-placement="top" title="编辑图片" data-target="#imageEditor"></span>
+                <div class="dropdown" style="float: right;margin: 4px;color: #5f6297">
+                    <span class="glyphicon glyphicon-circle-arrow-right dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false" data-placement="top" title="移动图片"></span>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li class="dropdown-header">移动图片到相册</li>
-<!--                        <li role="separator" class="divider"></li>-->
                         <?php
-                        $albums = $photoalbum->getAllItems();
                         foreach($albums as $album) { ?>
-                            <li><a href="#"><?php echo $album['remark']?></a></li>
+                            <li><a onclick="moveImgToAlbum(this)" data-imgid="<?php echo $photo['id']?>" data-albumid="<?php echo $album['id']?>" href="javascript:void(0)"><?php echo $album['remark']?></a></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -88,7 +99,83 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
     </div>
 </div>
 
-<!-- 文件上传模块 -->
+<script>
+    /*鼠标移入提示*/
+    $(function () {
+        $('[data-toggle="dropdown"]').tooltip();
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="modal"]').tooltip();
+    });
+    function moveImgToAlbum(node){
+        $.ajax({
+            url:'Data.php?id=moveImage',
+            type:'GET',
+            data:{
+                'imgid':node.getAttribute('data-imgid')||'',
+                'albumid':node.getAttribute('data-albumid')||'',
+                'imgsrc':node.getAttribute('data-imgsrc')||''
+            },
+            success:function(data){
+                data = eval('(' + data + ')');
+                console.log(data);
+                if (data.stat == 200) {
+                    alert(data.msg);
+                    location.reload();
+                }
+            },
+            error:function(data){
+                data = eval('(' + data + ')');
+                console.log(data);
+            }
+        })
+    }
+
+    function delImg(node){
+        $.ajax({
+            url:'Data.php?id=removeImage',
+            type:'GET',
+            data:{
+                'imgid':node.getAttribute('data-imgid')||'',
+                'imgsrc':node.getAttribute('data-imgsrc')||''
+            },
+            success:function(data){
+                data = eval('(' + data + ')');
+                console.log(data);
+                if (data.stat == 200) {
+                    alert(data.msg);
+                    location.reload();
+                }
+            },
+            error:function(data){
+                data = eval('(' + data + ')');
+                console.log(data);
+            }
+        })
+    }
+</script>
+
+<!-- ************* 图片编辑模块 ************* -->
+<div class="modal fade" id="imageEditor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑图片信息</h4>
+            </div>
+            <div class="modal-body" style="color:red;">
+                由于暂时不需要进行图片信息维护，所以该功能暂不提供，尽请期待...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button id="saveimg" type="button" class="btn btn-success" data-albumid="<?php echo $id?>">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ************* 图片上传模块 ************* -->
 <div class="modal fade" id="fileuploadpannel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -118,11 +205,6 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
             </div>
 
             <script>
-                /*移入提示*/
-                $(function () {
-                    $('[data-toggle="tooltip"]').tooltip()
-                });
-
                 var uploadbtn = document.getElementById('imageupload');
                 var uploadprv = document.getElementById('imguploadpreview');
                 var savebtn = document.getElementById('saveimg');
