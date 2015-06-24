@@ -178,6 +178,20 @@ function uploadImg()
         var_dump($_FILES['userfile']);
     } else {
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfileUrl)) {
+            /*********
+             * 记录入库
+             ********/
+            $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+            $Kodbc->insertItem(array(
+                'albumid'=>'0',
+                'remark'=>'from uploadImg',
+                'imgsrc'=>$uploadfileUrl,
+                'pubdata'=>date('Y-m-d')
+            ));
+
+            /*********
+             * 页面输出
+             ********/
             echo "<body style='padding: 0;margin: 0'>";
             echo "<form style='padding: 0;margin: 0;' enctype='multipart/form-data' action='./Data.php?id=uploadImg' method='POST' name='form'>";
             echo "<img id='uploadCallBack-ImgSrc' style='height:100%;max-width: 300px;' src='" . $uploadfileUrl . "'>";

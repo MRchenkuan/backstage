@@ -8,7 +8,7 @@
 $pageID = 'photoLib';
 include './widgets/head.php';
 include './tools/Kodbc.class.php';
-$id = $_GET['id'] or die('相册不存在');
+$id = $_GET['id'];
 $photobase = new Kodbc('./Database/photolib/photobase.xml');
 $photoalbum = new Kodbc('./Database/photolib/photoAlbum.xml');
 $album = $photoalbum->getById($id) or null;
@@ -18,7 +18,7 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
 <div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">
 
     <div class="panel-heading">
-        <h3 class="panel-title">相册《<?php echo $album['remark']?>》下的图片</h3>
+        <h3 class="panel-title">相册《<?php echo $album['remark'] ?>》下的图片</h3>
     </div>
 
     <!-- 文件上传控制按钮 -->
@@ -32,19 +32,47 @@ $photos = $photobase->getByAttr('albumid',$id) or null;
     if($album['count']!=count($photos)){
         $photoalbum->updateItem($id,array('count'=>count($photos)));
     }
+
+    /*****************
+     * 查看未绑定的图片
+     *****************/
+    if(!$id||$id=='0'||$id==''){
+        require_once('./widgets/getUnbindedImg.php');
+        $unbindedimgs = getUnbindedImg('./image/');
+        foreach($unbindedimgs as $key=>$unbindeimg){
+            if($photobase->getByAttr('imgsrc',$unbindeimg)){
+                unset($unbindedimgs[$key]);
+            }
+        }
+        /**更新未分类的图片数*/
+        if($album['count']!=count($unbindedimgs)){
+            $photoalbum->updateItem($id,array('count'=>count($unbindedimgs)));
+        }
+
+        foreach($unbindedimgs as $photo){?>
+            <div class="col-xs-6 col-md-3">
+                <a href="<?php echo $photo?>" class="thumbnail">
+                    <img src="<?php echo $photo?>" alt="<?php echo '未绑定的图片'?>">
+                </a>
+            </div>
+        <?php }
+    }
+
+    /***************
+     * 根据ID查看图片
+     ***************/
     if(!$photos||count($photos)==0){
         echo '相册中没有图片';
     }else{
         foreach($photos as $photo){?>
             <div class="col-xs-6 col-md-3">
+                <span class="glyphicon glyphicon-trash" style="position: absolute;margin: 5px;"></span>
                 <a href="<?php echo $photo['imgsrc']?>" class="thumbnail">
                     <img src="<?php echo $photo['imgsrc']?>" alt="<?php echo $photo['remark']?>">
                 </a>
             </div>
-    <?php
-        }
-    }
-    ?>
+        <?php }
+    } ?>
     </div>
 </div>
 
