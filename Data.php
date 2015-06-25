@@ -25,7 +25,9 @@ $config = array(
     'delNews' => delNews,
     'uploadImgAjax' => uploadImgAjax,
     'moveImage' => moveImage,
-    'removeImage' => removeImage
+    'removeImage' => removeImage,
+    'createAlbum' => createAlbum,
+    'delAlbum' => delAlbum
 );
 $config[$APIID]();
 
@@ -312,6 +314,10 @@ function delNews()
  *                  图库的处理函数
  *
  *****************************************************/
+
+/**
+ * 异步上传图片
+ */
 function uploadImgAjax()
 {
 
@@ -366,6 +372,9 @@ function uploadImgAjax()
     }
 }
 
+/**
+ * 相册间移动图片
+ */
 function moveImage(){
     $albumid=$_GET['albumid'];
     $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
@@ -399,6 +408,10 @@ function moveImage(){
 
 }
 
+
+/**
+ * 物理删除图片
+ */
 function removeImage(){
     $imgsrc = $_GET['imgsrc'];
     $filename=end(explode('/',$imgsrc));
@@ -433,4 +446,68 @@ function removeImage(){
         ));
         return true;
     }
+}
+
+
+/**
+ * 创建相册
+ */
+function createAlbum(){
+    try{
+
+        $albumname = $_GET['albumname'];
+        $stat = $_GET['stat'];
+
+        $Kodbc = new Kodbc('./Database/photolib/photoAlbum.xml');
+        if($_GET['albumid']&&$_GET['albumid']!==''){
+            $Kodbc->updateItem($_GET['albumid'],array(
+                'stat'=>$stat,
+                'remark'=>$albumname,
+                'editable'=>1,
+                'count'=>0,
+                'pubdata'=>date('Y-m-d')
+            ));
+            echo json_encode(array(
+                'stat'=>200,
+                'msg'=>"《{$albumname}》修改成功",
+            ));
+        }else{
+            $Kodbc->insertItem(array(
+                'stat'=>$stat,
+                'remark'=>$albumname,
+                'editable'=>1,
+                'count'=>0,
+                'pubdata'=>date('Y-m-d')
+            ));
+            echo json_encode(array(
+                'stat'=>200,
+                'msg'=>"《{$albumname}》创建成功",
+            ));
+        }
+    }catch (Exception $e){
+        echo json_encode(array(
+            'stat'=>202,
+            'msg'=>"出现异常:{$e}",
+        ));
+    }
+
+}
+
+function delAlbum(){
+    if($_GET['albumid']){
+        $albumid = $_GET['albumid'];
+        $Kodbc = new Kodbc('./Database/photolib/photoAlbum.xml');
+        $Kodbc->delById($albumid);
+        echo json_encode(array(
+            'stat'=>200,
+            'msg'=>"{$albumid}:成功删除",
+        ));
+    }else{
+        echo json_encode(array(
+            'stat'=>202,
+            'msg'=>"并没有找到什么卵ID",
+        ));
+    }
+
+
 }

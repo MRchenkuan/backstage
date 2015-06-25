@@ -167,7 +167,7 @@ $albums = $photoalbum->getAllItems();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button id="saveimg" type="button" class="btn btn-success" data-albumid="<?php echo $id?>">保存</button>
+                <button id="editimg" type="button" class="btn btn-success" data-albumid="<?php echo $id?>">保存</button>
             </div>
         </div>
     </div>
@@ -223,11 +223,13 @@ $albums = $photoalbum->getAllItems();
                         reader.readAsDataURL(self.files[0]);
                     });
                 });
+
+
+
                 savebtn.addEventListener('click',function(){
                     var imgs = document.getElementsByName('forupload');
                     var remark = document.getElementById('remark').value;
                     var onlineurl = document.getElementById('onlineurl').value;
-
                     Array.prototype.some.call(imgs,function(it,id,ar){
                         if(it.getAttribute('data-selected')!=0){
                             savebtn.setAttribute('disabled','disabled');
