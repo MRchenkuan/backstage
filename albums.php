@@ -23,7 +23,7 @@ require_once('./tools/Kodbc.class.php');
             <div class="col-xs-6 col-md-3">
                 <?php if($album['editable']==1){ ?>
                     <span onclick="if(!confirm('继续操作将删除此相册！'))return false;delAlbum(<?php echo $album['id']; ?>);" class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除相册" style="float: right;margin: 5px;color: #e94513"></span>
-                    <span onclick="fillAlertBoard('<?php echo $album['id']; ?>','<?php echo $album['remark']; ?>','<?php echo $album['stat']; ?>')" style="float: right;margin: 5px;color: #05c133" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-placement="top" title="编辑相册" data-target="#alertBoard"></span>
+                    <span onclick="fillAlertBoard('<?php echo $album['id']; ?>','<?php echo $album['remark']; ?>','<?php echo $album['stat']; ?>','修改相册信息')" style="float: right;margin: 5px;color: #05c133" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-placement="top" title="编辑相册" data-target="#alertBoard"></span>
                 <?php } ?>
                 <a href="./album.php?id=<?php echo $album['id']; ?>" class="thumbnail">
                     <img style="width: 70%" src="./UI/<?php echo $album['count']==0?'folder-empty.png':'folder.png';?>" alt="...">
@@ -55,13 +55,14 @@ require_once('./tools/Kodbc.class.php');
         var newAlbumBtn= document.getElementById('newAlbumBtn');
         $(newAlbumBtn).click(function(){
             /*创建时全填空*/
-            fillAlertBoard('','','')
+            fillAlertBoard('','','','新建相册')
         });
 
-        function fillAlertBoard(id,name,stat){
+        function fillAlertBoard(id,name,stat,title){
             document.getElementById('albumid').value = id;
             document.getElementById('album_name').value = name;
             document.getElementById('albumstat').setAttribute('albumstat',stat);
+            document.getElementById('myModalLabel').innerHTML=title||'修改相册信息';
         }
 
         function delAlbum(id){

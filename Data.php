@@ -27,7 +27,8 @@ $config = array(
     'moveImage' => moveImage,
     'removeImage' => removeImage,
     'createAlbum' => createAlbum,
-    'delAlbum' => delAlbum
+    'delAlbum' => delAlbum,
+    'getNewsContent' => getNewsContent,
 );
 $config[$APIID]();
 
@@ -308,6 +309,24 @@ function delNews()
     echo $Kodbc->delById($id);
 }
 
+/**
+ * 获得新闻内容的方法
+ * */
+function getNewsContent(){
+    $id=$_GET['newsid'];
+    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
+    $item= $Kodbc->getById($id);
+    $contentsrc = $item['text'];
+    $newsfile = fopen($contentsrc,'r') or die('can not find news,because no news file found');
+    echo json_encode(array(
+        'stat' => 200,
+        'msg' => $id.' get sucess！',
+        'content'=>htmlspecialchars_decode(fread($newsfile,filesize($contentsrc)))
+    ));
+    fclose($newsfile);
+
+}
+
 
 /*****************************************************
  *
@@ -463,8 +482,6 @@ function createAlbum(){
             $Kodbc->updateItem($_GET['albumid'],array(
                 'stat'=>$stat,
                 'remark'=>$albumname,
-                'editable'=>1,
-                'count'=>0,
                 'pubdata'=>date('Y-m-d\TH:i')
             ));
             echo json_encode(array(
@@ -493,6 +510,9 @@ function createAlbum(){
 
 }
 
+/**
+ * 删除相册
+ * */
 function delAlbum(){
     if($_GET['albumid']){
         $albumid = $_GET['albumid'];
@@ -508,6 +528,4 @@ function delAlbum(){
             'msg'=>"并没有找到什么卵ID",
         ));
     }
-
-
 }

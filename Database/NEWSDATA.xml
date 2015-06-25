@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "news.dtd">
 <database NOWID="27">
-<item id="22" stat="" title="allalala" auth="dfsdkfaj" origin="fdsafdsafasf" pubdata="2015-12-31T12:59" text="./news/20150616/1434431262.news" cover="./UI/IMGBED.jpg"/><item id="24" stat="" title="lalala" auth="dfasfas" origin="fdsafasfdsa" pubdata="2015-12-31T12:59" text="./news/20150616/1434434291.news" cover="./UI/IMGBED.jpg"/><item id="26" stat="" title="记得把图片唯一化" auth="记得把图片唯一化" origin="记得把图片唯一化" pubdata="2015-12-31T12:59" text="./news/20150617/1434510849.news" cover="./UI/IMGBED.jpg"/></database>
+<item id="22" stat="" title="页面样式测试" auth="陈宽同学" origin="自己" pubdata="2015-12-31T12:59" text="./news/20150616/1434431262.news" cover="./UI/IMGBED.jpg"/><item id="24" stat="" title="图片上传测试" auth="陈宽同学" origin="自动化脚本" pubdata="2015-12-31T12:59" text="./news/20150616/1434434291.news" cover="./image/20150625/1435217327.jpg"/><item id="26" stat="" title="记得把图片唯一化" auth="记得把图片唯一化" origin="记得把图片唯一化" pubdata="2015-12-31T12:59" text="./news/20150617/1434510849.news" cover="./image/20150625/1435218271.jpg"/></database>

@@ -34,7 +34,7 @@ usort($adCollection, function($a, $b) {
 <div class="panel panel-default" style="width: 960px;margin: 60px auto 0 auto">
     <!-- Default panel contents -->
     <div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span> 已有广告
-        <button type="button" class="btn btn-default" style="float: right" onclick="document.getElementById('ad_id').value='';location='#donewAdvt'"><span class="glyphicon glyphicon-plus"></span>新增一条广告</button>
+        <button type="button" class="btn btn-default" style="float: right" onclick="" id="createNewsBtn"><span class="glyphicon glyphicon-plus"></span>新增一条广告</button>
     </div>
     <div class="panel-body">
         下面表格展示了已经添加了的新闻,序号越大,排序越靠前
@@ -54,7 +54,7 @@ usort($adCollection, function($a, $b) {
         <?php
         foreach($adCollection as $items){?>
             <tr>
-                <td><img height=100 src="<?php echo $items['cover']?>" alt="缩略图"></td>
+                <td><img height=100 style="max-width: 250px;height: auto;" src="<?php echo $items['cover']?>" alt="缩略图"></td>
                 <td><?php echo $items['id']?></td>
                 <td><a href="./news.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
                 <td><?php echo substr($items['pubdata'],0,10)?></td>
@@ -67,7 +67,7 @@ usort($adCollection, function($a, $b) {
                         </button>
                         <button type="button"
                                 class="btn btn-default"
-                                onclick="fillForMod(this)"
+                                onclick="location='#news_id';fillForMod(this);"
                                 data-id="<?php echo $items['id']?>"
                                 data-title="<?php echo $items['title']?>"
                                 data-cover="<?php echo $items['cover']?>"
@@ -214,13 +214,46 @@ usort($adCollection, function($a, $b) {
     }
 
     function fillForMod(node){
-        var news_id  = document.getElementById('news_id').value=node.getAttribute('data-id')||'';
+        var news_id  = document.getElementById('news_id').value = node.getAttribute('data-id')||'';
         var news_cover  = document.getElementById('news_cover').contentWindow.document.getElementById('uploadCallBack-ImgSrc').src=node.getAttribute('data-cover')||'';
-        var news_publish_data  = document.getElementById('news_publish_data').value=node.getAttribute('data-update')||'';
-        var news_title = document.getElementById('news_title').value=node.getAttribute('data-title')||'';
-        var news_auth = document.getElementById('news_auth').value=node.getAttribute('data-auth')||'';
-        var news_origin = document.getElementById('news_origin').value=node.getAttribute('data-org')||'';
+        var news_publish_data  = document.getElementById('news_publish_data').value = node.getAttribute('data-update')||'';
+        var news_title = document.getElementById('news_title').value = node.getAttribute('data-title')||'';
+        var news_auth = document.getElementById('news_auth').value = node.getAttribute('data-auth')||'';
+        var news_origin = document.getElementById('news_origin').value = node.getAttribute('data-org')||'';
+        var news_editor = document.getElementById('news_editor').contentWindow.document.getElementById('editor');
+        /*设置不可编辑*/
+        news_editor.setAttribute('contenteditable','false');
+        news_editor.innerHTML="<span style='color:grey'>文章内容加载中...</span>";
+        $.ajax({
+            url:'Data.php?id=getNewsContent',
+            data:{
+                newsid:news_id
+            },
+            success: function (data) {
+                var rep = eval("(" + data + ")");
+                if (rep.stat == 200) {
+                    news_editor.innerHTML = rep.content;
+                    news_editor.setAttribute('contenteditable','true');
+                } else{
+                    news_editor.innerHTML = "<span style='color:red'>加载出错，请重试...</span>";
+                }
+            },
+            error: function () {
+                alert('提交出错');
+                self.removeAttribute('disabled');
+            }
+        })
     }
+
+    var createNewsBtn = document.getElementById('createNewsBtn');
+    createNewsBtn.addEventListener('click',function(){
+        var news_editor = document.getElementById('news_editor').contentWindow.document.getElementById('editor');
+        document.getElementById('news_id').value='';
+        news_editor.setAttribute('contenteditable','true');
+        news_editor.innerHTML='在此编辑';
+        location='#news_id';
+    })
+
 </script>
 
 
