@@ -190,7 +190,7 @@ function uploadImg()
                 'albumid'=>'0',
                 'remark'=>'from uploadImg',
                 'imgsrc'=>$uploadfileUrl,
-                'pubdata'=>date('Y-m-d')
+                'pubdata'=>date('Y-m-d\TH:i')
             ));
 
             /*********
@@ -346,7 +346,7 @@ function uploadImgAjax()
                         'stat'=>'active',
                         'remark'=>$_POST['remark'],
                         'imgsrc'=>$uploadfileUrl,
-                        'pubdata'=> date('Y-m-d')
+                        'pubdata'=> date('Y-m-d\TH:i')
                     )
                 );
 
@@ -392,7 +392,7 @@ function moveImage(){
         $Kodbc->insertItem(array(
             'albumid'=>'0',
            'imgsrc'=>$imgsrc,
-            'pubdata'=>date('Y-m-d'),
+            'pubdata'=>date('Y-m-d\TH:i'),
             'remark'=>'from image binding'
         ));
         echo json_encode(array(
@@ -465,7 +465,7 @@ function createAlbum(){
                 'remark'=>$albumname,
                 'editable'=>1,
                 'count'=>0,
-                'pubdata'=>date('Y-m-d')
+                'pubdata'=>date('Y-m-d\TH:i')
             ));
             echo json_encode(array(
                 'stat'=>200,
@@ -477,7 +477,7 @@ function createAlbum(){
                 'remark'=>$albumname,
                 'editable'=>1,
                 'count'=>0,
-                'pubdata'=>date('Y-m-d')
+                'pubdata'=>date('Y-m-d\TH:i')
             ));
             echo json_encode(array(
                 'stat'=>200,

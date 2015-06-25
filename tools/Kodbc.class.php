@@ -8,7 +8,7 @@
  *
  * 对应的xml格式如下
  * database( NOWID 必须,不建议增加其他属性)
- * -item (id必须，其余各式各样的属性都可以，表示字段)
+ * - item (id必须，其余各式各样的属性都可以，表示字段，建议新增的属性在DTD中声明)
  */
 error_reporting(0);
 class Kodbc {
