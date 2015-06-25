@@ -59,7 +59,7 @@ function userLogin()
     }
     if ($username == 'admin' && $password == 'admin') {
         /*记录session值并写入cookie*/
-        setcookie('SSID', session_id());
+        setcookie('SSID', session_id(),time()+43200);
         $_SESSION['stat'] = 'login';
         $_SESSION['Verifyed'] = true;
         $_SESSION['trycount'] = 1;
@@ -517,11 +517,19 @@ function delAlbum(){
     if($_GET['albumid']){
         $albumid = $_GET['albumid'];
         $Kodbc = new Kodbc('./Database/photolib/photoAlbum.xml');
-        $Kodbc->delById($albumid);
-        echo json_encode(array(
-            'stat'=>200,
-            'msg'=>"{$albumid}:成功删除",
-        ));
+        $item = $Kodbc->getById($albumid);
+        if($item['count']>0){
+            echo json_encode(array(
+                'stat'=>200,
+                'msg'=>"相册内有照片，需要先清空相册！",
+            ));
+        }else{
+            $Kodbc->delById($albumid);
+            echo json_encode(array(
+                'stat'=>200,
+                'msg'=>"{$albumid}:成功删除",
+            ));
+        }
     }else{
         echo json_encode(array(
             'stat'=>202,

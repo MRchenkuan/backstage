@@ -7,13 +7,6 @@ include './widgets/head.php';
 
 
 <!--登录框-->
-<?php
-if(!$_SESSION['stat']=='login'){
-    include('./widgets/Signinboard.php');
-}else{
-    include('./widgets/nav.php');
-}
-?>
 
     <div class="page-header" style="width: 960px;margin: 60px auto 0 auto">
         <h1>Home page header <small>Subtext for header</small></h1>

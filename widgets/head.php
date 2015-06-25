@@ -24,12 +24,13 @@
 <?php
 error_reporting(0);
 session_start();
-if(!$_SESSION['stat']=='login'){
+
+if(($_COOKIE['SSID']!==session_id())||!($_SESSION['stat']=='login')){
     /*未登录展示登录框*/
     require('./widgets/Signinboard.php');
-    echo "</body></html>";
-    return;
+    die("</body></html>");
 }else{
+    setcookie('SSID', session_id(),time()+86400);
     include('./widgets/nav.php');
 }
 ?>

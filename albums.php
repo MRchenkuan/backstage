@@ -3,7 +3,7 @@
 error_reporting(0);
 session_start();
 $pageID='photoLib';
-include "./widgets/head.php";
+include("./widgets/head.php");
 /*--连接数据库--*/
 require_once('./tools/Kodbc.class.php');
 ?>
