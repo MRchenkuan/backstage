@@ -17,6 +17,7 @@
                 <li class="<?php echo $pageID=='addAdvt'?'active':'default' ?>"><a href="./addAdvt.php">广告管理</a></li>
                 <li class="<?php echo $pageID=='addNews'?'active':'default' ?>"><a href="./addNews.php">新闻管理</a></li>
                 <li class="<?php echo $pageID=='photoLib'?'active':'default' ?>"><a href="./albums.php">图库管理</a></li>
+                <li class="<?php echo $pageID=='remarkManager'?'active':'default' ?>"><a href="./remarkManager.php">评论管理</a></li>
             </ul>
         </div>
     </div>

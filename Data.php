@@ -48,12 +48,12 @@ function userLogin()
     $password = $_GET['password'];
     $trylimit = 10;//最大登录尝试次数
 
-    if (!$_COOKIE['_auth']) return;
+//    if (!$_COOKIE['_auth']) return;
 
     if ($_SESSION['trycount'] && $_SESSION['trycount'] >= $trylimit) {
         echo json_encode(array(
-            'stat' => 201,
-            'msg' => 'login failed!'
+            'stat' => 205,
+            'msg' => 'login failed! too frequently you try!'
         ));
         return;
     }
@@ -352,7 +352,6 @@ function uploadImgAjax()
 
     /*base64保存为图片，并写入数据库*/
     if($imgdatastring){
-
         //do someting for 保存图片
         if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $imgdatastring, $result)){
             $type = $result[2];
@@ -375,11 +374,28 @@ function uploadImgAjax()
                     'msg'=>'图片上传成功',
                 ));
             }
+        }else if($_POST['onlineurl']){
+            /*如果没有图片但是有imgurl时*/
+            $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+            $Kodbc->insertItem(array(
+                    'albumid'=>$_POST['albumid'],
+                    'stat'=>'active',
+                    'remark'=>$_POST['remark'],
+                    'imgsrc'=>$_POST['onlineurl'],
+                    'pubdata'=> date('Y-m-d\TH:i')
+                )
+            );
+            echo json_encode(array(
+                'stat'=>200,
+                'imgurl'=>$_POST['onlineurl'],
+                'msg'=>'网络URL,图片添加成功',
+            ));
+
         }else{
             echo json_encode(array(
                 'stat'=>202,
                 'imgurl'=>null,
-                'msg'=>'图片字符串匹配失败！',
+                'msg'=>'图片字符串匹配失败！也未填写图片URL',
             ));
         }
 

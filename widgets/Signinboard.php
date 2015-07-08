@@ -34,12 +34,13 @@
                     url:'./Data.php',
                     complete:function(data){
                         var rep = eval("("+data.responseText+")");
-                        if(rep.stat==200){
+                        if(rep.stat==200||rep.stat==205){
                             alert(rep.msg);
                             clearInterval(timer);
                             window.location.pathname=ref;
                         }else if(rep.stat==201){
-                            self.innerHTML='帐号或密码错误，请重试';self.removeAttribute('disabled');
+                            self.innerHTML='帐号或密码错误，请重试';
+                            self.removeAttribute('disabled');
                         }
                     },
                     data:{

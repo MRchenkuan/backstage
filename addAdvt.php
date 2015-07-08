@@ -52,7 +52,7 @@ include('widgets/head.php');
         <?php
         foreach($adCollection as $items){?>
             <tr>
-                <td><img height=100 src="<?php echo $items['imgsrc']?>" alt="缩略图"></td>
+                <td><img height=100 style="max-width: 250px;height: auto;" src="<?php echo $items['imgsrc']?>" alt="缩略图"></td>
                 <td><?php echo $items['order']?></td>
                 <td><?php echo $items['id']?></td>
                 <td><?php echo $items['title']?></td>

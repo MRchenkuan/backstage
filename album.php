@@ -231,14 +231,14 @@ $albums = $photoalbum->getAllItems();
                     var remark = document.getElementById('remark').value;
                     var onlineurl = document.getElementById('onlineurl').value;
                     Array.prototype.some.call(imgs,function(it,id,ar){
-                        if(it.getAttribute('data-selected')!=0){
+                        if(it.getAttribute('data-selected')!=0||onlineurl){
                             savebtn.setAttribute('disabled','disabled');
                             savebtn.innerHTML = '上传中请稍等……';
                             $.ajax({
                                 url:'Data.php?id=uploadImgAjax',
                                 type:'POST',
                                 data:{
-                                    'imgDataString':it.src,
+                                    'imgDataString':it.src||'',
                                     'albumid':albumid,
                                     'remark':remark,
                                     'onlineurl':onlineurl
@@ -262,6 +262,8 @@ $albums = $photoalbum->getAllItems();
                                     savebtn.innerHTML = 'data.msg';
                                 }
                             });
+                        }else{
+                            alert('图片没上传或者没有填写网络图片地址！');
                         }
                     });
                 })
