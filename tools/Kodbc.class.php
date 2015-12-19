@@ -151,6 +151,10 @@ class Kodbc {
         $this->xmlDoc->asXML($this->xmlPath);
 
     }
+    /* 取当前最新的id */
+    function getNewestId(){
+        return $this->xmlDoc->attributes()['NOWID']-1;
+    }
 }
 
 //$kodbc = new Kodbc('../Database/photolib/photobase.xml');
