@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "news.dtd">
-<database NOWID="28">
-<item id="22" stat="" title="页面样式测试" auth="陈宽同学" origin="自己" pubdata="2015-12-31T12:59" text="./news/20150616/1434431262.news" cover="./UI/IMGBED.jpg"/></database>
+<database NOWID="29">
+<item id="28" stat="" title="初始内容" auth="站长" origin="原创" pubdata="2015-12-19T11:11" text="./news/20151219/1450512308.news" cover="./UI/IMGBED.jpg"/></database>
