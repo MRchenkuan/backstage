@@ -21,7 +21,7 @@
         }
         ?></title>
 </head>
-<body style="overflow-x: hidden">
+<body style="overflow-x: hidden;padding: 20px 5%;">
 <!--content-->
 <?php
 /*连接数据库*/
