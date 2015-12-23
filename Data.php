@@ -228,10 +228,15 @@ function createNews(){
     $pubdata    =   $_POST['pubdata'];
     $stat    =   $_POST['stat'];
     $cover    =   $_POST['cover'];
-
     $text       =   htmlspecialchars($_POST['text']);
+    $db         = $_POST['target'];
+    $Kodbc = null;
+    switch($db){
+        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
+        default:$Kodbc = new Kodbc('./Database/NEWSDATA.xml');break;
+    }
 
-    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
     /*************
      *
      * 储存大文本
@@ -295,7 +300,7 @@ function createNews(){
     echo json_encode(array(
         'stat' => 200,
         'msg' => $newsid.' add sucess！',
-        'articId'=>$newsid[0]
+        'articId'=>$newsid[0],
     ));
 }
 
@@ -305,7 +310,14 @@ function createNews(){
 function delNews()
 {
     $id = $_GET['newsid'];
-    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
+    $db = $_POST['target'];
+    $Kodbc = null;
+    echo $db;
+    switch($db){
+        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
+        default:$Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+    }
     echo $Kodbc->delById($id);
 }
 
@@ -314,7 +326,15 @@ function delNews()
  * */
 function getNewsContent(){
     $id=$_GET['newsid'];
-    $Kodbc = new Kodbc('./Database/NEWSDATA.xml');
+    $db = $_POST['target'];
+
+    $Kodbc = null;
+    switch($db){
+        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
+        default:$Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+    }
+
     $item= $Kodbc->getById($id);
     $contentsrc = $item['text'];
     $newsfile = fopen($contentsrc,'r') or die('can not find news,because no news file found');

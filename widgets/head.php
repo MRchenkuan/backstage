@@ -17,6 +17,7 @@
             case 'addNews':echo '新闻管理';break;
             case 'photoLib':echo '图库管理';break;
             case 'remarkManager':echo '评论管理';break;
+            case 'addIdea':echo '顺风观点';break;
             default:echo '首页';break;
         }
         ?></title>
