@@ -37,7 +37,7 @@ usort($adCollection, function($a, $b) {
         <button type="button" class="btn btn-default" style="float: right" onclick="" id="createNewsBtn"><span class="glyphicon glyphicon-plus"></span>新增一条广告</button>
     </div>
     <div class="panel-body">
-        下面表格展示了已经添加了的新闻,序号越大,排序越靠前
+        下面表格展示了已经添加了的新闻,日期越新,排序越靠前
     </div>
     <!--分页组件-->
     <?php include './widgets/pageSliceBar.php' ?>
