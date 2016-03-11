@@ -34,7 +34,7 @@ usort($adCollection, function($a, $b) {
 <div class="panel panel-default" style="width: 960px;margin: 60px auto 0 auto">
     <!-- Default panel contents -->
     <div class="panel-heading"><span class="glyphicon glyphicon-calendar"></span> 已有广告
-        <button type="button" class="btn btn-default" style="float: right" onclick="" id="createNewsBtn"  data-toggle="modal" data-target="#alertBoard"><span class="glyphicon glyphicon-plus"></span>新增一条广告</button>
+        <button type="button" class="btn btn-default" style="float: right" onclick="" id="createNewsBtn"><span class="glyphicon glyphicon-plus"></span>新增一条广告</button>
     </div>
     <div class="panel-body">
         下面表格展示了已经添加了的新闻,序号越大,排序越靠前
@@ -73,9 +73,7 @@ usort($adCollection, function($a, $b) {
                                 data-cover="<?php echo $items['cover']?>"
                                 data-auth="<?php echo $items['auth']?>"
                                 data-org="<?php echo $items['origin']?>"
-                                data-update="<?php echo substr($items['pubdata'],0,10).'T'.substr($items['pubdata'],11,16)?>"
-                                data-toggle="modal"
-                                data-target="#alertBoard">
+                                data-update="<?php echo substr($items['pubdata'],0,10).'T'.substr($items['pubdata'],11,16)?>">
                             <span class="glyphicon glyphicon-list-alt"></span>
                         </button>
                     </div>
@@ -88,44 +86,54 @@ usort($adCollection, function($a, $b) {
     <?php include './widgets/pageSliceBar.php' ?>
 </div>
 
-<!-- 弹出面板 -->
-<div class="modal fade" id="alertBoard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <!--富文本编辑器-->
+<!--富文本编辑器-->
 
-    <div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">
-        <div class="panel-heading">新闻发布器</div>
-        <div class="panel-body" style="overflow-x: hidden;overflow-y: scroll;padding: 0">
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">新闻艾迪</span>
-                <input id="news_id" type="number" class="form-control" readonly placeholder="自动填写" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">文章封面</span>
-                <iframe style="height: 100px;" id="news_cover" src="./fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
-            </div>
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">发布日期</span>
-                <input id="news_publish_data" type="datetime-local" class="form-control" placeholder="填写发布日期" aria-describedby="basic-addon1">
-            </div>
+<div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">
+    <div class="panel-heading">新闻发布器</div>
+    <div class="panel-body" style="overflow-x: hidden;overflow-y: scroll;padding: 0">
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">新闻艾迪</span>
+            <input id="news_id" type="number" class="form-control" readonly placeholder="自动填写" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">文章封面</span>
+            <iframe style="height: 100px;" id="news_cover" src="./fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
+        </div>
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">发布日期</span>
+            <input id="news_publish_data" type="datetime-local" class="form-control" placeholder="填写发布日期" aria-describedby="basic-addon1">
+        </div>
 
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">标　　题</span>
-                <input id="news_title" type="text" class="form-control" placeholder="填写作者" aria-describedby="basic-addon1">
-            </div>
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">标　　题</span>
+            <input id="news_title" type="text" class="form-control" placeholder="填写作者" aria-describedby="basic-addon1">
+        </div>
 
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">作　　者</span>
-                <input id="news_auth" type="text" class="form-control" placeholder="填写作者" aria-describedby="basic-addon1">
-            </div>
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">作　　者</span>
+            <input id="news_auth" type="text" class="form-control" placeholder="填写作者" aria-describedby="basic-addon1">
+        </div>
 
-            <div class="input-group" style="width: 80%">
-                <span class="input-group-addon" id="basic-addon1">来　　源</span>
-                <input id="news_origin" type="text" class="form-control" placeholder="填写新闻来源" aria-describedby="basic-addon1">
-            </div>
+        <div class="input-group" style="width: 80%">
+            <span class="input-group-addon" id="basic-addon1">来　　源</span>
+            <input id="news_origin" type="text" class="form-control" placeholder="填写新闻来源" aria-describedby="basic-addon1">
+        </div>
 
-            <iframe id="news_editor" src="./widgets/RichTxtEditor.html" style="height: 700px;width:960px;border: none">
-                您的浏览器已经过时了
-            </iframe>
+        <iframe id="news_editor" src="./widgets/RichTxtEditor.html" style="height: 700px;width:960px;border: none">
+            您的浏览器已经过时了
+        </iframe>
+    </div>
+    <div style="margin: 20px;height: 50px;">
+        <div class="dropup" style="float: right;margin-left:10px;">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                <span class="glyphicon glyphicon-send"></span> 发布文章
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" >隐藏</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-2" href="javascript:void(0)" onclick="submitNews()">上线</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-3" href="javascript:void(0)" >草稿</a></li>
+            </ul>
         </div>
         <div style="margin: 20px;height: 50px;">
             <div class="dropup" style="float: right;margin-left:10px;">
@@ -134,9 +142,9 @@ usort($adCollection, function($a, $b) {
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-<!--                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" >隐藏</a></li>-->
+                    <!--                    <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" >隐藏</a></li>-->
                     <li role="presentation"><a role="menuitem" tabindex="-2" href="javascript:void(0)" onclick="submitNews()">上线</a></li>
-<!--                    <li role="presentation"><a role="menuitem" tabindex="-3" href="javascript:void(0)" >草稿</a></li>-->
+                    <!--                    <li role="presentation"><a role="menuitem" tabindex="-3" href="javascript:void(0)" >草稿</a></li>-->
                 </ul>
             </div>
         </div>
@@ -235,19 +243,13 @@ usort($adCollection, function($a, $b) {
                 newsid:news_id
             },
             success: function (data) {
-
-                try{
-                    var rep = eval("(" + data + ")");
-                    if (rep.stat == 200) {
-                        news_editor.innerHTML = rep.content;
-                        news_editor.setAttribute('contenteditable','true');
-                    } else{
-                        news_editor.innerHTML = "<span style='color:red'>加载出错，请重试...</span>";
-                    }
-                }catch(e){
-                    news_editor.innerHTML = "<span style='color:red'>"+e+" 加载出错，请重试...</span>";
+                var rep = eval("(" + data + ")");
+                if (rep.stat == 200) {
+                    news_editor.innerHTML = rep.content;
+                    news_editor.setAttribute('contenteditable','true');
+                } else{
+                    news_editor.innerHTML = "<span style='color:red'>加载出错，请重试...</span>";
                 }
-
             },
             error: function () {
                 alert('提交出错');
@@ -262,6 +264,7 @@ usort($adCollection, function($a, $b) {
         document.getElementById('news_id').value='';
         news_editor.setAttribute('contenteditable','true');
         news_editor.innerHTML='在此编辑';
+        location='#news_id';
     })
 
 </script>

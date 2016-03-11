@@ -121,7 +121,7 @@ include('widgets/head.php');
             <input id="ad_dndate" type="datetime-local" class="form-control" placeholder="广告下架时间" aria-describedby="basic-addon1">
         </div>
         <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">备注信息</span>
+            <span class="input-group-addon" id="basic-addon1">简介信息</span>
             <textarea id="ad_remark" class="form-control" placeholder="备注信息" aria-describedby="basic-addon1"></textarea>
         </div>
     </div>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE database SYSTEM "news.dtd">
+<database NOWID="4">
+<item id="1" stat="" title="FDASF" auth="FDSAFSDA" origin="" pubdata="2015-12-31T12:59" text="./news/20151223/1450874253.news" cover="./UI/IMGBED.jpg"/><item id="2" stat="" title="FDSA3333" auth="FDSAFSA" origin="FDSAFS" pubdata="2015-12-31T12:59" text="./news/20151223/1450874284.news" cover="./UI/IMGBED.jpg"/><item id="3" stat="" title="测试测试" auth="南瓜饼" origin="" pubdata="2015-12-31T12:59" text="./news/20151223/1450882283.news" cover="./image/20151223/1450882263.jpg"/></database>
