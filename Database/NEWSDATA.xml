@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "news.dtd">
-<database NOWID="13">
-<item id="1" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151219/1450512308.news" cover="./image/20151221/1450661314.jpg"/>
-<item id="2" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450666869.news" cover="./image/20151221/1450666778.jpg"/>
-<item id="3" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450667925.news" cover="./image/20151221/1450667869.jpg"/>
-<item id="4" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450668310.news" cover="./image/20151221/1450668127.jpg"/>
-<item id="5" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450670741.news" cover="./image/20151221/1450670701.jpg"/>
-<item id="6" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450678101.news" cover="./image/20151221/1450677960.jpg"/>
-<item id="7" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450678232.news" cover="./image/20151221/1450688126.jpg"/>
-<item id="8" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450678834.news" cover="./image/20151221/1450679730.jpg"/>
-<item id="10" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450679687.news" cover="./image/20151221/1450679707.jpg"/>
-<item id="11" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450679969.news" cover="./image/20151221/1450680039.jpg"/>
-<item id="12" stat="" title="FDSA" auth="FDA" origin="FDA" pubdata="2015-12-31T12:59" text="./news/20151221/1450680195.news" cover="./image/20151221/1450680265.jpg"/>
-</database>
+<database NOWID="29">
+<item id="28" stat="" title="初始内容" auth="站长" origin="原创" pubdata="2015-12-19T11:11" text="./news/20151219/1450512308.news" cover="./UI/IMGBED.jpg"/></database>
