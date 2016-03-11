@@ -56,7 +56,7 @@ usort($adCollection, function($a, $b) {
             <tr>
                 <td><img height=100 style="max-width: 250px;height: auto;" src="<?php echo $items['cover']?>" alt="缩略图"></td>
                 <td><?php echo $items['id']?></td>
-                <td><a href="./news.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
+                <td><a href="./news-idea.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
                 <td><?php echo substr($items['pubdata'],0,10)?></td>
                 <td><?php echo substr($items['text'],0,20)?></td>
                 <td><div class="btn-group" role="group" aria-label="...">
@@ -239,9 +239,9 @@ usort($adCollection, function($a, $b) {
         news_editor.innerHTML="<span style='color:grey'>文章内容加载中...</span>";
         $.ajax({
             url:'Data.php?id=getNewsContent',
-            target:glob.dbtar,
             data:{
-                newsid:news_id
+                newsid:news_id,
+                target:glob.dbtar
             },
             success: function (data) {
                 var rep = eval("(" + data + ")");

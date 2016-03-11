@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE database SYSTEM "Album.dtd">
 <database NOWID="30">
-    <item id="0" stat="disable" remark="系统相册:未分类" editable="0" count="20" pubdata="2015-06-12T10:19"/>
+    <item id="0" stat="disable" remark="系统相册:未分类" editable="0" count="31" pubdata="2015-06-12T10:19"/>
     <item id="13" stat="disable" remark="系统相册:A" editable="0" count="4" pubdata="2015-06-12T10:19"/>
     <item id="14" stat="disable" remark="系统相册:B" editable="0" count="8" pubdata="2015-06-12T10:19"/>
     <item id="15" stat="disable" remark="系统相册:C" editable="0" count="1" pubdata="2015-06-12T10:19"/>

@@ -10,16 +10,7 @@
     <style>
         .input-group{margin: 10px auto;}
     </style>
-    <title><?php
-        switch($pageID){
-            case 'home':echo '首页';break;
-            case 'addAdvt':echo '广告管理';break;
-            case 'addNews':echo '新闻管理';break;
-            case 'photoLib':echo '图库管理';break;
-            case 'remarkManager':echo '评论管理';break;
-            default:echo '首页';break;
-        }
-        ?></title>
+    <title></title>
 </head>
 <body style="overflow-x: hidden;padding: 20px 5%;">
 <!--content-->

@@ -57,7 +57,7 @@ function userLogin()
         ));
         return;
     }
-    if ($username == 'admin' && $password == 'admin') {
+    if ($username == '' && $password == '') {
         /*记录session值并写入cookie*/
         setcookie('SSID', session_id(),time()+43200);
         $_SESSION['stat'] = 'login';
@@ -204,7 +204,7 @@ function uploadImg()
 //                echo "<input style='float: right' type='submit' value='上传图片'>";
             echo "</body>";
             echo "</form>";
-            header($uploadfileUrl);
+            // header($uploadfileUrl); // 此处有问题 导致服务器报500
         } else {
             header('#');
         }
@@ -325,14 +325,14 @@ function delNews()
  * 获得新闻内容的方法
  * */
 function getNewsContent(){
-    $id=$_GET['newsid'];
-    $db = $_POST['target'];
+    $id=$_REQUEST['newsid'];
+    $db = $_REQUEST['target'];
 
     $Kodbc = null;
     switch($db){
         case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
         case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
-        default:$Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+        default: $Kodbc = new Kodbc('./Database/NEWSDATA.xml');break;
     }
 
     $item= $Kodbc->getById($id);
@@ -341,9 +341,10 @@ function getNewsContent(){
     echo json_encode(array(
         'stat' => 200,
         'msg' => $id.' get sucess！',
-        'content'=>htmlspecialchars_decode(fread($newsfile,filesize($contentsrc)))
+        'content'=>htmlspecialchars_decode(fread($newsfile,filesize($contentsrc))),
+//        'content'=>'$contentsrc:'.$id
     ));
-    fclose($newsfile);
+//    fclose($newsfile);
 
 }
 
