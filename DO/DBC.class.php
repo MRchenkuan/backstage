@@ -1,4 +1,6 @@
 <?php
+//error_reporting(0);
+
 require_once('../TOOLS/Config.class.php');
 
 $DB = Config::getSection("DB");
@@ -14,8 +16,8 @@ $pdo = new PDO($dsn, $USERNAME, $PASSWORD);
 function getNewsData(){
     $id = __FUNCTION__;
     echo Config::get('DATABASE_DAO_DIR');
-    $DAO = simplexml_load_file(Config::get('DATABASE_DAO_DIR'));
-    echo $DAO;
+    $DAO = simplexml_load_file('./DAO/articleDAO.xml');
+    var_dump($DAO->xpath('/*[@id=\''.$id.'\']')[0]->children());
 }
 
 getNewsData();
