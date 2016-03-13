@@ -85,7 +85,7 @@ usort($adCollection, function($a, $b) {
     </table>
 
     <!--分页组件-->
-    <?php include './widgets/pageSliceBar.php' ?>
+    <?php include '../widgets/pageSliceBar.php' ?>
 </div>
 
 <!-- 弹出面板 -->

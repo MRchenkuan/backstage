@@ -36,7 +36,7 @@ include('../widgets/head.php');
         下面表格展示了已经添加了的广告,序号越大,排序越靠前
     </div>
     <!--分页组件-->
-    <?php include './widgets/pageSliceBar.php' ?>
+    <?php include '../widgets/pageSliceBar.php' ?>
     <!-- Table -->
     <table class="table">
         <tr  style="text-align: left">
@@ -85,7 +85,7 @@ include('../widgets/head.php');
         </table>
 
     <!--分页组件-->
-    <?php include './widgets/pageSliceBar.php' ?>
+    <?php include '../widgets/pageSliceBar.php' ?>
 </div>
 
 <!--创建新广告-->
