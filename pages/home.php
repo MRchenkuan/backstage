@@ -2,7 +2,7 @@
 error_reporting(0);
 session_start();
 $pageID='home';
-include './widgets/head.php';
+include '../widgets/head.php';
 ?>
 
 
@@ -43,5 +43,5 @@ include './widgets/head.php';
 </div>
 
 <?php
-include './widgets/foot.php';
+include '../widgets/foot.php';
 ?>

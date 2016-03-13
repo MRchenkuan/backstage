@@ -3,9 +3,9 @@
 error_reporting(0);
 session_start();
 $pageID='remarkManager';
-include("./widgets/head.php");
+include("../widgets/head.php");
 /*--连接数据库--*/
-require_once('./tools/Kodbc.class.php');
+require_once('../DO/Kodbc.class.php');
 ?>
 
 <div class="panel panel-default" style="width: 960px;margin: 80px auto 0 auto">
@@ -30,5 +30,5 @@ require_once('./tools/Kodbc.class.php');
 </div>
 <!--here this foot-->
 <?php
-include "./widgets/foot.php";
+include "../widgets/foot.php";
 ?>

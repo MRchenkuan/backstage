@@ -157,5 +157,5 @@ class Kodbc {
     }
 }
 
-//$kodbc = new Kodbc('../Database/photolib/photobase.xml');
+//$kodbc = new Kodbc('../DO/photolib/T_TABLE_PHOTOBASE.xml');
 //$kodbc->getByAttr('albumid','14');

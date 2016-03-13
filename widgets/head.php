@@ -2,11 +2,11 @@
 <html>
 <head lang="zh-CN">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="./bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap-theme.min.css">
 
-    <script src="./js/jquery.min.js"></script>
-    <script src="./bootstrap/bootstrap.min.js"></script>
+    <script src="../PUBLIC/javascripts/jquery.min.js"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
     <style>
         .input-group{margin: 10px auto;}
     </style>
@@ -29,10 +29,10 @@ session_start();
 
 if(($_COOKIE['SSID']!==session_id())||!($_SESSION['stat']=='login')){
     /*未登录展示登录框*/
-    require('./widgets/Signinboard.php');
+    require('../widgets/Signinboard.php');
     die("</body></html>");
 }else{
     setcookie('SSID', session_id(),time()+86400);
-    include('./widgets/nav.php');
+    include('../widgets/nav.php');
 }
 ?>

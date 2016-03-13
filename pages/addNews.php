@@ -2,20 +2,20 @@
 <?php
 error_reporting(0);
 session_start();
-$pageID='addIdea';
-include "./widgets/head.php";
+$pageID='addNews';
+include "../widgets/head.php";
 ?>
 
 
 <?php
 /*--连接数据库--*/
-require_once('./tools/Kodbc.class.php');
-$Kodbc = new Kodbc('./Database/IDEADATA.xml');
+require_once('../DO/Kodbc.class.php');
+$Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');
 $pageNow = $_GET['page'];
 $sliceParam = 'page';
 
 if(!$pageNow){$pageNow=1;}
-$pagesize = 15;
+$pagesize = 5;
 $adCollection = $Kodbc->getAllItems(-$pagesize*$pageNow,$pagesize);
 $count = $Kodbc->count();//总共条目数
 $pageCount = ceil($count/$pagesize);//总页数
@@ -40,7 +40,7 @@ usort($adCollection, function($a, $b) {
         下面表格展示了已经添加了的新闻,日期越大,排序越靠前
     </div>
     <!--分页组件-->
-    <?php include './widgets/pageSliceBar.php' ?>
+    <?php include '../widgets/pageSliceBar.php' ?>
     <!-- Table -->
     <table class="table">
         <tr  style="text-align: left">
@@ -56,7 +56,7 @@ usort($adCollection, function($a, $b) {
             <tr>
                 <td><img height=100 style="max-width: 250px;height: auto;" src="<?php echo $items['cover']?>" alt="缩略图"></td>
                 <td><?php echo $items['id']?></td>
-                <td><a href="./news-idea.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
+                <td><a href="news.php?id=<?php echo $items['id']?>"><?php echo $items['title']?></a></td>
                 <td><?php echo substr($items['pubdata'],0,10)?></td>
                 <td><?php echo substr($items['text'],0,20)?></td>
                 <td><div class="btn-group" role="group" aria-label="...">
@@ -93,7 +93,7 @@ usort($adCollection, function($a, $b) {
     <!--富文本编辑器-->
 
     <div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">
-        <div class="panel-heading">观点发布器</div>
+        <div class="panel-heading">新闻发布器</div>
         <div class="panel-body" style="overflow-x: hidden;overflow-y: scroll;padding: 0">
             <div class="input-group" style="width: 80%">
                 <span class="input-group-addon" id="basic-addon1">新闻艾迪</span>
@@ -101,7 +101,7 @@ usort($adCollection, function($a, $b) {
             </div>
             <div class="input-group" style="width: 80%">
                 <span class="input-group-addon" id="basic-addon1">文章封面</span>
-                <iframe style="height: 100px;" id="news_cover" src="./fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
+                <iframe style="height: 100px;" id="news_cover" src="fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
             </div>
             <div class="input-group" style="width: 80%">
                 <span class="input-group-addon" id="basic-addon1">发布日期</span>
@@ -123,7 +123,7 @@ usort($adCollection, function($a, $b) {
                 <input id="news_origin" type="text" class="form-control" placeholder="填写新闻来源" aria-describedby="basic-addon1">
             </div>
 
-            <iframe id="news_editor" src="./widgets/RichTxtEditor.html" style="height: 700px;width:960px;border: none">
+            <iframe id="news_editor" src="../widgets/RichTxtEditor.html" style="height: 700px;width:960px;border: none">
                 您的浏览器已经过时了
             </iframe>
         </div>
@@ -144,7 +144,6 @@ usort($adCollection, function($a, $b) {
 </div>
 
 <script>
-    var glob={dbtar:'idea'};
     function submitNews(stat){
         var imgsrcobj = document.getElementById('news_cover').contentWindow.document.getElementById('uploadCallBack-ImgSrc');
         var cover;
@@ -161,7 +160,6 @@ usort($adCollection, function($a, $b) {
         var news_publish_data = document.getElementById('news_publish_data');
         var news_title = document.getElementById('news_title');
         var news_cover = document.getElementById('cover');
-
         if(!(news_title.value&&news_publish_data.value)){
             alert('信息不全');
             return false;
@@ -169,17 +167,16 @@ usort($adCollection, function($a, $b) {
             console.log(news_editor.innerHTML);
             $.ajax({
                 url: './Data.php?id=createNews',
-                type: 'POST',
-                data: {
-                    stat: stat,
-                    newsid: news_id.value,
-                    title: news_title.value,
-                    text: news_editor.innerHTML,
-                    auth: news_auth.value,
-                    origin: news_origin.value,
-                    pubdata: news_publish_data.value,
-                    cover: cover,
-                    target: glob.dbtar
+                type:'POST',
+                data:{
+                    stat:stat,
+                    newsid:news_id.value,
+                    title:news_title.value,
+                    text:news_editor.innerHTML,
+                    auth:news_auth.value,
+                    origin:news_origin.value,
+                    pubdata:news_publish_data.value,
+                    cover:cover
                 },
                 success: function (data) {
                     console.log(data);
@@ -187,7 +184,7 @@ usort($adCollection, function($a, $b) {
                     if (rep.stat == 200) {
                         alert(rep.msg);
                         location.reload();
-                    } else {
+                    } else{
                         self.innerHTML = '提交出错，请重试';
                         self.removeAttribute('disabled');
                     }
@@ -205,7 +202,6 @@ usort($adCollection, function($a, $b) {
             url: './Data.php',
             data:{
                 id: 'delNews',
-                target:glob.dbtar,
                 newsid:id
             },
             success: function (data) {
@@ -240,17 +236,22 @@ usort($adCollection, function($a, $b) {
         $.ajax({
             url:'Data.php?id=getNewsContent',
             data:{
-                newsid:news_id,
-                target:glob.dbtar
+                newsid:news_id
             },
             success: function (data) {
-                var rep = eval("(" + data + ")");
-                if (rep.stat == 200) {
-                    news_editor.innerHTML = rep.content;
-                    news_editor.setAttribute('contenteditable','true');
-                } else{
-                    news_editor.innerHTML = "<span style='color:red'>加载出错，请重试...</span>";
+
+                try{
+                    var rep = eval("(" + data + ")");
+                    if (rep.stat == 200) {
+                        news_editor.innerHTML = rep.content;
+                        news_editor.setAttribute('contenteditable','true');
+                    } else{
+                        news_editor.innerHTML = "<span style='color:red'>加载出错，请重试...</span>";
+                    }
+                }catch(e){
+                    news_editor.innerHTML = "<span style='color:red'>"+e+" 加载出错，请重试...</span>";
                 }
+
             },
             error: function () {
                 alert('提交出错');

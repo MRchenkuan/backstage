@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE database SYSTEM "news.dtd">
+<!DOCTYPE database SYSTEM "./DTD/news.dtd">
 <database NOWID="17">
-<item id="1" stat="" title="2013年湖南卫视大型广告活动招标顺风再创佳绩" auth="顺风传媒" origin="" pubdata="2013-03-20T12:59" text="./news/20151219/1450512308.news" cover="./image/20151221/1450661314.jpg"/>
+<item id="1" stat="" title="2013年湖南卫视大型广告活动招标顺风再创佳绩" auth="顺风传媒" origin="" pubdata="2013-03-20T12:59" text="./news/20151219/1450512308.news" cover="./images/20151221/1450661314.jpg"/>
 <item id="2" stat="" title="2013年《快乐男声》广告招标，顺风传媒再传佳讯" auth="顺风传媒" origin="" pubdata="2013-06-08T12:59" text="./news/20151221/1450666869.news" cover="./image/20151221/1450666778.jpg"/>
 <item id="3" stat="" title="2013年半年活动——《变形记》在张家界顺利举行" auth="顺风传媒" origin="" pubdata="2013-05-31T12:59" text="./news/20151221/1450667925.news" cover="./image/20151221/1450667869.jpg"/>
 <item id="4" stat="" title="2013大型公益活动《加油吧！湘菜》正式启动" auth="顺风传媒" origin="" pubdata="2013-06-28T12:59" text="./news/20151221/1450668310.news" cover="./image/20151221/1450668127.jpg"/>

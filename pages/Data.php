@@ -2,10 +2,10 @@
 error_reporting(0);
 session_start();
 
-require_once('./tools/Kodbc.class.php');
+require_once('../DO/Kodbc.class.php');
 
 $APIID = $_GET['id'] ? $_GET['id'] : 'defaultMethod';
-$DATABASEURL = './Database/ADVTSDATA.xml';
+$DATABASEURL = '../DO/T_TABLE_ADVTS.xml';
 
 
 /*****************************************************
@@ -28,7 +28,7 @@ $config = array(
     'removeImage' => removeImage,
     'createAlbum' => createAlbum,
     'delAlbum' => delAlbum,
-    'getNewsContent' => getNewsContent,
+    'getNewsContent' => getNewsContent
 );
 $config[$APIID]();
 
@@ -121,7 +121,7 @@ function createAdvt()
         echo false;
     }
 
-    $Kodbc = new Kodbc('./Database/ADVTSDATA.xml');
+    $Kodbc = new Kodbc('../DO/T_TABLE_ADVTS.xml');
     $dataitem = array(
         'order' => $order,
         'stat' => 'disable',
@@ -168,7 +168,7 @@ function defaultMethod()
  * */
 function uploadImg()
 {
-    $uploaddir = './image/' . date('Ymd') . '/';
+    $uploaddir = '../PUBLIC/images/' . date('Ymd') . '/';
     if (!file_exists($uploaddir)) {
         if (mkdir($uploaddir)) {
             chmod($uploaddir, 0777);
@@ -186,7 +186,7 @@ function uploadImg()
             /*********
              * 记录入库
              ********/
-            $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+            $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
             $Kodbc->insertItem(array(
                 'albumid'=>'0',
                 'remark'=>'from uploadImg',
@@ -198,7 +198,7 @@ function uploadImg()
              * 页面输出
              ********/
             echo "<body style='padding: 0;margin: 0'>";
-            echo "<form style='padding: 0;margin: 0;' enctype='multipart/form-data' action='./Data.php?id=uploadImg' method='POST' name='form'>";
+            echo "<form style='padding: 0;margin: 0;' enctype='multipart/form-data' action='Data.php?id=uploadImg' method='POST' name='form'>";
             echo "<img id='uploadCallBack-ImgSrc' style='height:100%;max-width: 300px;' src='" . $uploadfileUrl . "'>";
             echo "<input style='float: right' id='userfile' name='userfile' type='file' onchange=\"document.getElementById('uploadform').submit()\">";
 //                echo "<input style='float: right' type='submit' value='上传图片'>";
@@ -232,9 +232,9 @@ function createNews(){
     $db         = $_POST['target'];
     $Kodbc = null;
     switch($db){
-        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
-        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
-        default:$Kodbc = new Kodbc('./Database/NEWSDATA.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
+        default:$Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
     }
 
     /*************
@@ -242,7 +242,7 @@ function createNews(){
      * 储存大文本
      *
      ************/
-    $newsDir = './news/'.date('Ymd').'/';
+    $newsDir = './newsfiles/'.date('Ymd').'/';
     if (!file_exists($newsDir)) {
         if (mkdir($newsDir)) {
             chmod($newsDir, 0777);
@@ -256,7 +256,7 @@ function createNews(){
         $item = $Kodbc->getById($newsid);
         $newsFileUrl = $item['text'];
     }else{
-        $newsFileUrl = $newsDir . time() . '.news';
+        $newsFileUrl = $newsDir . time() . '.newsfiles';
     }
 
     $fp = fopen($newsFileUrl, "w+");
@@ -314,9 +314,9 @@ function delNews()
     $Kodbc = null;
     echo $db;
     switch($db){
-        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
-        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
-        default:$Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
+        default:$Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
     }
     echo $Kodbc->delById($id);
 }
@@ -330,14 +330,14 @@ function getNewsContent(){
 
     $Kodbc = null;
     switch($db){
-        case "news": $Kodbc= new Kodbc('./Database/NEWSDATA.xml');break;
-        case "idea": $Kodbc= new Kodbc('./Database/IDEADATA.xml');break;
-        default: $Kodbc = new Kodbc('./Database/NEWSDATA.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
+        default: $Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
     }
 
     $item= $Kodbc->getById($id);
     $contentsrc = $item['text'];
-    $newsfile = fopen($contentsrc,'r') or die('can not find news,because no news file found');
+    $newsfile = fopen($contentsrc,'r') or die('can not find newsfiles,because no newsfiles file found');
     echo json_encode(array(
         'stat' => 200,
         'msg' => $id.' get sucess！',
@@ -362,7 +362,7 @@ function uploadImgAjax()
 {
 
     $imgdatastring = $_POST['imgDataString'] or null;
-    $uploaddir = './image/' . date('Ymd') . '/';
+    $uploaddir = '../PUBLIC/images/' . date('Ymd') . '/';
     if (!file_exists($uploaddir)) {
         if (mkdir($uploaddir)) {
             chmod($uploaddir, 0777);
@@ -374,12 +374,12 @@ function uploadImgAjax()
     /*base64保存为图片，并写入数据库*/
     if($imgdatastring){
         //do someting for 保存图片
-        if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $imgdatastring, $result)){
+        if (preg_match('/^(data:\s*images\/(\w+);base64,)/', $imgdatastring, $result)){
             $type = $result[2];
             $uploadfileUrl = $uploaddir. time().'.'.$type;
             if (file_put_contents($uploadfileUrl, base64_decode(str_replace($result[1], '', $imgdatastring)))){
                 //写入数据库
-                $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+                $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
                 $Kodbc->insertItem(array(
                         'albumid'=>$_POST['albumid'],
                         'stat'=>'active',
@@ -397,7 +397,7 @@ function uploadImgAjax()
             }
         }else if($_POST['onlineurl']){
             /*如果没有图片但是有imgurl时*/
-            $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+            $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
             $Kodbc->insertItem(array(
                     'albumid'=>$_POST['albumid'],
                     'stat'=>'active',
@@ -433,7 +433,7 @@ function uploadImgAjax()
  */
 function moveImage(){
     $albumid=$_GET['albumid'];
-    $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+    $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
     if($_GET['imgid']){
         $imgid=$_GET['imgid'];
         $Kodbc->updateItem($imgid,array(
@@ -449,7 +449,7 @@ function moveImage(){
             'albumid'=>'0',
            'imgsrc'=>$imgsrc,
             'pubdata'=>date('Y-m-d\TH:i'),
-            'remark'=>'from image binding'
+            'remark'=>'from images binding'
         ));
         echo json_encode(array(
             'stat'=>200,
@@ -481,7 +481,7 @@ function removeImage(){
         };
     }
 
-    $Kodbc = new Kodbc('./Database/photolib/photobase.xml');
+    $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
     if($_GET['imgid']){
         $imgid=$_GET['imgid'];
         $Kodbc->delById($imgid);
@@ -514,7 +514,7 @@ function createAlbum(){
         $albumname = $_GET['albumname'];
         $stat = $_GET['stat'];
 
-        $Kodbc = new Kodbc('./Database/photolib/photoAlbum.xml');
+        $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
         if($_GET['albumid']&&$_GET['albumid']!==''){
             $Kodbc->updateItem($_GET['albumid'],array(
                 'stat'=>$stat,
@@ -553,7 +553,7 @@ function createAlbum(){
 function delAlbum(){
     if($_GET['albumid']){
         $albumid = $_GET['albumid'];
-        $Kodbc = new Kodbc('./Database/photolib/photoAlbum.xml');
+        $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
         $item = $Kodbc->getById($albumid);
         if($item['count']>0){
             echo json_encode(array(

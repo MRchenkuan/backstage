@@ -6,11 +6,11 @@
  * Time: 下午5:21
  */
 $pageID = 'photoLib';
-include './widgets/head.php';
-include './tools/Kodbc.class.php';
+include '../widgets/head.php';
+include '../DO/Kodbc.class.php';
 $id = $_GET['id'];
-$photobase = new Kodbc('./Database/photolib/photobase.xml');
-$photoalbum = new Kodbc('./Database/photolib/photoAlbum.xml');
+$photobase = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+$photoalbum = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
 $thisalbum = $photoalbum->getById($id) or null;
 $photos = $photobase->getByAttr('albumid',$id) or null;
 $albums = $photoalbum->getAllItems();
@@ -38,8 +38,8 @@ $albums = $photoalbum->getAllItems();
      * 查看未绑定的图片
      *****************/
     if(!$id||$id=='0'||$id==''){
-        require_once('./widgets/getUnbindedImg.php');
-        $unbindedimgs = getUnbindedImg('./image/');
+        require_once('../widgets/getUnbindedImg.php');
+        $unbindedimgs = getUnbindedImg('../PUBLIC/images/');
         foreach($unbindedimgs as $key=>$unbindeimg){
             if($photobase->getByAttr('imgsrc',$unbindeimg)){
                 unset($unbindedimgs[$key]);
@@ -190,7 +190,7 @@ $albums = $photoalbum->getAllItems();
                 </div>
                 <div class="col-xs-6 col-md-10" style="position: relative;float: none;margin: 0 auto">
                     <a href="#" class="thumbnail">
-                        <img id="imguploadpreview" name="forupload" data-selected="0" src="./UI/area-add.png" alt="添加图片">
+                        <img id="imguploadpreview" name="forupload" data-selected="0" src="../PUBLIC/UI/area-add.png" alt="添加图片">
                     </a>
                     <input id="imageupload" type="file" value="选择图片" accept="image/*" style="opacity:0;width:100%;height:100%;position: absolute;top:0;left: 0;">
                 </div>
@@ -272,5 +272,5 @@ $albums = $photoalbum->getAllItems();
     </div>
 </div>
 <?php
-include './widgets/foot.php';
+include '../widgets/foot.php';
 ?>

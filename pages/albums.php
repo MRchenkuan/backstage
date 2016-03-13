@@ -3,9 +3,9 @@
 error_reporting(0);
 session_start();
 $pageID='photoLib';
-include("./widgets/head.php");
+include("../widgets/head.php");
 /*--连接数据库--*/
-require_once('./tools/Kodbc.class.php');
+require_once('../DO/Kodbc.class.php');
 ?>
 
 <!--album-->
@@ -16,7 +16,7 @@ require_once('./tools/Kodbc.class.php');
 
     <div class="panel-body">
         <?php
-        $albumDoc = new Kodbc('./Database/photolib/photoAlbum.xml');
+        $albumDoc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
         $albums = $albumDoc->getAllItems();
         foreach($albums as $album) {
             ?>
@@ -25,8 +25,8 @@ require_once('./tools/Kodbc.class.php');
                     <span onclick="if(!confirm('继续操作将删除此相册！'))return false;delAlbum(<?php echo $album['id']; ?>);" class="glyphicon glyphicon-remove-sign" data-toggle="tooltip" data-placement="top" title="删除相册" style="float: right;margin: 5px;color: #e94513"></span>
                     <span onclick="fillAlertBoard('<?php echo $album['id']; ?>','<?php echo $album['remark']; ?>','<?php echo $album['stat']; ?>','修改相册信息')" style="float: right;margin: 5px;color: #05c133" class="glyphicon glyphicon-info-sign" data-toggle="modal" data-placement="top" title="编辑相册" data-target="#alertBoard"></span>
                 <?php } ?>
-                <a href="./album.php?id=<?php echo $album['id']; ?>" class="thumbnail">
-                    <img style="width: 70%" src="./UI/<?php echo $album['count']==0?'folder-empty.png':'folder.png';?>" alt="...">
+                <a href="album.php?id=<?php echo $album['id']; ?>" class="thumbnail">
+                    <img style="width: 70%" src="../PUBLIC/UI/<?php echo $album['count']==0?'folder-empty.png':'folder.png';?>" alt="...">
                     <div class="caption" style="text-align: center">
                         <button type="button" class="btn btn-info">
                             <?php echo $album['remark'].' '; ?><span class="badge"><?php echo $album['count'] ;?></span>
@@ -39,7 +39,7 @@ require_once('./tools/Kodbc.class.php');
         ?>
         <div id="newAlbumBtn" class="col-xs-6 col-md-3" data-toggle="modal" data-target="#alertBoard">
             <a href="#" class="thumbnail">
-                <img style="width: 70%" src="./UI/area-add.png" alt="...">
+                <img style="width: 70%" src="../PUBLIC/UI/area-add.png" alt="...">
                 <div class="caption" style="text-align: center">
                     <!-- 面板控制按钮 -->
                     <button type="button" class="btn btn-success" >
@@ -133,5 +133,5 @@ require_once('./tools/Kodbc.class.php');
 </div>
 <!--here this foot-->
 <?php
-include "./widgets/foot.php";
+include "../widgets/foot.php";
 ?>

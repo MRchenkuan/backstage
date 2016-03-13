@@ -1,13 +1,13 @@
 <!--this is head-->
 <?php
 $pageID = 'addAdvt';
-include('widgets/head.php');
+include('../widgets/head.php');
 ?>
 
 <?php
     /*--连接数据库--*/
-    require_once('./tools/Kodbc.class.php');
-    $Kodbc = new Kodbc('./Database/ADVTSDATA.xml');
+    require_once('../DO/Kodbc.class.php');
+    $Kodbc = new Kodbc('../DO/Data/T_TABLE_ADVTS.xml');
     $pageNow = $_GET['page'];//当前分页
     if(!$pageNow){$pageNow=1;}
     $sliceParam = 'page'; //分页参数
@@ -110,7 +110,7 @@ include('widgets/head.php');
         </div>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">图片上传</span>
-            <iframe style="height: 100px;" id="ad_img" src="./fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
+            <iframe style="height: 100px;" id="ad_img" src="fileupload.html" aria-describedby="basic-addon1" class="form-control"></iframe>
         </div>
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">开始时间</span>
@@ -215,4 +215,4 @@ include('widgets/head.php');
 </script>
 
 <!--this is foot-->
-<?php include('widgets/foot.php') ?>
+<?php include('../widgets/foot.php') ?>

@@ -3,15 +3,15 @@
 error_reporting(0);
 session_start();
 $pageID='news';
-include "./widgets/head.php";
+include "../widgets/head.php";
 ?>
 
 <!--content-->
 <?php
 /*连接数据库*/
-require_once('./tools/Kodbc.class.php');
+require_once('../DO/Kodbc.class.php');
 $newsid = $_GET['id'];
-$kodbc = new Kodbc('./Database/IDEADATA.xml');
+$kodbc = new Kodbc('../DO/T_TABLE_IDEA.xml');
 
 $news = $kodbc->getById($newsid);
 ?>
@@ -22,7 +22,7 @@ $news = $kodbc->getById($newsid);
     <div class="panel-body">
     <?php
 
-        $newsfile = fopen($news['text'],'r') or die('can not find news,because no news file found');
+        $newsfile = fopen($news['text'],'r') or die('can not find newsfiles,because no newsfiles file found');
         echo htmlspecialchars_decode(fread($newsfile,filesize($news['text'])));
         fclose($newsfile);
     ?>
@@ -32,5 +32,5 @@ $news = $kodbc->getById($newsid);
 
 <!--here this foot-->
 <?php
-include "./widgets/foot.php";
+include "../widgets/foot.php";
 ?>
