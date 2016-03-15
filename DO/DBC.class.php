@@ -1,6 +1,7 @@
 <?php
 //error_reporting(0);
 
+require('../definations.php');
 require_once('../TOOLS/Config.class.php');
 
 $DB = Config::getSection("DB");
@@ -13,11 +14,10 @@ $PORT = $DB['PORT'];
 $dsn = $TYPE.":host=".$HOST.";port=".$PORT.";dbname=".$NAME;
 $pdo = new PDO($dsn, $USERNAME, $PASSWORD);
 
-function getNewsData(){
-    $id = __FUNCTION__;
-    echo Config::get('DATABASE_DAO_DIR');
-    $DAO = simplexml_load_file('./DAO/articleDAO.xml');
-    var_dump($DAO->xpath('/*[@id=\''.$id.'\']')[0]->children());
-}
 
-getNewsData();
+function getNewsData()
+{
+    $id = __FUNCTION__;
+    $DAO = simplexml_load_file(APP_DIR . Config::get('DATABASE_DAO_DIR') . 'newsDAO.xml');
+    $sql = trim($this->$DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]);
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper>
+    <select id="getNewsData" >
+        select * from T_NEWS
+    </select>
+
+    <select id="getNewsData1" >
+        select * from T_NEWS
+    </select>
+
+    <select id="getNewsData2" >
+        select * from T_NEWS
+    </select>
+</mapper>
+
+
+
