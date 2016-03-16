@@ -15,4 +15,9 @@
         select * from T_TABLE_PHOTO_ALBUM limit #{count};
     </select>
 
+    <!-- 根据id更新相册信息 -->
+    <update id="updateAlbumById" >
+        replace into T_TABLE_PHOTO_ALBUM(#{colname}) VALUES(#{value});
+    </update>
+
 </mapper>

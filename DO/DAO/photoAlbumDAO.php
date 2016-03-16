@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/DO/DBC.class.php');
+require($_SERVER['DOCUMENT_ROOT'].'/DO/DBC.class.php');
 /**
  * Created by PhpStorm.
  * User: chenkuan
@@ -51,8 +51,39 @@ class photoAlbumDAO extends DBC{
         return $rows;
     }
 
+    /**
+     * 更新相册
+     * @param $id
+     * @param $info
+     * @return mixed
+     */
+    public function updateAlbumById($info){
+
+        $colname = array();
+        $value = array();
+        foreach($info as $k=>$v ){
+            array_push($colname,$k);
+            array_push($value,"'".$v."'");
+        }
+        $colname = implode(",",$colname);
+        $value = implode(",",$value);
+        $rs = $this->getResult(__FUNCTION__,array('colname'=>$colname,'value'=>$value));
+        return $rs;
+    }
+
+    /**
+     * 更新相册 - 兼容文件数据库
+     * @param $id
+     * @param $info
+     */
     public function updateItem($id, $info){
-        echo 0;
+        $info['id'] = $id;
+        $this->updateAlbumById($id,$info);
     }
 
 }
+//
+//$a = new photoAlbumDAO();
+//var_dump($a);
+////var_dump($a->getAllAlbums());
+//$a->updateAlbumById(array("remark"=>"来自php","editable"=>"true","count"=>3));
