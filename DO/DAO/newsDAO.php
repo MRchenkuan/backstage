@@ -26,6 +26,7 @@ class newsDAO extends DBC{
 
     /**
      * 获取最新的新闻数据
+     * @param $count
      * @return int|PDOStatement
      */
     public function getRecentNews($count)

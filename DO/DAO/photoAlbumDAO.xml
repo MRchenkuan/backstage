@@ -1,37 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapper>
-    <!--根据ID查询-->
-    <select id="getNewsDataById" >
-        select * from T_NEWS a where a.id = #{id} and a.type="NEWS";
+    <!--根据ID查询相册信息-->
+    <select id="getAlbumInfoById" >
+        select * from T_TABLE_PHOTO_ALBUM a where a.id = #{id};
     </select>
 
-    <!--查询最近条数-->
-    <select id="getRecentNews" >
-        select * from T_NEWS a order by a.pubdata desc limit #{count};
+    <!--根据ID查询所有照片-->
+    <select id="getPhotoInfoByAlbumId" >
+        select * from T_TABLE_PHOTOS a where a.albumid = #{id};
     </select>
 
-    <!--根据分页查询最近条数 : 新闻-->
-    <select id="getRecentNewsByPage" >
-        select * from T_NEWS a where a.type='NEWS' order by a.pubdata desc,a.id desc limit #{start},#{size};
+    <!-- 得到所有相册 -->
+    <select id="getAllAlbums" >
+        select * from T_TABLE_PHOTO_ALBUM limit #{count};
     </select>
-
-    <!--根据分页查询最近条数 : 广告-->
-    <select id="getRecentADVTByPage" >
-        select * from T_NEWS a where a.type='ADVT' order by a.pubdata desc,a.id desc limit #{start},#{size};
-    </select>
-
-    <!-- 查询总有效条数 :新闻-->
-    <select id="getNewsCount" >
-        select count(*) from T_NEWS a where a.stat='Y' and a.type='NEWS';
-    </select>
-
-    <!-- 查询总有效条数 :广告 -->
-    <select id="getADVTCount" >
-        select count(*) from T_NEWS a where a.stat='Y' and a.type='ADVT';
-    </select>
-
-    <insert id="addNewsData" >
-        INSERT INTO T_NEWS(title) VALUES("inisert from dbc");
-    </insert>
 
 </mapper>

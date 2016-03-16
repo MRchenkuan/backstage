@@ -8,13 +8,27 @@
 $pageID = 'photoLib';
 require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
 include(WIDGETS_DIR.'/head.php');
-include KODBC_PATH;
 $id = $_GET['id'];
-$photobase = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
-$photoalbum = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
-$thisalbum = $photoalbum->getById($id) or null;
-$photos = $photobase->getByAttr('albumid',$id) or null;
-$albums = $photoalbum->getAllItems();
+
+
+if(strtoupper(DB_TYPE)=='FILE'){
+    include KODBC_PATH;
+    $photobase = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
+    $photoalbum = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
+
+    $thisalbum = $photoalbum->getById($id) or null;
+    $photos = $photobase->getByAttr('albumid',$id) or null;
+    $albums = $photoalbum->getAllItems();
+}else{
+    require_once(DATABASE_DAO_DIR."/photoAlbumDAO.php");
+    $data = new photoAlbumDAO();
+    $thisalbum = $data->getAlbumInfoById($id) or null;
+    $photos = $data->getPhotoInfoByAlbumId($id) or null;
+    $albums = $data->getAllAlbums();
+}
+
+
+
 ?>
 <!--album-->
 <div class="panel panel-default"  style="width: 960px;margin: 60px auto 0 auto">

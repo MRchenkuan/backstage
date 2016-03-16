@@ -14,68 +14,41 @@ class photoAlbumDAO extends DBC{
         return parent:: __construct(get_class($this));
     }
 
+
     /**
-     * 根据ID获取新闻数据
-     * @return int|PDOStatement
+     * 根据ID查找相册
+     * @param $id
+     * @return mixed
      */
-    public function getNewsDataById($id){
+    function getAlbumInfoById($id)
+    {
         $rs = $this->getResult(__FUNCTION__,array('id'=>$id));
         $row = $rs->fetch();
         return $row;
     }
 
     /**
-     * 获取最新的新闻数据
-     * @return int|PDOStatement
+     * 根据相册id查找图片
+     * @param $id
+     * @return mixed
      */
-    public function getRecentNews($count)
+    public function getPhotoInfoByAlbumId($id)
     {
-        $rs = $this->getResult(__FUNCTION__, array('count' => $count));
-        $arr=$rs->fetchAll();
-        return $arr;
+        $rs = $this->getResult(__FUNCTION__,array('id'=>$id));
+        $rows = $rs->fetchAll();
+        return $rows;
     }
 
     /**
-     * 根据分页取数据
-     * @param $pagenow
-     * @param $pagesize
+     * 获得所有相册
+     * @param int $count
      * @return array
      */
-    public function  getRecentNewsByPage($pagenow,$pagesize){
-//        select * from T_NEWS a order by a.pubdata desc limit 4,12
-        $rs = $this->getResult(__FUNCTION__, array('start' => ($pagenow-1)*$pagesize,'size' => $pagesize));
-        $arr=$rs->fetchAll();
-        return $arr;
-    }
-    /**
-     * 根据分页取数据
-     * @param $pagenow
-     * @param $pagesize
-     * @return array
-     */
-    public function  getRecentADVTByPage($pagenow,$pagesize){
-//        select * from T_NEWS a order by a.pubdata desc limit 4,12
-        $rs = $this->getResult(__FUNCTION__, array('start' => ($pagenow-1)*$pagesize,'size' => $pagesize));
-        $arr=$rs->fetchAll();
-        return $arr;
+    public function getAllAlbums($count = 100)
+    {
+        $rs = $this->getResult(__FUNCTION__,array("count"=>$count));
+        $rows = $rs->fetchAll();
+        return $rows;
     }
 
-    /**
-     * 获取新闻总条数
-     * @return int
-     */
-    public function  getNewsCount(){
-//        select * from T_NEWS a order by a.pubdata desc limit 4,12
-        $rs = $this->getResult(__FUNCTION__);
-        return (int)$rs->fetchColumn();
-    }
-    /**
-     * 获取新闻总条数
-     * @return int
-     */
-    public function  getADVTCount(){
-//        select * from T_NEWS a order by a.pubdata desc limit 4,12
-        $rs = $this->getResult(__FUNCTION__);
-        return (int)$rs->fetchColumn();
-    }
 }
