@@ -6,11 +6,12 @@
  * Time: 下午5:21
  */
 $pageID = 'photoLib';
-include '../widgets/head.php';
-include '../DO/Kodbc.class.php';
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
+include KODBC_PATH;
 $id = $_GET['id'];
-$photobase = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
-$photoalbum = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
+$photobase = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
+$photoalbum = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
 $thisalbum = $photoalbum->getById($id) or null;
 $photos = $photobase->getByAttr('albumid',$id) or null;
 $albums = $photoalbum->getAllItems();
@@ -38,8 +39,8 @@ $albums = $photoalbum->getAllItems();
      * 查看未绑定的图片
      *****************/
     if(!$id||$id=='0'||$id==''){
-        require_once('../widgets/getUnbindedImg.php');
-        $unbindedimgs = getUnbindedImg('../PUBLIC/images/');
+        require_once(WIDGETS_DIR.'getUnbindedImg.php');
+        $unbindedimgs = getUnbindedImg(STATIC_DIR.'images/');
         foreach($unbindedimgs as $key=>$unbindeimg){
             if($photobase->getByAttr('imgsrc',$unbindeimg)){
                 unset($unbindedimgs[$key]);
@@ -272,5 +273,5 @@ $albums = $photoalbum->getAllItems();
     </div>
 </div>
 <?php
-include '../widgets/foot.php';
+include WIDGETS_DIR.'foot.php';
 ?>

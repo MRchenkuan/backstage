@@ -3,9 +3,10 @@
 error_reporting(0);
 session_start();
 $pageID='photoLib';
-include("../widgets/head.php");
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
 /*--连接数据库--*/
-require_once('../DO/Kodbc.class.php');
+require_once(KODBC_PATH);
 ?>
 
 <!--album-->
@@ -16,7 +17,7 @@ require_once('../DO/Kodbc.class.php');
 
     <div class="panel-body">
         <?php
-        $albumDoc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
+        $albumDoc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
         $albums = $albumDoc->getAllItems();
         foreach($albums as $album) {
             ?>
@@ -133,5 +134,5 @@ require_once('../DO/Kodbc.class.php');
 </div>
 <!--here this foot-->
 <?php
-include "../widgets/foot.php";
+include WIDGETS_DIR."foot.php";
 ?>

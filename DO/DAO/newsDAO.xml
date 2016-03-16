@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapper>
-    <select id="getNewsData" >
-        select * from T_NEWS
+    <select id="getNewsDataById" >
+        select * from T_NEWS a where a.id = #{id}
     </select>
 
-    <select id="getNewsData1" >
-        select * from T_NEWS
-    </select>
+    <insert id="addNewsData" >
+        INSERT INTO T_NEWS(title) VALUES("inisert from dbc");
+    </insert>
 
-    <select id="getNewsData2" >
-        select * from T_NEWS
-    </select>
 </mapper>
 
 

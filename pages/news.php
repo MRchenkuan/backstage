@@ -3,7 +3,8 @@
 error_reporting(0);
 session_start();
 $pageID='news';
-include "../widgets/head.php";
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
 ?>
 
 <!--content-->

@@ -1,11 +1,11 @@
 <?php
 error_reporting(0);
 session_start();
-
-require_once('../DO/Kodbc.class.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+require_once(KODBC_PATH);
 
 $APIID = $_GET['id'] ? $_GET['id'] : 'defaultMethod';
-$DATABASEURL = '../DO/T_TABLE_ADVTS.xml';
+$DATABASEURL = DATA_TABLE_DIR.'T_TABLE_ADVTS.xml';
 
 
 /*****************************************************
@@ -121,7 +121,7 @@ function createAdvt()
         echo false;
     }
 
-    $Kodbc = new Kodbc('../DO/T_TABLE_ADVTS.xml');
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_ADVTS.xml');
     $dataitem = array(
         'order' => $order,
         'stat' => 'disable',
@@ -186,7 +186,7 @@ function uploadImg()
             /*********
              * 记录入库
              ********/
-            $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+            $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
             $Kodbc->insertItem(array(
                 'albumid'=>'0',
                 'remark'=>'from uploadImg',
@@ -232,9 +232,9 @@ function createNews(){
     $db         = $_POST['target'];
     $Kodbc = null;
     switch($db){
-        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
-        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
-        default:$Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_IDEA.xml');break;
+        default:$Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
     }
 
     /*************
@@ -314,9 +314,9 @@ function delNews()
     $Kodbc = null;
     echo $db;
     switch($db){
-        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
-        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
-        default:$Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_IDEA.xml');break;
+        default:$Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
     }
     echo $Kodbc->delById($id);
 }
@@ -330,9 +330,9 @@ function getNewsContent(){
 
     $Kodbc = null;
     switch($db){
-        case "newsfiles": $Kodbc= new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
-        case "idea": $Kodbc= new Kodbc('../DO/Data/T_TABLE_IDEA.xml');break;
-        default: $Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');break;
+        case "newsfiles": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
+        case "idea": $Kodbc= new Kodbc(DATA_TABLE_DIR.'T_TABLE_IDEA.xml');break;
+        default: $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');break;
     }
 
     $item= $Kodbc->getById($id);
@@ -362,7 +362,7 @@ function uploadImgAjax()
 {
 
     $imgdatastring = $_POST['imgDataString'] or null;
-    $uploaddir = '../PUBLIC/images/' . date('Ymd') . '/';
+    $uploaddir = STATIC_DIR.'/images/' . date('Ymd') . '/';
     if (!file_exists($uploaddir)) {
         if (mkdir($uploaddir)) {
             chmod($uploaddir, 0777);
@@ -379,7 +379,7 @@ function uploadImgAjax()
             $uploadfileUrl = $uploaddir. time().'.'.$type;
             if (file_put_contents($uploadfileUrl, base64_decode(str_replace($result[1], '', $imgdatastring)))){
                 //写入数据库
-                $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+                $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
                 $Kodbc->insertItem(array(
                         'albumid'=>$_POST['albumid'],
                         'stat'=>'active',
@@ -397,7 +397,7 @@ function uploadImgAjax()
             }
         }else if($_POST['onlineurl']){
             /*如果没有图片但是有imgurl时*/
-            $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+            $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
             $Kodbc->insertItem(array(
                     'albumid'=>$_POST['albumid'],
                     'stat'=>'active',
@@ -433,7 +433,7 @@ function uploadImgAjax()
  */
 function moveImage(){
     $albumid=$_GET['albumid'];
-    $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
     if($_GET['imgid']){
         $imgid=$_GET['imgid'];
         $Kodbc->updateItem($imgid,array(
@@ -472,7 +472,7 @@ function removeImage(){
     $imgsrc = $_GET['imgsrc'];
     $filename=end(explode('/',$imgsrc));
     /*新建回收站*/
-    $dashbindir = './dashbin/'.date('Ymd').'/';
+    $dashbindir = DUSTBIN_DIR.date('Ymd').'/';
     if (!file_exists($dashbindir)) {
         if (mkdir($dashbindir)) {
             chmod($dashbindir, 0777);
@@ -481,7 +481,7 @@ function removeImage(){
         };
     }
 
-    $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTOBASE.xml');
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
     if($_GET['imgid']){
         $imgid=$_GET['imgid'];
         $Kodbc->delById($imgid);
@@ -514,7 +514,7 @@ function createAlbum(){
         $albumname = $_GET['albumname'];
         $stat = $_GET['stat'];
 
-        $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
+        $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
         if($_GET['albumid']&&$_GET['albumid']!==''){
             $Kodbc->updateItem($_GET['albumid'],array(
                 'stat'=>$stat,
@@ -553,7 +553,7 @@ function createAlbum(){
 function delAlbum(){
     if($_GET['albumid']){
         $albumid = $_GET['albumid'];
-        $Kodbc = new Kodbc('../DO/Data/T_TABLE_PHOTO_ALBUM.xml');
+        $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTO_ALBUM.xml');
         $item = $Kodbc->getById($albumid);
         if($item['count']>0){
             echo json_encode(array(

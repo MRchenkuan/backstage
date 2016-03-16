@@ -2,7 +2,8 @@
 error_reporting(0);
 session_start();
 $pageID='home';
-include '../widgets/head.php';
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
 ?>
 
 

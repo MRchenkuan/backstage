@@ -3,7 +3,9 @@
 error_reporting(0);
 session_start();
 $pageID='remarkManager';
-include("../widgets/head.php");
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
+
 /*--连接数据库--*/
 require_once('../DO/Kodbc.class.php');
 ?>

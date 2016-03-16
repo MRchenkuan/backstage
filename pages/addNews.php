@@ -3,14 +3,15 @@
 error_reporting(0);
 session_start();
 $pageID='addNews';
-include "../widgets/head.php";
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
 ?>
 
 
 <?php
 /*--连接数据库--*/
-require_once('../DO/Kodbc.class.php');
-$Kodbc = new Kodbc('../DO/Data/T_TABLE_NEWS.xml');
+require_once(KODBC_PATH);
+$Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');
 $pageNow = $_GET['page'];
 $sliceParam = 'page';
 

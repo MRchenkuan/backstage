@@ -1,13 +1,14 @@
 <!--this is head-->
 <?php
 $pageID = 'addAdvt';
-include('../widgets/head.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+include(WIDGETS_DIR.'/head.php');
 ?>
 
 <?php
     /*--连接数据库--*/
-    require_once('../DO/Kodbc.class.php');
-    $Kodbc = new Kodbc('../DO/Data/T_TABLE_ADVTS.xml');
+    require_once(KODBC_PATH);
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_ADVTS.xml');
     $pageNow = $_GET['page'];//当前分页
     if(!$pageNow){$pageNow=1;}
     $sliceParam = 'page'; //分页参数
