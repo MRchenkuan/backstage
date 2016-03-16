@@ -16,3 +16,5 @@ define('WIDGETS_DIR',$_SERVER['DOCUMENT_ROOT']."/widgets");
 define('KODBC_PATH',$_SERVER['DOCUMENT_ROOT']."/DO/Kodbc.class.php");
 define('STATIC_DIR',$_SERVER['DOCUMENT_ROOT']."/PUBLIC/");
 define('DUSTBIN_DIR',$_SERVER['DOCUMENT_ROOT']."/dashbin/");
+define('NEWS_FILE_DIR',$_SERVER['DOCUMENT_ROOT']."/news/");
+define('IMAGE_BED_DIR',$_SERVER['DOCUMENT_ROOT']."/image/");

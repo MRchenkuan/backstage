@@ -23,6 +23,7 @@ class DBC{
 
     public function getResult($id,$args=array()){
         var_dump(func_get_args());
+
         $sql = trim($this->DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]);
         // 当参数存在
         if(!$args){
@@ -36,6 +37,7 @@ class DBC{
         }
         var_dump($sql);
         $type = ($this->DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]->getName());
+        $this->pdo->query('set names utf8;');
         switch(strtolower($type)){
             case 'select':return $this->pdo->query($sql); break;
             case 'insert':return $this->pdo->exec($sql); break;

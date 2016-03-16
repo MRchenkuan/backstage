@@ -242,7 +242,7 @@ function createNews(){
      * 储存大文本
      *
      ************/
-    $newsDir = './newsfiles/'.date('Ymd').'/';
+    $newsDir = NEWS_FILE_DIR.date('Ymd').'/';
     if (!file_exists($newsDir)) {
         if (mkdir($newsDir)) {
             chmod($newsDir, 0777);
@@ -341,8 +341,7 @@ function getNewsContent(){
     echo json_encode(array(
         'stat' => 200,
         'msg' => $id.' get sucess！',
-        'content'=>htmlspecialchars_decode(fread($newsfile,filesize($contentsrc))),
-//        'content'=>'$contentsrc:'.$id
+        'content'=>htmlspecialchars_decode(fread($newsfile,filesize($contentsrc)))
     ));
 //    fclose($newsfile);
 
@@ -362,7 +361,7 @@ function uploadImgAjax()
 {
 
     $imgdatastring = $_POST['imgDataString'] or null;
-    $uploaddir = STATIC_DIR.'/images/' . date('Ymd') . '/';
+    $uploaddir = IMAGE_BED_DIR . date('Ymd') . '/';
     if (!file_exists($uploaddir)) {
         if (mkdir($uploaddir)) {
             chmod($uploaddir, 0777);
