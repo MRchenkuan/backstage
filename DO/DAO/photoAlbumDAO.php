@@ -51,4 +51,8 @@ class photoAlbumDAO extends DBC{
         return $rows;
     }
 
+    public function updateItem($id, $info){
+        echo 0;
+    }
+
 }

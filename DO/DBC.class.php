@@ -5,7 +5,7 @@ require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/TOOLS/Config.class.php');
 
 
-class DBC{
+class DBC implements KodbcAdapter{
     private $DAO,$SQL,$fuc;
     public function __construct($DAONAME){
         $DB = Config::getSection("DB");
@@ -38,5 +38,64 @@ class DBC{
             case 'update':return $this->pdo->exec($sql); break;
             default :return $this->pdo->query($sql);break;
         }
+    }
+
+    function initCol()
+    {
+        // TODO: Implement initCol() method.
+    }
+
+    function getById($id)
+    {
+        // TODO: Implement getById() method.
+    }
+
+    function delById($id)
+    {
+        // TODO: Implement delById() method.
+    }
+
+    function getByAttr($attr, $val)
+    {
+        // TODO: Implement getByAttr() method.
+    }
+
+    function getAllItems()
+    {
+        // TODO: Implement getAllItems() method.
+    }
+
+    function sort($arr, $by, $rule)
+    {
+        // TODO: Implement sort() method.
+    }
+
+    /**
+     * 统计结果集
+     * @return mixed
+     */
+    function count()
+    {
+        // TODO: Implement count() method.
+    }
+
+    function getByPeriod($start, $end)
+    {
+        // TODO: Implement getByPeriod() method.
+    }
+
+    function insertItem($attrs)
+    {
+        // TODO: Implement insertItem() method.
+    }
+
+    function updateItem($id, $info)
+    {
+        // TODO: Implement updateItem() method.
+    }
+
+    function getNewestId()
+    {
+        // TODO: Implement getNewestId() method.
     }
 }

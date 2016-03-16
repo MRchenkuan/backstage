@@ -14,6 +14,4 @@ class photosDAO extends DBC{
         return parent:: __construct(get_class($this));
     }
 
-
-
 }
