@@ -10,9 +10,9 @@ include(WIDGETS_DIR.'/head.php');
 <!--content-->
 <?php
 /*连接数据库*/
-require_once('../DO/Kodbc.class.php');
+require_once(KODBC_PATH);
 $newsid = $_GET['id'];
-$kodbc = new Kodbc('../DO/T_TABLE_NEWS.xml');
+$kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');
 
 $news = $kodbc->getById($newsid);
 ?>
@@ -33,5 +33,5 @@ $news = $kodbc->getById($newsid);
 
 <!--here this foot-->
 <?php
-include "../widgets/foot.php";
+include WIDGETS_DIR."foot.php";
 ?>

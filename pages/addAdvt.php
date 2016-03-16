@@ -6,7 +6,6 @@ include(WIDGETS_DIR.'/head.php');
 ?>
 
 <?php
-
     $pageNow = $_GET['page'];//当前分页
     if(!$pageNow){$pageNow=1;}
     $sliceParam = 'page'; //分页参数

@@ -32,5 +32,5 @@ require_once('../DO/Kodbc.class.php');
 </div>
 <!--here this foot-->
 <?php
-include "../widgets/foot.php";
+include WIDGETS_DIR."foot.php";
 ?>

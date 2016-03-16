@@ -44,5 +44,5 @@ include(WIDGETS_DIR.'/head.php');
 </div>
 
 <?php
-include '../widgets/foot.php';
+include WIDGETS_DIR."foot.php";
 ?>

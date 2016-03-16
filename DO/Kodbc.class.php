@@ -11,7 +11,7 @@
  * - item (id必须，其余各式各样的属性都可以，表示字段，建议新增的属性在DTD中声明)
  */
 error_reporting(0);
-class Kodbc {
+class Kodbc{
     function __construct($xmlPath) {
         $this->xmlPath=$xmlPath;
         $this->xmlDoc = simplexml_load_file($xmlPath);

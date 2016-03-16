@@ -17,8 +17,8 @@
 <?php
 /*连接数据库*/
 $newsid = $_GET['id'];
-require_once('../DO/Kodbc.class.php');
-$kodbc = new Kodbc('../DO/T_TABLE_NEWS.xml');
+require_once(KODBC_PATH);
+$kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');
 
 $news = $kodbc->getById($newsid);
 
