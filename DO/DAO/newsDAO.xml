@@ -4,6 +4,10 @@
         select * from T_NEWS a where a.id = #{id}
     </select>
 
+    <select id="getRecentNews" >
+        select * from T_NEWS a order by a.pubdata desc limit #{count}
+    </select>
+
     <insert id="addNewsData" >
         INSERT INTO T_NEWS(title) VALUES("inisert from dbc");
     </insert>

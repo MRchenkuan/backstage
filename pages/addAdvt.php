@@ -6,14 +6,17 @@ include(WIDGETS_DIR.'/head.php');
 ?>
 
 <?php
-    /*--连接数据库--*/
-    require_once(KODBC_PATH);
-    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_ADVTS.xml');
+
     $pageNow = $_GET['page'];//当前分页
     if(!$pageNow){$pageNow=1;}
     $sliceParam = 'page'; //分页参数
     $pagesize = 5;//页面条数
 
+
+
+    /*--连接数据库--*/
+    require_once(KODBC_PATH);
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_ADVTS.xml');
     $adCollection = $Kodbc->getAllItems(-$pagesize*$pageNow,$pagesize);
     /*排序*/
     usort($adCollection, function($a, $b) {

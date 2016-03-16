@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE database SYSTEM "./DTDs/photo.dtd">
+<!DOCTYPE database SYSTEM "T_TABLE_PHOTOBASE.dtd">
 <database NOWID="117">
     <item id="14" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" pubdata="2015-06-12T10:19"/>
     <item id="15" albumid="14" stat="disable" remark="第一张图片" imgsrc="http://tangweimm.com/img/imgveiw/3.jpg" pubdata="2015-06-12T10:19"/>

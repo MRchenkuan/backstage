@@ -15,11 +15,21 @@ class newsDAO extends DBC{
     }
 
     /**
-     * 获取新闻数据
+     * 根据ID获取新闻数据
      * @return int|PDOStatement
      */
     public function getNewsDataById($id){
         $rs = $this->getResult(__FUNCTION__,array('id'=>$id));
+        $row = $rs->fetch();
+        return $row;
+    }
+
+    /**
+     * 获取最新的新闻数据
+     * @return int|PDOStatement
+     */
+    public function getRecentNews($count){
+        $rs = $this->getResult(__FUNCTION__,array('count'=>$count));
         $row = $rs->fetch();
         return $row;
     }
