@@ -5,8 +5,7 @@
  * Date: 16/3/13
  * Time: 下午3:54
  */
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-
+define('CONFIG_INI_DIR',$_SERVER['DOCUMENT_ROOT']."/config.ini");
 class Config
 {
     /**
@@ -34,3 +33,4 @@ class Config
         return parse_ini_file(CONFIG_INI_DIR,true)[$section];
     }
 }
+

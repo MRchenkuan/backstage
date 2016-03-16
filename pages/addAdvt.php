@@ -12,13 +12,13 @@ include(WIDGETS_DIR.'/head.php');
     $pagesize = 5;//页面条数
 
 
-
+if(strtoupper(DB_TYPE)=='FILE') {
     /*--连接数据库--*/
     require_once(KODBC_PATH);
-    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_ADVTS.xml');
-    $adCollection = $Kodbc->getAllItems(-$pagesize*$pageNow,$pagesize);
+    $Kodbc = new Kodbc(DATA_TABLE_DIR . 'T_TABLE_ADVTS.xml');
+    $adCollection = $Kodbc->getAllItems(-$pagesize * $pageNow, $pagesize);
     /*排序*/
-    usort($adCollection, function($a, $b) {
+    usort($adCollection, function ($a, $b) {
         $al = (int)$a['order'];
         $bl = (int)$b['order'];
         if ($al == $bl)
@@ -26,6 +26,12 @@ include(WIDGETS_DIR.'/head.php');
         return ($al > $bl) ? -1 : 1;
     });
     $count = $Kodbc->count();//总共条目数
+}else{
+    require(DATABASE_DAO_DIR."/newsDAO.php");
+    $data = new newsDAO();
+    $count = $data->getADVTCount();//总共条目数
+    $adCollection = $data->getRecentADVTByPage($pageNow,$pagesize);
+}
     $pageCount = ceil($count/$pagesize);//总页数
 ?>
 

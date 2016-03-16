@@ -3,32 +3,41 @@
 error_reporting(0);
 session_start();
 $pageID='addNews';
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+
 include(WIDGETS_DIR.'/head.php');
 ?>
 
 
 <?php
-/*--连接数据库--*/
-require_once(KODBC_PATH);
-$Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');
+
 $pageNow = $_GET['page'];
 $sliceParam = 'page';
-
 if(!$pageNow){$pageNow=1;}
 $pagesize = 5;
-$adCollection = $Kodbc->getAllItems(-$pagesize*$pageNow,$pagesize);
-$count = $Kodbc->count();//总共条目数
-$pageCount = ceil($count/$pagesize);//总页数
 
-/*排序*/
-usort($adCollection, function($a, $b) {
-    $al = (int)$a['pubdata'];
-    $bl = (int)$b['pubdata'];
-    if ($al == $bl)
-        return 0;
-    return ($al > $bl) ? -1 : 1;
-});
+/*--选择数据源--*/
+if(strtoupper(DB_TYPE)=='FILE'){
+    require_once(KODBC_PATH);
+    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_NEWS.xml');
+    $adCollection = $Kodbc->getAllItems(-$pagesize*$pageNow,$pagesize);
+    $count = $Kodbc->count();//总共条目数
+    /*排序*/
+    usort($adCollection, function($a, $b) {
+        $al = (int)$a['pubdata'];
+        $bl = (int)$b['pubdata'];
+        if ($al == $bl)
+            return 0;
+        return ($al > $bl) ? -1 : 1;
+    });
+}else{
+    require_once(DATABASE_DAO_DIR."/newsDAO.php");
+    $data = new newsDAO();
+    $count = $data->getNewsCount();//总共条目数
+    $adCollection = $data->getRecentNewsByPage($pageNow,$pagesize);
+}
+
+$pageCount = ceil($count/$pagesize);//总页数
 ?>
 
 <!--below is content-->

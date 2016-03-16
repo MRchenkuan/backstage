@@ -22,20 +22,13 @@ class DBC{
     }
 
     public function getResult($id,$args=array()){
-        var_dump(func_get_args());
-
         $sql = trim($this->DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]);
         // 当参数存在
-        if(!$args){
-            $sql = trim($this->DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]);
-        }else{
-            // 遍历替换所有占位符
-            // 可能需要先进行占位符转义
-            foreach($args as $argkey=>$argval){
-                $sql = str_replace('#{'.$argkey.'}',$argval,$sql);
-            }
+        // 遍历替换所有占位符
+        // 可能需要先进行占位符转义
+        foreach($args as $argkey=>$argval){
+            $sql = str_replace('#{'.$argkey.'}',$argval,$sql);
         }
-        var_dump($sql);
         $type = ($this->DAO->xpath('/mapper/*[@id=\'' . $id . '\']/text()')[0]->getName());
         $this->pdo->query('set names utf8;');
         switch(strtolower($type)){

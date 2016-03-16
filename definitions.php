@@ -7,11 +7,12 @@
  */
 
 // 定义网站根目录
+define('DB_TYPE','MYSQL');
 define('APP_DIR',__DIR__);
 define('DATA_TABLE_DIR',$_SERVER['DOCUMENT_ROOT']."/DO/Data/");
 define('DATABASE_DIR',$_SERVER['DOCUMENT_ROOT']."/DO");
 define('DATABASE_DAO_DIR',$_SERVER['DOCUMENT_ROOT']."/DO/DAO/");
-define('CONFIG_INI_DIR',$_SERVER['DOCUMENT_ROOT']."/config.ini");
+//require_once($_SERVER['DOCUMENT_ROOT'].'/tools/Config.class.php');
 define('WIDGETS_DIR',$_SERVER['DOCUMENT_ROOT']."/widgets");
 define('KODBC_PATH',$_SERVER['DOCUMENT_ROOT']."/DO/Kodbc.class.php");
 define('STATIC_DIR',$_SERVER['DOCUMENT_ROOT']."/PUBLIC/");
