@@ -40,7 +40,7 @@ require_once(KODBC_PATH);
         ?>
         <div id="newAlbumBtn" class="col-xs-6 col-md-3" data-toggle="modal" data-target="#alertBoard">
             <a href="#" class="thumbnail">
-                <img style="width: 70%" src="../PUBLIC/UI/area-add.png" alt="...">
+                <img style="width: 70%" src="../static/UI/area-add.png" alt="...">
                 <div class="caption" style="text-align: center">
                     <!-- 面板控制按钮 -->
                     <button type="button" class="btn btn-success" >

@@ -2,11 +2,11 @@
 <html>
 <head lang="zh-CN">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap/bootstrap-theme.min.css">
 
-    <script src="../PUBLIC/javascripts/jquery.min.js"></script>
-    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="../static/js/3rd/jquery.min.js"></script>
+    <script src="../static/bootstrap/bootstrap.min.js"></script>
     <style>
         .input-group{margin: 10px auto;}
     </style>

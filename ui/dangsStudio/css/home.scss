@@ -1,0 +1,57 @@
+aside{
+  width: 15%;
+  float: left;
+  height: 100%;
+  border-right: 1px solid grey;
+  box-sizing: border-box;
+  padding: 2rem;
+  overflow: auto;
+  .btn-theme{
+    margin: 1rem 0;
+    &:hover{
+      background: grey;
+      color: #fff;
+    }
+  }
+  .active{
+    background: grey;
+    color: #fff;
+  }
+  .logo{
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+
+#main{
+  float: left;
+  width: 85%;
+  height: 100%;
+  position: relative;
+  #header{
+    padding: 4rem 1rem 2rem;
+    border-bottom: 1px solid grey;
+    box-sizing: border-box;
+    height:15%;
+    .btn-theme{
+      width: 15%;
+      margin:0 2%;
+      &:hover{
+        background: grey;
+        color: #fff;
+      }
+    }
+    .active{
+      background: grey;
+      color: #fff;
+    }
+  }
+  #content{
+    height: 85%;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    border: none;
+    padding: 0;
+  }
+}

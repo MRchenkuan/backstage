@@ -1,0 +1,13 @@
+@import "index";
+@import "home";
+html,body{line-height: 1.7;height: 100%}
+.btn-theme{
+  width: 100%;
+  background: none;
+  color:#202020;
+  border: 1px solid #000;
+  transition: all .5s ease;
+  &:hover{
+    box-shadow: 0 0 5px #878787;
+  }
+}

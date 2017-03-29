@@ -205,7 +205,7 @@ if(strtoupper(DB_TYPE)=='FILE'){
                 </div>
                 <div class="col-xs-6 col-md-10" style="position: relative;float: none;margin: 0 auto">
                     <a href="#" class="thumbnail">
-                        <img id="imguploadpreview" name="forupload" data-selected="0" src="../PUBLIC/UI/area-add.png" alt="添加图片">
+                        <img id="imguploadpreview" name="forupload" data-selected="0" src="../static/UI/area-add.png" alt="添加图片">
                     </a>
                     <input id="imageupload" type="file" value="选择图片" accept="image/*" style="opacity:0;width:100%;height:100%;position: absolute;top:0;left: 0;">
                 </div>

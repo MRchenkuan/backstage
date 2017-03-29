@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #FAFAFA;">
+<head>
+    <title>当记造型后台管理</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="../../static/js/3rd/jquery.min.js"></script>
+    <script src="../../static/js/3rd/vue.min.js"></script>
+    <script src="../../static/bootstrap/bootstrap.min.js"></script>
+    <script src="../../static/js/api.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="frame">
+    <div id="loginFrame" class="loginFrame">
+        <div class="logo text-center themesColor">
+            <img src="./img/logo.png">
+        </div>
+
+        <div class="inputGroup input-group-lg">
+            <input id="username" autocomplete="off" :value="username" v-model="username" class="list-group-item" type="text" placeholder="账号">
+            <input id="password" autocomplete="off" :value="password" v-model="password" class="list-group-item" type="password" placeholder="密码">
+        </div>
+        <label class="control-label" for="username" style="color:{{color}}">{{notice}}</label>
+        <button class="{{isLogin?'disabled':''}} btn-theme btn btn-lg btn-block" @click="login">登录 <span v-if="isLogin" class="glyphicon glyphicon-asterisk"></span></button>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" charset="UTF-8">
+
+
+    var loginFrame = new Vue({
+        el:"#loginFrame",
+        data:{
+            notice:"",
+            color:"#a94442",
+            username:"",
+            password:"",
+            isLogin:false,
+        },
+        methods:{
+            login:function(){
+                if(!loginFrame.username)return loginFrame.notice="请输入用户名";
+                if(!loginFrame.password)return loginFrame.notice="请输入密码";
+                loginFrame.notice ="  ";
+                loginFrame.isLogin=true;
+                api.post("login.do",{userInfo: {
+                    loginName: loginFrame.username,
+                    loginPassword: loginFrame.password
+                }},function(data){
+                    location.href = "projects.html"
+
+                },function(data){
+                    loginFrame.notice = data['rspInf'];
+                    loginFrame.isLogin = false
+                });
+
+                var timeId = setTimeout(function(){
+                    loginFrame.notice = "请求超时";
+                    loginFrame.isLogin = false;
+                },15*1000)
+            }
+        }
+    });
+</script>

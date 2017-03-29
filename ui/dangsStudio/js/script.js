@@ -1,0 +1,120 @@
+/**
+ * Created by chenkuan on 2017/3/29.
+ */
+var content = new Vue({
+    el:"#content",
+    data:{
+        src:""
+    }
+});
+var main = new Vue({
+    el:"#main",
+    data:{
+        headers:[]
+    },
+    methods:{
+        openPage:function(header){
+            content.src=header.link;
+            header.isAcitve = true;
+            console.log(header)
+        }
+    }
+});
+var leftSide = new Vue({
+    el:"#leftSide",
+    data:{
+        navlist:[
+            {
+                isActive:false,
+                title:'首页滚动图',
+                page:[
+                    {
+                        isActive:false,
+                        title:"作品展示5张图",
+                        link:"worksImages.html"
+                    },
+                    {
+                        isActive:false,
+                        title:"精品教学5张图",
+                        link:"classes.html"
+                    }
+                ]
+            },
+            {
+                isActive:false,
+                title:'工作室简介',
+                page:[
+                    {
+                        isActive:false,
+                        title:"工作室照片",
+                        link:"envDisplay.html"
+                    }
+                ]
+            },
+            {
+                isActive:false,
+                title:'化妆课程',
+                page:[
+                    {
+                        isActive:false,
+                        title:"化妆课程",
+                        link:"makeup.html"
+                    }
+                ]
+            },
+            {
+                title:'美甲课程',
+                isActive:false,
+                page:[
+                    {
+                        isActive:false,
+                        title:"美甲课程",
+                        link:"meijia.html"
+                    }
+                ]
+            },
+            {
+                title:'作品展示',
+                isActive:false,
+                page:[
+                    {
+                        isActive:false,
+                        title:"作品展示",
+                        link:"works.html"
+                    }
+                ]
+            },
+            {
+                isActive:false,
+                title:'师资力量',
+                page:[
+                    {
+                        isActive:false,
+                        title:"师资力量",
+                        link:"teachers.html"
+                    }
+                ]
+            },
+            {
+                isActive:false,
+                title:'合作明星',
+                page:[
+                    {
+                        isActive:false,
+                        title:"合作明星",
+                        link:"stars.html"
+                    }
+                ]
+            }
+        ]
+    },
+    methods:{
+        showPages:function(nav){
+            main.headers = nav.page;
+            nav.isAcitve = true;
+            content.src = nav.page[0].link;
+            nav.page[0].isAcitve = true;
+
+        }
+    }
+});

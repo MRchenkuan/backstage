@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #FAFAFA;">
+<head>
+    <title>当记造型后台管理</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="../../static/js/3rd/jquery.min.js"></script>
+    <script src="../../static/js/3rd/vue.min.js"></script>
+    <script src="../../static/bootstrap/bootstrap.min.js"></script>
+    <script src="../../static/js/api.js"></script>
+</head>
+<body>
+    <aside id="leftSide">
+        <div class="logo">
+            <img src="./img/logo.png">
+        </div>
+        <a v-for="nav in navlist" class="btn btn-theme" @click="showPages(nav)" :class="nav.isActive?'active':''">{{nav.title}}</a>
+    </aside>
+    <div id="main">
+        <div id="header">
+            <a v-for="header in headers" @click="openPage(header)" class="btn btn-theme" :class="header.isActive?'active'">{{header.title}}</a>
+        </div>
+        <iframe id="content" :src="'./partPages/'+src"></iframe>
+    </div>
+
+</body>
+<script src="./js/script.js"></script>
+</html>
+
