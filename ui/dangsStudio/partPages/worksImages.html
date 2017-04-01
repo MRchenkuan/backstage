@@ -2,9 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>作品展示5张图</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../static/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../../../static/js/3rd/jquery.min.js"></script>
+    <script src="../../../static/js/3rd/vue.min.js"></script>
+    <script src="../../../static/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../static/js/api.js"></script>
+    <script src="../../../static/js/api.js"></script>
 </head>
 <body>
-
+<div v-for="img in imgs" class="updateBox">
+    <input type="text" class="form-control input-sm h5" v-model="img.imgTitle" placeholder="图片标题">
+    <div>
+        <img src="{{img.imgDateSource || img.imgSrc}}">
+        <input @change="loadLocalImage($event,$index)" type="file" accept="image/jepg,image/jpg,image/png">
+        <span class="h5">尺寸: 1001*390px<br>分辨率:300 dpi</span>
+        <a class="btn btn-theme" @click="saveDate($index)">保存</a>
+    </div>
+</div>
+<script>
+    var api = new API("../../../API.php")
+    var updateBox = new Vue({
+        el:"body",
+        data:{
+            imgs:[
+                {
+                    imgDateSource:"",
+                    imgTitle:"",
+                    imgDesc:"",
+                    imgSrc:"",
+                    identification:"worksImages-1"
+                },
+                {
+                    imgDateSource:"",
+                    imgTitle:"",
+                    imgDesc:"",
+                    imgSrc:"",
+                    identification:"worksImages-2"
+                },
+                {
+                    imgDateSource:"",
+                    imgTitle:"",
+                    imgDesc:"",
+                    imgSrc:"",
+                    identification:"worksImages-3"
+                },
+                {
+                    imgDateSource:"",
+                    imgTitle:"",
+                    imgDesc:"",
+                    imgSrc:"",
+                    identification:"worksImages-4"
+                },
+                {
+                    imgDateSource:"",
+                    imgTitle:"",
+                    imgDesc:"",
+                    imgSrc:"",
+                    identification:"worksImages-5"
+                }
+            ]
+        },
+        methods:{
+            saveDate:function(index){
+                console.log(index);
+                var self = this;
+                api.post('?id=imageUpload',{
+                    imageDataSource:self.imgs[index].imgDateSource,
+                    imgTitle:self.imgs[index].imgTitle,
+                    imgDesc:self.imgs[index].imgDesc,
+                    imgSrc:self.imgs[index].imgSrc,
+                    identification:self.imgs[index].identification
+                },function(response){
+                    if(response.body['stat']===200 && response.body['imgSrc']){
+                        self.imgs[index].imgSrc = response.body['imgSrc'];
+                        alert('图片上传成功');
+                    }else{
+                        alert('图片上传失败,请重新上传')
+                    }
+                })
+            },
+            loadLocalImage:function(event,index){
+                var that = this;
+                var self = event.currentTarget;
+                if(self.files[0].size>500*1000)return alert("图片超过最大限制(500 KB),当前大小:"+self.files[0].size/1000+" KB");
+                var reader = new FileReader();
+                reader.onload = function(){
+                    that.imgs[index].imgDateSource = this.result;
+                };
+                reader.readAsDataURL(self.files[0]);
+            }
+        }
+    })
+</script>
 </body>
 </html>

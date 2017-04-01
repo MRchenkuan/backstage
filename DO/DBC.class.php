@@ -2,7 +2,7 @@
 error_reporting(0);
 
 require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/TOOLS/Config.class.php');
+require_once TOOLS_PATH.'/Config.class.php';
 
 
 class DBC{

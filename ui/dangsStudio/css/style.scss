@@ -11,3 +11,37 @@ html,body{line-height: 1.7;height: 100%}
     box-shadow: 0 0 5px #878787;
   }
 }
+.updateBox{
+  overflow: hidden;
+  padding: 2rem 5rem;
+  &>.form-control{
+    width: 10rem;
+  }
+  &>div{
+    position: relative;
+  }
+  img,input[type='file']{
+    width: 38rem;
+    height: 14rem;
+    float: left;
+  }
+  input[type='file']{
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  span{
+    float: left;
+    height: 14rem;
+    display: block;
+    margin: 0;
+    padding: 5.5rem 5rem;
+  }
+  .btn-theme{
+    width: auto;
+    float: left;
+    margin-top: 5.5rem;
+  }
+}

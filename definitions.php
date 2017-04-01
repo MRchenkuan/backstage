@@ -5,17 +5,23 @@
  * Date: 16/3/15
  * Time: 下午3:13
  */
-
+error_reporting(0);
 // 定义网站根目录
-define('DB_TYPE','MYSQL');
-define('APP_DIR',__DIR__);
-define('DATA_TABLE_DIR',$_SERVER['DOCUMENT_ROOT']."/DO/Data/");
-define('DATABASE_DIR',$_SERVER['DOCUMENT_ROOT']."/DO");
-define('DATABASE_DAO_DIR',$_SERVER['DOCUMENT_ROOT']."/DO/DAO/");
-//require_once($_SERVER['DOCUMENT_ROOT'].'/tools/Config.class.php');
-define('WIDGETS_DIR',$_SERVER['DOCUMENT_ROOT']."/widgets");
-define('KODBC_PATH',$_SERVER['DOCUMENT_ROOT']."/DO/Kodbc.class.php");
-define('STATIC_DIR',$_SERVER['DOCUMENT_ROOT']."/PUBLIC/");
-define('DUSTBIN_DIR',$_SERVER['DOCUMENT_ROOT']."/dashbin/");
-define('NEWS_FILE_DIR',$_SERVER['DOCUMENT_ROOT']."/news/");
-define('IMAGE_BED_DIR',$_SERVER['DOCUMENT_ROOT']."/image/");
+if(!defined(DB_TYPE))define('DB_TYPE','MYSQL');
+if(!defined(APP_DIR))define('APP_DIR',__DIR__."/../");
+if(!defined(BACKSTAGE_DIR))define('BACKSTAGE_DIR',__DIR__ );
+// 数据库配置文件
+if(!defined(CONFIG_INI_DIR))define('CONFIG_INI_DIR',BACKSTAGE_DIR."/config.ini");
+if(!defined(DATA_TABLE_DIR))define('DATA_TABLE_DIR',BACKSTAGE_DIR."/DO/Data/");
+if(!defined(DATABASE_DIR))define('DATABASE_DIR',BACKSTAGE_DIR."/DO/");
+if(!defined(DATABASE_DAO_DIR))define('DATABASE_DAO_DIR',BACKSTAGE_DIR."/DO/DAO/");
+if(!defined(WIDGETS_DIR))define('WIDGETS_DIR',BACKSTAGE_DIR."/widgets/");
+if(!defined(KODBC_PATH))define('KODBC_PATH',BACKSTAGE_DIR."/DO/Kodbc.class.php");
+if(!defined(STATIC_DIR))define('STATIC_DIR',BACKSTAGE_DIR."/static/");
+if(!defined(DUSTBIN_DIR))define('DUSTBIN_DIR',BACKSTAGE_DIR."/dustbin/");
+if(!defined(NEWS_FILE_DIR))define('NEWS_FILE_DIR',BACKSTAGE_DIR."/news/");
+if(!defined(IMAGE_BED_DIR))define('IMAGE_BED_DIR',BACKSTAGE_DIR."/images/");
+if(!defined(TOOLS_PATH))define('TOOLS_PATH',BACKSTAGE_DIR."/utils/");
+if(!defined(ROUTER_PATH))define('ROUTER_PATH',BACKSTAGE_DIR."/routers/");
+if(!defined(CORE_PATH))define('CORE_PATH',BACKSTAGE_DIR."/core/");
+if(!defined(CONTROLLER_PATH))define('CONTROLLER_PATH',BACKSTAGE_DIR."/controller/");

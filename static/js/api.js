@@ -43,12 +43,13 @@ API.fn.post = function(url,param,fn,completed,err,failed){
         },
         crossDomain: true,
         contentType: "application/json"
+        // contentType: "application/x-www-form-urlencoded"
     });
 };
 
 
 // // 测试环境
-var api = new API("http://teamsupport.sqbj.com:8051/ifsys/");
+//var api = new API("http://teamsupport.sqbj.com:8051/ifsys/");
 
 // // // 线上环境
 // var api = new API("../");
