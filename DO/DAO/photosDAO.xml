@@ -7,7 +7,7 @@
 
     <!-- 新增照片信息 -->
     <insert id="addImageInfo" >
-        insert into T_PHOTO set ,PATH="#{PATH}",THUMB="#{THUMB}",FS_PATH="#{FS_PATH}";
+        insert into T_PHOTO set PATH="#{PATH}",THUMB="#{THUMB}",FS_PATH="#{FS_PATH}";
     </insert>
 
     <!-- 新增照片信息 -->

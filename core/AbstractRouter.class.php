@@ -5,11 +5,12 @@
  * Date: 2017/3/29
  * Time: 下午11:19
  */
+
 namespace core;
+error_reporting(E_ERROR);
 use core\interfaces\Router;
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-require_once CORE_PATH . 'Router.interface.php';
-error_reporting(E_ALL);
+include_once '../definitions.php';
+include_once CORE_PATH . 'Router.interface.php';
 abstract class AbstractRouter implements Router
 {
     public static $allRouters = array();

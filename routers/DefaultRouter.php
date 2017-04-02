@@ -5,9 +5,9 @@
  * Date: 2017/3/29
  * Time: 下午11:09
  */
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-require_once CORE_PATH . 'AbstractRouter.class.php';
-error_reporting(E_ALL);
+include_once '../definitions.php';
+include_once CORE_PATH . 'AbstractRouter.class.php';
+error_reporting(E_ERROR);
 \core\AbstractRouter::addRouter(array(
     'defaultMethod' => function(){
         echo "defaultMethod";

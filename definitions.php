@@ -5,7 +5,7 @@
  * Date: 16/3/15
  * Time: 下午3:13
  */
-error_reporting(0);
+error_reporting(E_ERROR);
 // 定义网站根目录
 if(!defined(DB_TYPE))define('DB_TYPE','MYSQL');
 if(!defined(APP_DIR))define('APP_DIR',__DIR__."/../");

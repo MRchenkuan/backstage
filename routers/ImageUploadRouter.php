@@ -1,8 +1,9 @@
 <?php
-error_reporting(E_ALL);
-require_once $_SERVER['DOCUMENT_ROOT'] . '/definitions.php' ;
-require_once CORE_PATH . 'AbstractRouter.class.php';
-require_once TOOLS_PATH.'imgUploader.php';
+//error_reporting(0);
+include_once '../definitions.php' ;
+include_once CORE_PATH . 'AbstractRouter.class.php';
+include_once TOOLS_PATH.'imgUploader.php';
+include_once DATABASE_DAO_DIR.'advantrueDAO.php';
 /**
  * Created by PhpStorm.
  * User: chenkuan
@@ -24,75 +25,65 @@ AbstractRouter::addRouter(array(
 //            ));
 //            return;
 //        };
-        var_dump($_POST);
+
         $imageDateSource = $_POST['imageDataSource'];
-        echo $imageDateSource;
         $imgTitle = $_POST['imgTitle'];
         $imgDesc = $_POST['imgDesc'];
         $imgSrc = $_POST['imgSrc'];
         $identification = $_POST['identification'];
-        $imgObj = uploadImage($imageDateSource);
-        if($imgObj['pid']){
-            $dao = new advantrueDAO();
+
+        $dao = new advantrueDAO();
+        // 当存在datasource时，为新增,否则为更新
+        if($imageDateSource){
+            $imgObj = uploadImage($imageDateSource);
+            if(isset($imgObj['pid']) && $imgObj['pid']>0){
+                // 更新目标对象信息
+                $dao->updateItemByInfo($identification,array(
+                    'PHOTO_ID'=>$imgObj['pid'],
+                    'FILE_PATH'=>isset($imgObj['FS_PATH'])?$imgObj['FS_PATH']:"",
+                    'IMG_URL'=>isset($imgObj['imgurl'])?$imgObj['imgurl']:"",
+                    'IMG_THUMB'=>isset($imgObj['thumburl'])?$imgObj['thumburl']:"",
+                    'IMG_TITLE'=>$imgTitle,
+                    'IMG_DESC'=>$imgDesc
+                ));
+                echo json_encode(array(
+                    'stat' => 200,
+                    'imgSrc' => isset($imgObj['imgurl'])?$imgObj['imgurl']:""
+                ));
+                return;
+            }else{
+                echo json_encode(array(
+                    'stat' => 201,
+                    'info' => "图片上传失败"
+                ));
+            }
+        }else{
             $dao->updateItemByInfo($identification,array(
-                'PHOTO_ID'=>$imgObj['pid'],
-                'FILE_PATH'=>$imgObj['FS_PATH'],
-                'IMG_URL'=>$imgObj['PATH'],
-                'IMG_THUMB'=>$imgObj['THUMB'],
+                'IMG_TITLE'=>$imgTitle,
+                'IMG_DESC'=>$imgDesc
             ));
             echo json_encode(array(
                 'stat' => 200,
-                'imgSrc' => $imgObj['imgurl']
+                'info' => "更新成功"
+            ));
+        }
+    },
+
+    "getALlItems" => function(){
+        $dao = new advantrueDAO();
+        $type = $_POST['type'];
+        if(!$type){
+            echo json_encode(array(
+                'stat' => 201,
+                'info' => "请填提交type参数"
             ));
             return;
         }
-    },
-
-    'uploadImg' => function()
-    {
-        {
-            $uploaddir = '../PUBLIC/images/' . date('Ymd') . '/';
-            if (!file_exists($uploaddir)) {
-                if (mkdir($uploaddir)) {
-                    chmod($uploaddir, 0777);
-                } else {
-                    echo 'faile to create ' . $uploaddir . 'maybe the path you have no permit!<br>';
-                };
-            }
-            $uploadfileUrl = $uploaddir . time() . '.jpg';
-
-            if ($_FILES['userfile']['error'] !== 0) {
-                echo 'upload failed! error code:' . $_FILES['userfile']['error'];
-                var_dump($_FILES['userfile']);
-            } else {
-                if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfileUrl)) {
-                    /*********
-                     * 记录入库
-                     ********/
-                    $Kodbc = new Kodbc(DATA_TABLE_DIR.'T_TABLE_PHOTOBASE.xml');
-                    $Kodbc->insertItem(array(
-                        'albumid'=>'0',
-                        'remark'=>'from uploadImg',
-                        'imgsrc'=>$uploadfileUrl,
-                        'pubdata'=>date('Y-m-d\TH:i')
-                    ));
-
-                    /*********
-                     * 页面输出
-                     ********/
-                    echo "<body style='padding: 0;margin: 0'>";
-                    echo "<form style='padding: 0;margin: 0;' enctype='multipart/form-data' action='API.php?id=uploadImg' method='POST' name='form'>";
-                    echo "<img id='uploadCallBack-ImgSrc' style='height:100%;max-width: 300px;' src='" . $uploadfileUrl . "'>";
-                    echo "<input style='float: right' id='userfile' name='userfile' type='file' onchange=\"document.getElementById('uploadform').submit()\">";
-//                echo "<input style='float: right' type='submit' value='上传图片'>";
-                    echo "</body>";
-                    echo "</form>";
-                    // header($uploadfileUrl); // 此处有问题 导致服务器报500
-                } else {
-                    header('#');
-                }
-            }
-        }
-    },
+        $date = $dao->getALlItems($type);
+        echo json_encode(array(
+            'stat' => 200,
+            'allItems' => $date
+        ));
+    }
 
 ));

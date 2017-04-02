@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(E_ALL);
 require_once(BACKSTAGE_DIR.'/DO/DBC.class.php');
 /**
  * Created by PhpStorm.
@@ -21,17 +21,20 @@ class advantrueDAO extends DBC{
      */
     function updateItemByInfo($id,$info)
     {
-        $colname = array();
-        $value = array();
+        $setting = [];
         foreach($info as $k=>$v ){
-            array_push($colname,"`".$k."`");
-            array_push($value,"'".$v."'");
+            array_push($setting,"`".$k."`"."="."'".$v."'");
         }
-        $colname = implode(",",$colname);
-        $value = implode(",",$value);
-        $rs = $this->getResult(__FUNCTION__,array('colname'=>$colname,'value'=>$value,'id'=>$id));
-        $row = $rs->fetch(PDO::FETCH_ASSOC);
-        return $row;
+        $rs = $this->getResult(__FUNCTION__,array('setting'=>implode($setting,","),'id'=>$id));
+        return $rs;
     }
 
+    /**
+     * 获取所有图片信息
+     */
+    function getALlItems($type){
+        $rs = $this->getResult(__FUNCTION__,array("type"=>$type));
+        $rows = $rs->fetchAll();
+        return $rows;
+    }
 }

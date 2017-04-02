@@ -1,13 +1,12 @@
 <?php
-error_reporting(0);
-
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
-require_once TOOLS_PATH.'/Config.class.php';
+include_once '../definitions.php';
+include_once TOOLS_PATH.'/Config.class.php';
 
 
 class DBC{
     private $DAO,$SQL,$fuc;
     public function __construct($DAONAME){
+
         $DB = Config::getSection("DB");
         $TYPE = $DB['TYPE'];
         $HOST = $DB['HOST'];
@@ -33,9 +32,13 @@ class DBC{
         $this->pdo->query('set names utf8;');
         switch(strtolower($type)){
             case 'select':return $this->pdo->query($sql); break;
-            case 'insert':return $this->pdo->exec($sql); break;
+            case 'insert':
+                $this->pdo->exec($sql);
+                return $this->pdo->lastInsertId(); break;
             case 'delete':return $this->pdo->exec($sql); break;
-            case 'update':return $this->pdo->exec($sql); break;
+            case 'update':
+                return $this->pdo->exec($sql);
+                break;
             default :return $this->pdo->query($sql);break;
         }
     }

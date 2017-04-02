@@ -5,9 +5,10 @@
  * Date: 16/6/12
  * Time: 上午11:55
  */
-require_once $_SERVER['DOCUMENT_ROOT'] . '/definitions.php' ;
-require_once TOOLS_PATH.'/Config.class.php';
-require_once(TOOLS_PATH."img2thumb.php");
+include_once '../definitions.php' ;
+include_once TOOLS_PATH.'/Config.class.php';
+include_once TOOLS_PATH."img2thumb.php";
+include_once DATABASE_DAO_DIR.'photosDAO.php';
 
 /**
  * 工具方法 , 图片上传
@@ -18,7 +19,8 @@ function uploadImage($imgdatastring){
 
     $thumbPath = "";
     $thumbUrl = "";
-    $imgHostUrl = Config::getSection("PROPERTIES")["IMG_HOST_URL"];
+    $properties = Config::getSection("PROPERTIES");
+    $imgHostUrl = isset($properties["IMG_HOST_URL"])?$properties["IMG_HOST_URL"]:"";
 
     $relative_path = date('Ymd') . '/';
     $uploaddir = IMAGE_BED_DIR . $relative_path;
@@ -68,7 +70,6 @@ function uploadImage($imgdatastring){
                     'THUMB'=>$thumbUrl,
                     "FS_PATH"=>$relative_path.$filename
                 ));
-
                 if($id>0){
                     return array(
                         'stat'=>200,
@@ -88,28 +89,7 @@ function uploadImage($imgdatastring){
                 }
 
             }
-        }else if(preg_match('/^(http:\/\/|https:\/\/)/', $imgdatastring, $result)){
-            /*如果没有图片但是有imgurl时*/
-            $dao->addImageInfo(array(
-                'PATH'=>$imgdatastring,
-                'THUMB'=>$thumbPath,
-                "FS_PATH"=>""
-            ));
-            return array(
-                'stat'=>200,
-                'imgurl'=>$_POST['onlineurl'],
-                'msg'=>'网络URL,图片添加成功',
-            );
-
-        }else{
-            return array(
-                'stat'=>false,
-                'imgurl'=>null,
-                'imgdata'=>$imgdatastring,
-                'msg'=>'图片字符串匹配失败！也未填写图片URL',
-            );
         }
-
     }else{
         return array(
             'stat'=>false,

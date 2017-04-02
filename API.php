@@ -1,16 +1,18 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(0);
 
 session_start();
-require($_SERVER['DOCUMENT_ROOT']. '/definitions.php');
-
+use core\AbstractRouter;
+require_once './definitions.php';
 $APIID = $_GET['id'] ? $_GET['id'] : 'defaultMethod';
 if($_GET['id']){
+//    var_dump($_POST);
     // 导入路由
-    require_once CORE_PATH . 'AbstractRouter.class.php';
-    require_once ROUTER_PATH.'./DefaultRouter.php';
-    require_once ROUTER_PATH.'./ImageUploadRouter.php';
-    \core\AbstractRouter::go($APIID);
+     include_once CORE_PATH . 'AbstractRouter.class.php';
+     include_once ROUTER_PATH.'DefaultRouter.php';
+     include_once ROUTER_PATH.'ImageUploadRouter.php';
+     AbstractRouter::go($APIID);
+
 }else{
     echo phpinfo();
 }

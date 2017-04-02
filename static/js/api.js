@@ -22,7 +22,7 @@ API.fn.post = function(url,param,fn,completed,err,failed){
         url: this.urlHost + url,
         type: "post",
         success: function(data){
-             fn(data)
+            fn(JSON.parse(data))
         },
         error:function(data){
             if(failed){
@@ -36,13 +36,13 @@ API.fn.post = function(url,param,fn,completed,err,failed){
                 completed(data)
             }
         },
-        data: JSON.stringify(param),
+        data: param,
         //dataType: 'jsonp',
+        // contentType:"application/json",
         xhrFields: {
             withCredentials: true
         },
-        crossDomain: true,
-        contentType: "application/json"
+        crossDomain: true
         // contentType: "application/x-www-form-urlencoded"
     });
 };

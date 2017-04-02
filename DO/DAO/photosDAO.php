@@ -1,6 +1,6 @@
 <?php
 //error_reporting(0);
-require_once(BACKSTAGE_DIR.'/DO/DBC.class.php');
+include_once BACKSTAGE_DIR.'/DO/DBC.class.php';
 /**
  * Created by PhpStorm.
  * User: chenkuan

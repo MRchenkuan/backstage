@@ -12,64 +12,26 @@
     <script src="../../../static/js/3rd/vue.min.js"></script>
     <script src="../../../static/bootstrap/bootstrap.min.js"></script>
     <script src="../../../static/js/api.js"></script>
-    <script src="../../../static/js/api.js"></script>
 </head>
 <body>
 <div v-for="img in imgs" class="updateBox">
     <input type="text" class="form-control input-sm h5" v-model="img.imgTitle" placeholder="图片标题">
     <div>
-        <img src="{{img.imgDateSource || img.imgSrc}}">
+        <img :src="img.imgDateSource||('../../../images/'+( img.imgSrc || 'default.jpg'))">
         <input @change="loadLocalImage($event,$index)" type="file" accept="image/jepg,image/jpg,image/png">
         <span class="h5">尺寸: 1001*390px<br>分辨率:300 dpi</span>
         <a class="btn btn-theme" @click="saveDate($index)">保存</a>
     </div>
 </div>
 <script>
-    var api = new API("../../../API.php")
+    var api = new API("../../../API.php");
     var updateBox = new Vue({
         el:"body",
         data:{
-            imgs:[
-                {
-                    imgDateSource:"",
-                    imgTitle:"",
-                    imgDesc:"",
-                    imgSrc:"",
-                    identification:"worksImages-1"
-                },
-                {
-                    imgDateSource:"",
-                    imgTitle:"",
-                    imgDesc:"",
-                    imgSrc:"",
-                    identification:"worksImages-2"
-                },
-                {
-                    imgDateSource:"",
-                    imgTitle:"",
-                    imgDesc:"",
-                    imgSrc:"",
-                    identification:"worksImages-3"
-                },
-                {
-                    imgDateSource:"",
-                    imgTitle:"",
-                    imgDesc:"",
-                    imgSrc:"",
-                    identification:"worksImages-4"
-                },
-                {
-                    imgDateSource:"",
-                    imgTitle:"",
-                    imgDesc:"",
-                    imgSrc:"",
-                    identification:"worksImages-5"
-                }
-            ]
+            imgs:[]
         },
         methods:{
             saveDate:function(index){
-                console.log(index);
                 var self = this;
                 api.post('?id=imageUpload',{
                     imageDataSource:self.imgs[index].imgDateSource,
@@ -78,9 +40,12 @@
                     imgSrc:self.imgs[index].imgSrc,
                     identification:self.imgs[index].identification
                 },function(response){
-                    if(response.body['stat']===200 && response.body['imgSrc']){
-                        self.imgs[index].imgSrc = response.body['imgSrc'];
-                        alert('图片上传成功');
+                    if(response['stat']===200){
+                        if(response['imgSrc']){
+                            self.imgs[index].imgDateSource = null;
+                            self.imgs[index].imgSrc = response['imgSrc'];
+                        }
+                        alert('保存成功');
                     }else{
                         alert('图片上传失败,请重新上传')
                     }
@@ -95,7 +60,34 @@
                     that.imgs[index].imgDateSource = this.result;
                 };
                 reader.readAsDataURL(self.files[0]);
+            },
+            getALlItems:function () {
+                var self = this;
+                api.post('?id=getALlItems',{
+                    type:"worksImages"
+                },function(response){
+                    console.log(response)
+                    if(response['stat']===200 && response['allItems']){
+                            self.imgs =[]
+                            var allItems = response['allItems'];
+                            allItems.some(function (it) {
+                                var obj={
+                                    imgDateSource:"",
+                                    imgTitle:it['img_title'],
+                                    imgDesc:it['img_desc'],
+                                    imgSrc:it['img_url'],
+                                    identification:it['id']
+                                };
+                                self.imgs.push(obj);
+                            })
+                    }else{
+                        alert('图片获取失败');
+                    }
+                })
             }
+        },
+        created:function () {
+            this.getALlItems();
         }
     })
 </script>

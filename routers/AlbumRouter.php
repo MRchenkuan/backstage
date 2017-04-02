@@ -5,7 +5,7 @@
  * Date: 2017/3/29
  * Time: 下午11:09
  */
-require($_SERVER['DOCUMENT_ROOT'] . '/definitions.php');
+require( '../definitions.php');
 include CORE_PATH . 'AbstractRouter.class.php';
 error_reporting(E_ALL);
 \core\AbstractRouter::addRouter(array(
