@@ -2,9 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>工作室简介</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="../../../static/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../static/bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../../../static/js/3rd/jquery.min.js"></script>
+    <script src="../../../static/js/3rd/vue.min.js"></script>
+    <script src="../../../static/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../static/js/api.js"></script>
 </head>
 <body>
-
+<div v-for="img in imgs" class="updateBox-sm">
+    <input type="text" class="form-control input-sm" v-model="img.imgTitle" placeholder="图片标题">
+    <div>
+        <img :src="img.imgDateSource||('../../../images/'+( img.imgSrc || 'default.jpg'))">
+        <input @change="loadLocalImage($event,$index)" type="file" accept="image/jepg,image/jpg,image/png">
+        <a class="btn btn-theme" @click="saveDate($index)">保存</a>
+    </div>
+</div>
+<script>
+    var api = new API("../../../API.php");
+    var updateBox = new Vue({
+        el:"body",
+        data:{
+            imgs:[]
+        },
+        methods:{
+            saveDate:function(index){
+                var self = this;
+                api.post('?id=imageUpload',{
+                    imageDataSource:self.imgs[index].imgDateSource,
+                    imgTitle:self.imgs[index].imgTitle,
+                    imgDesc:self.imgs[index].imgDesc,
+                    imgSrc:self.imgs[index].imgSrc,
+                    identification:self.imgs[index].identification
+                },function(response){
+                    if(response['stat']===200){
+                        if(response['imgSrc']){
+                            self.imgs[index].imgDateSource = null;
+                            self.imgs[index].imgSrc = response['imgSrc'];
+                        }
+                        alert('保存成功');
+                    }else{
+                        alert('图片上传失败,请重新上传')
+                    }
+                })
+            },
+            loadLocalImage:function(event,index){
+                var that = this;
+                var self = event.currentTarget;
+                if(self.files[0].size>500*1000)return alert("图片超过最大限制(500 KB),当前大小:"+self.files[0].size/1000+" KB");
+                var reader = new FileReader();
+                reader.onload = function(){
+                    that.imgs[index].imgDateSource = this.result;
+                };
+                reader.readAsDataURL(self.files[0]);
+            },
+            getALlItems:function () {
+                var self = this;
+                api.post('?id=getALlItems',{
+                    type:"envDisplay"
+                },function(response){
+                    console.log(response)
+                    if(response['stat']===200 && response['allItems']){
+                        self.imgs =[]
+                        var allItems = response['allItems'];
+                        allItems.some(function (it) {
+                            var obj={
+                                imgDateSource:"",
+                                imgTitle:it['img_title'],
+                                imgDesc:it['img_desc'],
+                                imgSrc:it['img_url'],
+                                identification:it['id']
+                            };
+                            self.imgs.push(obj);
+                        })
+                    }else{
+                        alert('图片获取失败');
+                    }
+                })
+            }
+        },
+        created:function () {
+            this.getALlItems();
+        }
+    })
+</script>
 </body>
 </html>

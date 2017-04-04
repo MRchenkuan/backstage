@@ -17,11 +17,11 @@
         <div class="logo">
             <img src="./img/logo.png">
         </div>
-        <a v-for="nav in navlist" class="btn btn-theme" @click="showPages(nav)" :class="nav.isActive?'active':''">{{nav.title}}</a>
+        <a v-for="nav in navlist" class="btn btn-theme {{nav.enable?'':'disable'}}" @click="nav.enable?showPages(nav):''" :class="nav.isActive?'active':''">{{nav.title}}</a>
     </aside>
     <div id="main">
         <div id="header">
-            <a v-for="header in headers" @click="openPage(header)" class="btn btn-theme" :class="header.isActive?'active'">{{header.title}}</a>
+            <a v-for="header in headers" @click="header.enable?openPage(header):''" class="btn btn-theme {{header.enable?'':'disable'}}" :class="header.isActive?'active'">{{header.title}}</a>
         </div>
         <iframe id="content" :src="'./partPages/'+src"></iframe>
     </div>

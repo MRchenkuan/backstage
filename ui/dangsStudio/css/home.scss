@@ -6,9 +6,13 @@ aside{
   box-sizing: border-box;
   padding: 2rem;
   overflow: auto;
+  .disable{
+    opacity: .5;
+    cursor: not-allowed;
+  };
   .btn-theme{
     margin: 1rem 0;
-    &:hover{
+    &:hover:not(.disable){
       background: grey;
       color: #fff;
     }

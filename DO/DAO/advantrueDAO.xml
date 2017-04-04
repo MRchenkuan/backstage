@@ -11,6 +11,6 @@
         img_thumb,
         img_title,
         img_desc
-        from T_ADVANTCE where id like "#{type}%"
+        from T_ADVANTCE where id like "#{type}-%"
     </select>
 </mapper>

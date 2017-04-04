@@ -27,14 +27,17 @@ var leftSide = new Vue({
             {
                 isActive:false,
                 title:'首页滚动图',
+                enable:true,
                 page:[
                     {
                         isActive:false,
+                        enable:true,
                         title:"作品展示5张图",
                         link:"worksImages.html"
                     },
                     {
                         isActive:false,
+                        enable:true,
                         title:"精品教学5张图",
                         link:"classes.html"
                     }
@@ -43,10 +46,12 @@ var leftSide = new Vue({
             {
                 isActive:false,
                 title:'工作室简介',
+                enable:false,
                 page:[
                     {
                         isActive:false,
                         title:"工作室照片",
+                        enable:false,
                         link:"envDisplay.html"
                     }
                 ]
@@ -54,8 +59,10 @@ var leftSide = new Vue({
             {
                 isActive:false,
                 title:'化妆课程',
+                enable:false,
                 page:[
                     {
+                        enable:false,
                         isActive:false,
                         title:"化妆课程",
                         link:"makeup.html"
@@ -65,8 +72,10 @@ var leftSide = new Vue({
             {
                 title:'美甲课程',
                 isActive:false,
+                enable:false,
                 page:[
                     {
+                        enable:false,
                         isActive:false,
                         title:"美甲课程",
                         link:"meijia.html"
@@ -76,8 +85,10 @@ var leftSide = new Vue({
             {
                 title:'作品展示',
                 isActive:false,
+                enable:true,
                 page:[
                     {
+                        enable:true,
                         isActive:false,
                         title:"作品展示",
                         link:"works.html"
@@ -86,9 +97,11 @@ var leftSide = new Vue({
             },
             {
                 isActive:false,
+                enable:false,
                 title:'师资力量',
                 page:[
                     {
+                        enable:false,
                         isActive:false,
                         title:"师资力量",
                         link:"teachers.html"
@@ -98,8 +111,10 @@ var leftSide = new Vue({
             {
                 isActive:false,
                 title:'合作明星',
+                enable:true,
                 page:[
                     {
+                        enable:true,
                         isActive:false,
                         title:"合作明星",
                         link:"stars.html"
@@ -110,11 +125,15 @@ var leftSide = new Vue({
     },
     methods:{
         showPages:function(nav){
+            console.log(nav);
             main.headers = nav.page;
             nav.isAcitve = true;
             content.src = nav.page[0].link;
             nav.page[0].isAcitve = true;
-
         }
+    },
+    created:function () {
+        var nav = this.navlist[0];
+        this.showPages(nav);
     }
 });

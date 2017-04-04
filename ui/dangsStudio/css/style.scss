@@ -7,11 +7,12 @@ html,body{line-height: 1.7;height: 100%}
   color:#202020;
   border: 1px solid #000;
   transition: all .5s ease;
-  &:hover{
+  &:hover:not(.disable){
     box-shadow: 0 0 5px #878787;
   }
 }
 .updateBox{
+  min-width: 80rem;
   overflow: hidden;
   padding: 2rem 5rem;
   &>.form-control{
@@ -43,5 +44,38 @@ html,body{line-height: 1.7;height: 100%}
     width: auto;
     float: left;
     margin-top: 5.5rem;
+  }
+}
+
+.updateBox-sm{
+  overflow: hidden;
+  width: 15rem;
+  margin: 2rem 0 0 2rem;
+  float: left;
+  &>.form-control{
+  }
+  &>div{
+    position: relative;
+  }
+  img,input[type='file']{
+    width: 15rem;
+    height: 14rem;
+    float: left;
+  }
+  input[type='file']{
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  span{
+    float: left;
+    height: 14rem;
+    display: block;
+    margin: 0;
+    padding: 5.5rem 5rem;
+  }
+  .btn-theme{
   }
 }
