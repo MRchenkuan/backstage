@@ -1,6 +1,24 @@
 @import "index";
 @import "home";
 html,body{line-height: 1.7;height: 100%}
+/*旋转动画*/
+@keyframes rotation {
+  0%{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+.glyphicon-refresh{
+  animation:rotation 2s infinite linear ;
+}
+.glyphicon-asterisk{
+  animation:rotation 1.5s infinite linear ;
+}
 .btn-theme{
   width: 100%;
   background: none;
@@ -25,6 +43,9 @@ html,body{line-height: 1.7;height: 100%}
     width: 38rem;
     height: 14rem;
     float: left;
+  }
+  img{
+    background-color: #ccc;
   }
   input[type='file']{
     position: absolute;
@@ -62,6 +83,9 @@ html,body{line-height: 1.7;height: 100%}
     height: 14rem;
     float: left;
   }
+  img{
+    background-color: #ccc;
+  }
   input[type='file']{
     position: absolute;
     top:0;
@@ -78,4 +102,16 @@ html,body{line-height: 1.7;height: 100%}
   }
   .btn-theme{
   }
+}
+
+.createBtn{
+  border: 1px solid grey;
+  height: 19.3rem;
+  background-color: #cccccc;
+  text-align: center;
+  color: #8e8c8c;
+  line-height: 19.3rem;
+  font-size: 10rem;
+  font-family: monospace;
+  cursor: pointer;
 }

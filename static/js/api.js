@@ -22,7 +22,12 @@ API.fn.post = function(url,param,fn,completed,err,failed){
         url: this.urlHost + url,
         type: "post",
         success: function(data){
-            fn(JSON.parse(data))
+            data = JSON.parse(data);
+            console.log(data)
+            if(data['stat']===302){
+                location.href="./index.html"
+            }
+            fn(data);
         },
         error:function(data){
             if(failed){

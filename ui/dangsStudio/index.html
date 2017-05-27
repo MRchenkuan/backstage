@@ -34,7 +34,7 @@
 </html>
 <script type="text/javascript" charset="UTF-8">
 
-
+    var api = new API("../../API.php");
     var loginFrame = new Vue({
         el:"#loginFrame",
         data:{
@@ -50,15 +50,22 @@
                 if(!loginFrame.password)return loginFrame.notice="请输入密码";
                 loginFrame.notice ="  ";
                 loginFrame.isLogin=true;
-                api.post("login.do",{userInfo: {
-                    loginName: loginFrame.username,
-                    loginPassword: loginFrame.password
-                }},function(data){
-                    location.href = "projects.html"
 
+                api.post('?id=userLogin',{
+                    username:loginFrame.username,
+                    password:loginFrame.password
                 },function(data){
-                    loginFrame.notice = data['rspInf'];
-                    loginFrame.isLogin = false
+                    if(data['stat']===200){
+                        location.href = './home.html'
+                    }else{
+                        clearTimeout(timeId);
+                        loginFrame.notice = data['msg'];
+                        loginFrame.isLogin = false;
+                    }
+                },function () {
+
+                },function () {
+                   alert("登录失败");
                 });
 
                 var timeId = setTimeout(function(){

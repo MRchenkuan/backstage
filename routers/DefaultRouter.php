@@ -17,8 +17,8 @@ error_reporting(E_ERROR);
      * 用户登陆的方法
      * */
     'userLogin' => function() {
-        $username = $_GET['username'];
-        $password = $_GET['password'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
         $trylimit = 10;//最大登录尝试次数
 
         //    if (!$_COOKIE['_auth']) return;
@@ -30,7 +30,7 @@ error_reporting(E_ERROR);
             ));
             return;
         }
-        if ($username == '' && $password == '') {
+        if ($username == 'ckadol' && $password == 'ckadol') {
             /*记录session值并写入cookie*/
             setcookie('SSID', session_id(),time()+43200);
             $_SESSION['stat'] = 'login';
@@ -41,11 +41,11 @@ error_reporting(E_ERROR);
                 'msg' => 'login sucessed!'
             ));
         } else {
-            if (!$_SESSION['trycount']) {
+            if (!isset($_SESSION['trycount']) || !$_SESSION['trycount']) {
                 $_SESSION['trycount'] = 0;
             }
             $_SESSION['trycount'] += 1;
-
+            $_SESSION['stat'] = "offline";
             echo json_encode(array(
                 'stat' => 201,
                 'msg' => 'login failed!'
@@ -58,9 +58,17 @@ error_reporting(E_ERROR);
      * 用户登陆态验证的方法
      * */
     'userVerify' => function () {
-        if ($_SESSION['stat'] == 'login') {
+        if (isset($_SESSION['stat'])&&$_SESSION['stat'] == 'login') {
+            echo json_encode(array(
+                'stat' => 200,
+                'msg' => 'success'
+            ));
             return true;
         } else {
+            echo json_encode(array(
+                'stat' => 302,
+                'msg' => '登录失效'
+            ));
             return false;
         }
     },

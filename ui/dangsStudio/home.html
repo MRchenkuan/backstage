@@ -11,6 +11,13 @@
     <script src="../../static/js/3rd/vue.min.js"></script>
     <script src="../../static/bootstrap/bootstrap.min.js"></script>
     <script src="../../static/js/api.js"></script>
+    <script>
+        var api = new API("../../API.php");
+        api.post('?id=userVerify',{},function(){},function () {});
+        setInterval(function () {
+            api.post('?id=userVerify',{},function(){},function () {});
+        },30*1000)
+    </script>
 </head>
 <body>
     <aside id="leftSide">

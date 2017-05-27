@@ -17,16 +17,18 @@
 <div v-for="img in imgs" class="updateBox-sm">
     <input type="text" class="form-control input-sm" v-model="img.imgTitle" placeholder="图片标题">
     <div>
-        <img :src="img.imgDateSource||('../../../images/'+( img.imgSrc || 'default.jpg'))">
+        <img :src="img.imgDateSource|| (img.imgSrc&&('../../../images/'+ img.imgSrc)) || '../img/default.png'">
         <input @change="loadLocalImage($event,$index)" type="file" accept="image/jepg,image/jpg,image/png">
         <a class="btn btn-theme" @click="saveDate($index)">保存</a>
     </div>
 </div>
+<div class="updateBox-sm createBtn" @click="createNewItem">+</div>
 <script>
     var api = new API("../../../API.php");
     var updateBox = new Vue({
         el:"body",
         data:{
+            identification:"works",
             imgs:[]
         },
         methods:{
@@ -50,6 +52,17 @@
                     }
                 })
             },
+            createNewItem:function () {
+                var self = this;
+                var newItem = {
+                  imgDateSource:"",
+                  imgTitle:"",
+                  imgDesc:"",
+                  imgSrc:"",
+                  identification:self.identification+""
+                };
+                self.imgs.push(newItem);
+            },
             loadLocalImage:function(event,index){
                 var that = this;
                 var self = event.currentTarget;
@@ -63,7 +76,7 @@
             getALlItems:function () {
                 var self = this;
                 api.post('?id=getALlItems',{
-                    type:"works"
+                    type:self.identification
                 },function(response){
                     console.log(response)
                     if(response['stat']===200 && response['allItems']){

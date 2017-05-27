@@ -18,13 +18,13 @@ AbstractRouter::addRouter(array(
      */
     'imageUpload' => function(){
         // 登录校验
-//        if($_SESSION['stat'] != 'login'){
-//            echo json_encode(array(
-//                'stat' => 201,
-//                'msg' => 'login failed!'
-//            ));
-//            return;
-//        };
+        if(!userVerify()){
+            echo json_encode(array(
+                'stat' => 302,
+                'info' => "用户未登录"
+            ));
+            return;
+        }
 
         $imageDateSource = $_POST['imageDataSource'];
         $imgTitle = $_POST['imgTitle'];
